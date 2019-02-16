@@ -1,0 +1,66 @@
+@media only screen and (max-width: 992px){
+    .intro h1{
+        font-size: 55px;
+    }
+    .intro p{
+        font-size: 24px;
+    }
+    .intro{
+        width: 750px;
+    }
+}
+@media only screen and (max-width: 768px){
+    .intro h1{
+        font-size: 45px;
+    }
+    .intro p{
+        font-size: 22px;
+    }
+    .intro{
+        width: 84%;
+        margin-left: 20px;
+    }
+
+}
+@media only screen and (max-width: 510px){
+    header nav ul li:first-child{
+        display: inline-block;
+    }
+    header nav ul li:not(.mob){
+        display: none;
+    }
+    .postlab{
+        display: block;
+        width: 100%;
+        height: 50px;
+        border-radius: 0;
+        margin-bottom: 0;
+        margin-top: 5px;
+    }
+    .form1 ,.form2{
+        display: none;
+    }
+    .postlab h1{
+        display: none;
+    }
+    .wall{
+        display: block;
+        margin-top: 5px;
+        width: 100%;
+        height: 100%;
+        overflow: scroll;
+        border-radius: 0;
+
+    }
+    .pic1,.pic2{
+        width:150px;
+        height: 200px;
+        margin: 0 20px;
+        margin-top: 40px;
+    }
+    .vote2,.vote1{
+        width: 80px;
+        margin:10px 60px;
+    }
+
+}

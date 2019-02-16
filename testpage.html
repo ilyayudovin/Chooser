@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="testpage.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script>
+    function getScrollXY() {
+        var scrOfX = 0, scrOfY = 0;
+        if( typeof( window.pageYOffset ) == 'number' ) {
+            //Netscape compliant
+            scrOfY = window.pageYOffset;
+            scrOfX = window.pageXOffset;
+        } else if( document.body && ( document.body.scrollLeft || document.body.scrollTop ) ) {
+            //DOM compliant
+            scrOfY = document.body.scrollTop;
+            scrOfX = document.body.scrollLeft;
+        } else if( document.documentElement && ( document.documentElement.scrollLeft || document.documentElement.scrollTop ) ) {
+            //IE6 standards compliant mode
+            scrOfY = document.documentElement.scrollTop;
+            scrOfX = document.documentElement.scrollLeft;
+        }
+        return [ scrOfX, scrOfY ];
+    }
+
+    function getDocHeight() {
+        var D = document;
+        return Math.max(
+            D.body.scrollHeight, D.documentElement.scrollHeight,
+            D.body.offsetHeight, D.documentElement.offsetHeight,
+            D.body.clientHeight, D.documentElement.clientHeight
+        );
+    }
+
+    document.addEventListener("scroll", function (event) {
+        if (getDocHeight() - 20 <= getScrollXY()[1] + window.innerHeight)
+        {
+            var oldcontent = document.getElementById('scrollcontent');
+            oldcontent.innerHTML = oldcontent.innerHTML + '<div class="post">new content loaded</div>';
+            document.getElementById("scrollcontent").innerHTML=oldcontent.innerHTML;
+
+            $('.post').each(function(i){
+                var currentIndex = i + 1;
+                $(this).addClass('post' + (currentIndex));
+                $(this).attr('id', 'post' + (currentIndex));
+                $('post' + (currentIndex)).before($('post' + (currentIndex-1)))
+            });
+        }
+    });
+
+</script>
+
+</head>
+<body>
+<div id="scrollcontent">
+
+    <div class="post post1" id="post1"></div>
+
+</div>
+
+</body>
+</html>

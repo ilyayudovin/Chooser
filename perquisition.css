@@ -1,0 +1,154 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+html {
+    font-family: 'Raleway', sans-serif;
+}
+body{
+   /* background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url("https://www.gsma.com/iot/wp-content/uploads/2015/03/man-with-phone.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;*/
+    background-color: #fafafa;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background-size: cover;
+}
+/*:root {
+    --main-bg-color: lightskyblue;
+}*/
+.skin{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-bg-color);
+
+}
+header{
+    width: 100%;
+    height: 55px;
+    background-color: lightskyblue;
+    border-bottom: 1px solid darkgray;
+    box-shadow: 0 0 10px black;
+}
+.bigcolumn{
+    width: 650px;
+    margin: 0 auto;
+    padding-top:15px ;
+}
+.postlab{
+    position: relative;
+    width: 650px;
+    height: 200px;
+    background-color: transparent;
+    border-radius: 2px;
+}
+.test{
+    padding-top: 33px;
+}
+
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    border: 1px solid black;
+    height: 140px;
+    width: 100px;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 0 20px darkgrey inset;
+}
+.wall{
+    width: 650px;
+    background-color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    margin-top: 15px;
+}
+.pic1,.pic2 {
+    position: relative;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+    width: 280px;
+    margin-top: 40px;
+    height: 400px;
+    border: 1px solid black;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.wall .post .imgnum{
+    display: none;
+}
+.postbtn{
+    width: 100px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+.postbtn button{
+    line-height: 27px;
+    border: 1px solid black;
+    font-size: 15px;
+    color: black;
+    background-color: lightskyblue;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.tableBanner,.tableBanner2{
+    display: none;
+}
+.form1 , .form2{
+    width:100px;
+    position: relative;
+    display: inline-block;
+    margin: 0 10px;
+}
+.imagearea1,.imagearea2{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: none;
+}
+.imagearea1 img{
+    width: 102px;
+    height: 142px;
+    border-radius: 10px;
+    border: 1px solid deepskyblue;
+}
+.imagearea2 img{
+    width: 102px;
+    height: 142px;
+    border-radius: 10px;
+    border: 1px solid deepskyblue;
+}
+form.test{
+    text-align: center;
+}
+.vote1,.vote2{
+    width: 100px;
+    margin: 20px 95px;
+    cursor: pointer;
+    display: inline-block;
+}
+.smallbtn{
+    text-align: center;
+    color: whitesmoke;
+    line-height: 30px;
+    font-size: 21px;
+    background-color: deepskyblue;
+    display: none;
+    cursor: pointer;
+}
+.post{
+   height: 485px;
+    border:solid 1px #ccc;
+    display: none;
+}

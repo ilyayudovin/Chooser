@@ -1,0 +1,183 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html{
+    font-family:'Raleway', sans-serif;
+}
+html a{
+    text-decoration: none;
+}
+body{
+    height: 100%;
+}
+.background1{
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url("https://www.gsma.com/iot/wp-content/uploads/2015/03/man-with-phone.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background-size: cover;
+}
+.background1 a{
+    color: whitesmoke;
+}
+header{
+    z-index: 1;
+    width: 100%;
+    margin: 0;
+}
+header nav{
+    text-align: center;
+    margin: 0 auto;
+    padding: 33px 0;
+}
+header nav ul li {
+    display: inline-block;
+    font-size: 1.5em;
+    margin-left: 3%;
+    margin-right: 3%;
+
+}
+header nav ul li a:hover{
+    cursor: pointer;
+    color: deepskyblue;
+}
+header nav ul li:first-child{
+    display: none;
+}
+
+
+.menu2{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(52, 73, 94, 0.7) ;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: none;
+}
+.menu2 nav {
+padding-top: 93px;
+    padding-left: 10px;
+}
+.menu2 nav ul li{
+    padding: 10px 0;
+    font-size: 20px;
+    border-bottom: 1px solid white;
+    font-weight: 300;
+}
+.intro{
+    width: 900px;
+    margin: 0 auto;
+    padding: 111px 0;
+    display: block;
+}
+.intro h1{
+    color: whitesmoke;
+    font-size: 74px;
+    font-weight: 300;
+    letter-spacing: 4px;
+
+}
+.intro p{
+    color:whitesmoke;
+    font-size: 28px;
+    font-weight: 300;
+}
+.button{
+    color: whitesmoke;
+    width: 150px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 5px;
+    position: relative;
+    top: 50%;
+    margin-top: 32px;
+    background: deepskyblue;
+    font-size: 22px;
+    font-weight: 300;
+    border:1px solid deepskyblue;
+    letter-spacing: 1px;
+}
+.button:hover{
+    border: 1px solid deepskyblue;
+    background-color: transparent;
+    color: deepskyblue;
+    transition-duration: 0.5s;
+    cursor: pointer;
+}
+footer{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    display: block;
+}
+.wrapper {
+   float: right;
+    padding-right: 40px;
+}
+.wrapper ul {
+    list-style: none;
+}
+.wrapper ul li {
+
+    margin: 0 17px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 50%;
+    float: left;
+    transition: all 0.5s ease;
+    color: whitesmoke;
+}
+i.fa.fa-2x {
+    font-size: 1.8em;
+}
+.wrapper ul li:hover .fa-facebook {
+    color: #3b5998;
+    text-shadow: 0 0 15px #3b5998;
+    transition: all 0.5s ease;
+}
+
+/*twitter*/
+
+
+.wrapper ul li:hover .fa-twitter {
+    color: #00aced;
+    text-shadow: 0 0 15px #00aced;
+    transition: all 0.5s ease;
+}
+
+/* instagram */
+
+
+.wrapper ul li:hover .fa-instagram {
+    color: #bc2a8d;
+    text-shadow: 0 0 15px #bc2a8d;
+    transition: all 0.5s ease;
+}
+
+/* google */
+
+
+.wrapper ul li:hover .fa-google {
+    color: #dd4b39;
+    text-shadow: 0 0 15px #dd4b39;
+    transition: all 0.5s ease;
+}
+
+/* whatsapp */
+
+
+.wrapper ul li:hover .fa-whatsapp {
+    color: #4dc247;
+    text-shadow: 0 0 15px #4dc247;
+    transition: all 0.5s ease;
+}

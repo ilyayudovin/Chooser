@@ -1,0 +1,129 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html{
+    font-family:'Raleway', sans-serif;
+}
+html a{
+    text-decoration: none;
+}
+body{
+    height: 100%;
+}
+header{
+    width: 100%;
+    height: 55px;
+    position: absolute;
+    background-color: lightskyblue;
+}
+.background1{
+    background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ),url("https://www.gsma.com/iot/wp-content/uploads/2015/03/man-with-phone.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    position: absolute;
+    background-size: cover;
+}
+.back{
+    width: 100%;
+    position: absolute;
+    height: 100%;
+
+}
+form{
+    width: 333px;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    z-index: 9999;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: whitesmoke;
+
+}
+.headword{
+    padding-top: 15px;
+    font-size: 25px;
+    color: deepskyblue;
+}
+
+label{
+    margin-right: 1%;
+    color: black;
+}
+.input input,button{
+    border-radius: 5px;
+    border: 1px solid black;
+    margin-top: 15px;
+    width: 85%;
+    font-size: 18px;
+    padding-left: 10px;
+    line-height: 40px;
+    background-color: lightgrey;
+    box-shadow: inset 3px 3px 3px darkgrey;
+}
+.countries select{
+    border-radius: 5px;
+    border: 1px solid black;
+    width: 88%;
+    font-size: 18px;
+    line-height: 30px;
+    background-color: lightgrey;
+    box-shadow: inset 3px 3px 3px darkgrey;
+}
+.countries select option[value="none"]{
+    color: darkgray;
+}
+.countries, .input p.sex {
+    margin-top: 15px;
+}
+input#sex,input#sex2{
+    width:15px;
+    box-shadow: none;
+}
+*:focus{
+    outline: none;
+}
+input:valid {
+    border-color: green;
+    content:'\2714';
+}
+input:focus:invalid {
+    border-color: red;
+}
+.remember{
+    text-align: left;
+    padding-left: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid black;
+}
+.signup{
+    margin-bottom: 15px;
+    background-color: lightskyblue;
+    color: whitesmoke;
+    border: none;
+    width: 88%;
+    font-size: 1.3em;
+    border-radius: 5px;
+    box-shadow: none;
+}
+.signup:hover{
+    cursor: pointer;
+    background-color: deepskyblue;
+}
+form .already{
+    padding-bottom: 15px;
+}
+form .already a{
+    color: deepskyblue ;
+}
+

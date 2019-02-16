@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="sign-in-out.css">
+</head>
+<body>
+<div class="background1">
+    <header></header>
+    <div class="back">
+<form>
+    <p class="headword">Registration</p>
+    <div class="input">
+        <input type="text" name="Name" id="name" placeholder="Name" autofocus required>
+    </div>
+    <div class="input">
+        <input type="email" name="email" id="email" placeholder="E-mail" required>
+    </div>
+    <div class="input">
+        <input type="number" name="Age" min="1" max="100" step="1" id="age" placeholder="Age" required>
+    </div>
+    <div class="input">
+        <input type="password" name="Passwrod" id="psw" placeholder="Password" required>
+    </div>
+    <div class="countries">
+        <select name="Nationality" size="1"  required>
+            <option value="none" selected>Choose your country</option>
+            <option value="belarus" >Belarus</option>
+        </select>
+    </div>
+    <div class="input">
+        <p class="sex" style="color: black">Sex:</p>
+        <input type="radio" id="sex" name="sex">
+        <label for="sex">Male</label>
+        <input type="radio" id="sex2" name="sex">
+        <label for="sex2">Female</label>
+    </div>
+    <div class="input">
+        <button class="signup" type="submit"><a href="signin.html" style="color: white">Sign Up</a></button>
+    </div>
+    <p class="already">Already have an account? <a href="signin.html">Sign in</a></p>
+</form>
+    </div>
+</div>
+</body>
+</html>
