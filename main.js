@@ -97,29 +97,32 @@ function posting(box) {
         });
         document.getElementsByClassName("imagearea1")[0].style.display = "none";//change color to label
         $("div#imagearea1").empty();
+        $('#logo').empty();
 
         document.getElementsByClassName("imagearea2")[0].style.display = "none";//change color to label
         $("div#imagearea2").empty();
 
         localStorage.setItem('show', 'true');
-        // document.getElementById('vote1').style.display = "inline-block";
-        //document.getElementById('vote2').style.display = "inline-block";
+
 
         document.getElementById('post' + (postsCounter)).style.display = "block";
 
         var oldcontent = document.getElementById('wall');
-        oldcontent.innerHTML = oldcontent.innerHTML + '<div class="post"><div class="pic1"></div>' + '<div class="imgnum"><img src="" class="tableBanner1"></div>' + '<div class="pic2"></div>' + '<div class="imgnum"><img src="" class="tableBanner2"></div><div class="vote1" id="post1_vote1" onclick="voting1(this)">0 votes</div><div class="vote2" id="post1_vote2" onclick="voting2(this)">0 votes</div></div>';
-        document.getElementById("wall").innerHTML = oldcontent.innerHTML;
+        $("#wall").prepend("<div class='post'><div class='pic1'><div class='mask flex-center rgba-stylish-strong'><i class='far fa-heart'></i></i></div></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'><div class='mask flex-center rgba-stylish-strong'><i class='far fa-heart'></i></div></div><div class='imgnum'><img src='' class='tableBanner2'></div></div>");
+        //oldcontent.innerHTML = oldcontent.innerHTML + '<div class="post"><div class="pic1"></div>' + '<div class="imgnum"><img src="" class="tableBanner1"></div>' + '<div class="pic2"></div>' + '<div class="imgnum"><img src="" class="tableBanner2"></div><div class="vote1" id="post1_vote1" onclick="voting1(this)">0 votes</div><div class="vote2" id="post1_vote2" onclick="voting2(this)">0 votes</div></div>';
+        //document.getElementById("wall").innerHTML = oldcontent.innerHTML;
 
         postsCounter++;
-        currentPost = $('.post').last();
+        currentPost = $('.post').first();
 
         currentPost.addClass('post' + (postsCounter));
+        currentPost.addClass('example hoverable');
         currentPost.attr('id', 'post' + (postsCounter));
         currentPost.find('.pic1').attr('id', 'post' + postsCounter + '_pic1');
+        currentPost.find('.pic1').addClass('view overlay');
         currentPost.find('.pic2').attr('id', 'post' + postsCounter + '_pic2');
-        currentPost.find('.vote1').attr('id', 'post' + postsCounter + '_vote1');
-        currentPost.find('.vote2').attr('id', 'post' + postsCounter + '_vote2');
+        currentPost.find('.pic2').addClass('view overlay');
+
 
     }
 

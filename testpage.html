@@ -1,63 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="testpage.css">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script>
-    function getScrollXY() {
-        var scrOfX = 0, scrOfY = 0;
-        if( typeof( window.pageYOffset ) == 'number' ) {
-            //Netscape compliant
-            scrOfY = window.pageYOffset;
-            scrOfX = window.pageXOffset;
-        } else if( document.body && ( document.body.scrollLeft || document.body.scrollTop ) ) {
-            //DOM compliant
-            scrOfY = document.body.scrollTop;
-            scrOfX = document.body.scrollLeft;
-        } else if( document.documentElement && ( document.documentElement.scrollLeft || document.documentElement.scrollTop ) ) {
-            //IE6 standards compliant mode
-            scrOfY = document.documentElement.scrollTop;
-            scrOfX = document.documentElement.scrollLeft;
-        }
-        return [ scrOfX, scrOfY ];
-    }
-
-    function getDocHeight() {
-        var D = document;
-        return Math.max(
-            D.body.scrollHeight, D.documentElement.scrollHeight,
-            D.body.offsetHeight, D.documentElement.offsetHeight,
-            D.body.clientHeight, D.documentElement.clientHeight
-        );
-    }
-
-    document.addEventListener("scroll", function (event) {
-        if (getDocHeight() - 20 <= getScrollXY()[1] + window.innerHeight)
-        {
-            var oldcontent = document.getElementById('scrollcontent');
-            oldcontent.innerHTML = oldcontent.innerHTML + '<div class="post">new content loaded</div>';
-            document.getElementById("scrollcontent").innerHTML=oldcontent.innerHTML;
-
-            $('.post').each(function(i){
-                var currentIndex = i + 1;
-                $(this).addClass('post' + (currentIndex));
-                $(this).attr('id', 'post' + (currentIndex));
-                $('post' + (currentIndex)).before($('post' + (currentIndex-1)))
-            });
-        }
-    });
-
-</script>
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Material Design Bootstrap</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet">
 </head>
-<body>
-<div id="scrollcontent">
 
-    <div class="post post1" id="post1"></div>
+<body>
+
+<!-- Start your project here-->
+<!--Card-->
+<div class="card m-5" style="width: 22rem;">
+
+    <!--Card image-->
+    <div class="view overlay">
+        <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%287%29.jpg" class="img-fluid" alt="">
+        <a href="#">
+            <div class="mask rgba-white-slight"></div>
+        </a>
+    </div>
+
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title">Card title</h4>
+        <!--Text-->
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+        <a href="#" class="btn btn-primary">Button</a>
+    </div>
 
 </div>
+<!--/.Card-->
+<!-- /Start your project here-->
 
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="js/mdb.min.js"></script>
 </body>
+
 </html>

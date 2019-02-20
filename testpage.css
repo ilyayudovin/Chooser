@@ -15,3 +15,13 @@ body{
 .post:nth-child(2){
     background-color: #4dc247;
 }
+.block1,.c{
+    width: 100px;
+    height: 100px;
+}
+.block1{
+    background-color: #4dc247;
+}
+.c{
+    background-color: #00aced;
+}

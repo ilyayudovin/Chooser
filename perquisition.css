@@ -28,29 +28,46 @@ body{
     background-color: var(--main-bg-color);
 
 }
+.primary-color{
+    background-color: #33b5e5!important;
+}
 header{
+    position: fixed;
     width: 100%;
-    height: 55px;
-    background-color: lightskyblue;
-    border-bottom: 1px solid darkgray;
-    box-shadow: 0 0 10px black;
+    z-index: 1;
 }
 .bigcolumn{
     width: 650px;
     margin: 0 auto;
-    padding-top:15px ;
+    padding-top:56px ;
 }
 .postlab{
-    position: relative;
-    width: 650px;
-    height: 200px;
+    position: fixed;
+    width: 300px;
+    height: 255px;
+    right: 100px;
+    top:90px;
     background-color: transparent;
     border-radius: 2px;
 }
-.test{
-    padding-top: 33px;
+.avatar{
+    width: 300px;
+    height: 50px;
+    margin-bottom: 10px;
+    display: flex;
 }
+.avatar_pic{
+    width: 50px;
+    height:50px;
+    background-color: whitesmoke;
+    border-radius: 50%;
+    border: 1px solid black;
+    box-shadow: 0 0 15px lightgrey inset;
 
+}
+.avatar_name{
+    padding-left: 15px;
+}
 input[type="file"] {
     display: none;
 }
@@ -65,17 +82,22 @@ input[type="file"] {
 }
 .wall{
     width: 650px;
-    background-color: #fff;
     text-align: center;
     border-radius: 2px;
     margin-top: 15px;
+}
+.pic1{
+    float: left;
+}
+.pic2{
+    float: right;
 }
 .pic1,.pic2 {
     position: relative;
     background-size: cover;
     background-position: center center;
     display: inline-block;
-    width: 280px;
+    width: 300px;
     margin-top: 40px;
     height: 400px;
     border: 1px solid black;
@@ -87,21 +109,11 @@ input[type="file"] {
 .wall .post .imgnum{
     display: none;
 }
-.postbtn{
-    width: 100px;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
+.post{
+    background-color: #fff;
+    margin: 20px 0;
 }
-.postbtn button{
-    line-height: 27px;
-    border: 1px solid black;
-    font-size: 15px;
-    color: black;
-    background-color: lightskyblue;
-    border-radius: 2px;
-    cursor: pointer;
-}
+
 .tableBanner,.tableBanner2{
     display: none;
 }
@@ -131,6 +143,9 @@ input[type="file"] {
 }
 form.test{
     text-align: center;
+    border: 1px solid lightgray;
+    padding-top: 15px;
+    border-radius: 5px;
 }
 .vote1,.vote2{
     width: 100px;
@@ -151,4 +166,8 @@ form.test{
    height: 485px;
     border:solid 1px #ccc;
     display: none;
+}
+.fa-heart{
+    font-size: 40px;
+    color: #33b5e5;
 }
