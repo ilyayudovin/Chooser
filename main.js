@@ -1,9 +1,5 @@
-var wallPosts = {
-    'posts': []
-};
-
 $(document).ready(function () {
-    var dataImage1 = localStorage.getItem('data1');
+   /* var dataImage1 = localStorage.getItem('data1');
     var bannerImg = document.getElementById('tableBanner1');
     bannerImg.src = dataImage1;
 
@@ -18,7 +14,7 @@ $(document).ready(function () {
     $('.pic2').each(function () {
         var imgURL = $(this).next('.imgnum').find('img').attr('src');
         $(this).css('background-image', 'url(' + imgURL + ')');
-    });
+    });*/
 
     var counter = 0;
 
@@ -47,9 +43,11 @@ $(document).ready(function () {
 
             var dataImage = localStorage.getItem('theImage');
 
+           var postNum = 'post' + postsCounter;
+
             if (counter % 2 === 1) {
                 $(".imagearea1").html(img);
-                var bannerImgg = document.getElementById("tableBanner1");
+                var bannerImgg =  $('#' + postNum).find('.imgnum').find('img')[0];
                 bannerImgg.src = dataImage;
                 data1 = dataImage;
                 localStorage.setItem('data1', data1);
@@ -57,7 +55,7 @@ $(document).ready(function () {
             }
             if (counter % 2 === 0) {
                 $(".imagearea2").html(img);
-                var bannerImgg2 = document.getElementById('tableBanner2');
+                var bannerImgg2 = $('#' + postNum).find('.imgnum').find('img')[1];
                 bannerImgg2.src = dataImage;
                 data2 = dataImage;
                 localStorage.setItem('data2', data2);
@@ -81,18 +79,21 @@ function posting(box) {
         pic1Id = 'post' + postsCounter + '_pic1',
         pic2Id = 'post' + postsCounter + '_pic2';
 
+    var imgsrc1 = $('#post' + postsCounter).find('.imgnum').find('img')[0];
+    var imgsrc2 = $('#post' + postsCounter).find('.imgnum').find('img')[1];
+
     event.preventDefault();
     localStorage.setItem('ID', pic1Id);
     localStorage.setItem('ID2', pic2Id);
 
-    if (inputName.value.trim() && inputName2.value.trim()) {
+    if (imgsrc1.src.length>81 && imgsrc2.src.length>81) {
         event.preventDefault();
         $('#' + pic1Id).each(function () {
-            var imgURL = $('#post1_pic1').next('.imgnum').find('img').attr('src');
+            var imgURL = $('#' + pic1Id).next('.imgnum').find('img').attr('src');
             $(this).css('background-image', 'url(' + imgURL + ')');
         });
         $('#' + pic2Id).each(function () {
-            var imgURL = $('#post1_pic2').next('.imgnum').find('img').attr('src');
+            var imgURL = $('#' + pic2Id).next('.imgnum').find('img').attr('src');
             $(this).css('background-image', 'url(' + imgURL + ')');
         });
         document.getElementsByClassName("imagearea1")[0].style.display = "none";//change color to label
@@ -101,6 +102,8 @@ function posting(box) {
 
         document.getElementsByClassName("imagearea2")[0].style.display = "none";//change color to label
         $("div#imagearea2").empty();
+        $('#logo2').empty();
+
 
         localStorage.setItem('show', 'true');
 
