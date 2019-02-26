@@ -29,17 +29,21 @@ body{
 
 }
 .primary-color{
-    background-color: #33b5e5!important;
+    background-color: #8ad5d8!important;
 }
 header{
     position: fixed;
     width: 100%;
     z-index: 1;
 }
+.navbar-brand img{
+    height: 140px;
+    transform: translate(0,-50px);
+}
 .bigcolumn{
     width: 980px;
     margin: 0 auto;
-    padding-top:80px;
+    padding-top:90px;
     display: -webkit-box;
 }
 .postlab{
@@ -88,9 +92,11 @@ input[type="file"] {
 }
 .pic1{
     float: left;
+    left: 10px;
 }
 .pic2{
     float: right;
+    right: 10px;
 }
 .pic1,.pic2 {
     position: relative;
@@ -98,12 +104,13 @@ input[type="file"] {
     background-position: center center;
     display: inline-block;
     width: 300px;
-    margin-top: 40px;
+    margin-top: 10px;
     height: 400px;
     border: 1px solid black;
     cursor: pointer;
     overflow: hidden;
     border-radius: 10px;
+    margin-bottom: 15px;
 }
 
 .wall .post .imgnum{
@@ -133,13 +140,13 @@ input[type="file"] {
     width: 102px;
     height: 142px;
     border-radius: 10px;
-    border: 1px solid deepskyblue;
+    border: 1px solid #8ad5d8;
 }
 .imagearea2 img{
     width: 102px;
     height: 142px;
     border-radius: 10px;
-    border: 1px solid deepskyblue;
+    border: 1px solid #8ad5d8;
 }
 form.test{
     text-align: center;
@@ -147,27 +154,44 @@ form.test{
     padding-top: 15px;
     border-radius: 5px;
 }
-.vote1,.vote2{
-    width: 100px;
-    margin: 20px 95px;
-    cursor: pointer;
-    display: inline-block;
+.votes{
+    position: absolute;
+    color: #8ad5d8;
+    font-size: 30px;
+    display: none;
+}
+.description_area{
+    padding: 0 10px;
+    width: 100%;
+    height: 51px;
+    text-align: left;
+    position: relative;
+    display: -webkit-box;
+    overflow-y: scroll;
+    word-break: break-word;
+}
+.description_area::-webkit-scrollbar{
+    visibility: hidden;
+    display: none;
 }
 .smallbtn{
     text-align: center;
     color: whitesmoke;
     line-height: 30px;
     font-size: 21px;
-    background-color: deepskyblue;
+    background-color: #8ad5d8;
     display: none;
     cursor: pointer;
 }
+.btn-info{
+    background-color: #8ad5d8!important;
+}
 .post{
-   height: 485px;
+   height: 480px;
     border:solid 1px #ccc;
     display: none;
 }
 .fa-heart{
     font-size: 40px;
-    color: #33b5e5;
+    color: #8ad5d8;
 }

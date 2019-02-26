@@ -104,6 +104,10 @@ function posting(box) {
         $("div#imagearea2").empty();
         $('#logo2').empty();
 
+        var desc = document.forms["forma"].elements["description"].value;
+        var descarea = document.getElementById('description_area script' + (postsCounter));
+        descarea.innerHTML=desc;
+        $('#description').val('');
 
         localStorage.setItem('show', 'true');
 
@@ -111,7 +115,7 @@ function posting(box) {
         document.getElementById('post' + (postsCounter)).style.display = "block";
 
         var oldcontent = document.getElementById('wall');
-        $("#wall").prepend("<div class='post'><div class='pic1'><div class='mask flex-center rgba-stylish-strong'><i class='far fa-heart'></i></i></div></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'><div class='mask flex-center rgba-stylish-strong'><i class='far fa-heart'></i></div></div><div class='imgnum'><img src='' class='tableBanner2'></div></div>");
+        $("#wall").prepend("<div class='post'><div class='pic1'><div class='mask flex-center rgba-stylish-strong'><i class='far fa-heart'></i><div class='votes vote1' id='vote'>100</div></div></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'><div class='mask flex-center rgba-stylish-strong'><i class='far fa-heart'></i><div class='votes vote2' id='vote'>101</div></div></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
         //oldcontent.innerHTML = oldcontent.innerHTML + '<div class="post"><div class="pic1"></div>' + '<div class="imgnum"><img src="" class="tableBanner1"></div>' + '<div class="pic2"></div>' + '<div class="imgnum"><img src="" class="tableBanner2"></div><div class="vote1" id="post1_vote1" onclick="voting1(this)">0 votes</div><div class="vote2" id="post1_vote2" onclick="voting2(this)">0 votes</div></div>';
         //document.getElementById("wall").innerHTML = oldcontent.innerHTML;
 
@@ -125,12 +129,15 @@ function posting(box) {
         currentPost.find('.pic1').addClass('view overlay');
         currentPost.find('.pic2').attr('id', 'post' + postsCounter + '_pic2');
         currentPost.find('.pic2').addClass('view overlay');
-
+        currentPost.find('.description_area').addClass('script' + (postsCounter));
+        currentPost.find('.description_area').attr('id', 'description_area script' + (postsCounter));
+        currentPost.find('.vote1').attr('id','post' + (postsCounter) + '_vote1');
+        currentPost.find('.vote2').attr('id','post' + (postsCounter) + '_vote2');
 
     }
 
     localStorage.setItem('pc', postsCounter);
-    wallPosts.posts.push({'id': 'post' + postsCounter + '_pic1'})
+
 
 }
 
@@ -157,6 +164,27 @@ function attach1(file) {
 function attach2(file) {
     if (file.files && file.files[0]) {
         document.getElementsByClassName("imagearea2")[0].style.display = "block";//change color to label
+    }
+}
+
+function showvotes(box) {
+    display=document.getElementById('post1_vote1').style.display;
+    if(display==='block'){
+        document.getElementById('post1_vote1').style.display="none";
+        document.getElementById('heart1').style.display="block";
+    }
+    else{
+        document.getElementById('post1_vote1').style.display="block";
+        document.getElementById('heart1').style.display="none";
+    }
+    display=document.getElementById('post1_vote2').style.display;
+    if(display==='block'){
+        document.getElementById('post1_vote2').style.display="none";
+        document.getElementById('heart2').style.display="block";
+    }
+    else{
+        document.getElementById('post1_vote2').style.display="block";
+        document.getElementById('heart2').style.display="none";
     }
 }
 
