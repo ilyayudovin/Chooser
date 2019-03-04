@@ -5,9 +5,6 @@
 html{
     font-family:'Raleway', sans-serif;
 }
-html a{
-    text-decoration: none;
-}
 body{
     height: 100%;
 }
@@ -26,32 +23,27 @@ body{
 .background1 a{
     color: whitesmoke;
 }
-header{
-    z-index: 1;
-    width: 100%;
-    margin: 0;
+.navbar-brand img{
+    height: 140px;
+    transform: translate(0,-50px);
 }
-header nav{
-    text-align: center;
+.primary-color{
+    background-color: transparent!important;
+}
+.navbar{
+    box-shadow: 0 0 0 0 transparent;
+}
+span.nav-link{
+    list-style-type: disc;
+    display: list-item;
+    padding-left: 0.5px;
+    margin-left: 5px;
+    color: white;
+    letter-spacing: 0.5px;
+}
+.navbar-nav{
     margin: 0 auto;
-    padding: 33px 0;
 }
-header nav ul li {
-    display: inline-block;
-    font-size: 1.5em;
-    margin-left: 3%;
-    margin-right: 3%;
-
-}
-header nav ul li a:hover{
-    cursor: pointer;
-    color: deepskyblue;
-}
-header nav ul li:first-child{
-    display: none;
-}
-
-
 .menu2{
     position: fixed;
     width: 100%;
@@ -74,7 +66,7 @@ padding-top: 93px;
 .intro{
     width: 900px;
     margin: 0 auto;
-    padding: 111px 0;
+    padding: 130px 0;
     display: block;
 }
 .intro h1{
@@ -98,16 +90,16 @@ padding-top: 93px;
     position: relative;
     top: 50%;
     margin-top: 32px;
-    background: deepskyblue;
+    background: #8ad5d8;
     font-size: 22px;
     font-weight: 300;
-    border:1px solid deepskyblue;
+    border:1px solid #8ad5d8;
     letter-spacing: 1px;
 }
 .button:hover{
-    border: 1px solid deepskyblue;
+    border: 1px solid #8ad5d8;
     background-color: transparent;
-    color: deepskyblue;
+    color: #8ad5d8;
     transition-duration: 0.5s;
     cursor: pointer;
 }

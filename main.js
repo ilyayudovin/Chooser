@@ -115,7 +115,7 @@ function posting(box) {
         document.getElementById('post' + (postsCounter)).style.display = "block";
 
         var oldcontent = document.getElementById('wall');
-        $("#wall").prepend("<div class='post'><div class='pic1'><div class='mask flex-center rgba-stylish-strong'><i class='far fa-heart'></i><div class='votes vote1' id='vote'>100</div></div></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'><div class='mask flex-center rgba-stylish-strong'><i class='far fa-heart'></i><div class='votes vote2' id='vote'>101</div></div></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        $("#wall").prepend("<div class='post'><div class='pic1'><div class='mask flex-center rgba-stylish-strong'><i class='far fa-heart' onclick='showvotes()'></i><div class='votes vote1' id='vote'>100</div></div></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'><div class='mask flex-center rgba-stylish-strong'><i class='far fa-heart' onclick='showvotes()'></i><div class='votes vote2' id='vote'>101</div></div></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
         //oldcontent.innerHTML = oldcontent.innerHTML + '<div class="post"><div class="pic1"></div>' + '<div class="imgnum"><img src="" class="tableBanner1"></div>' + '<div class="pic2"></div>' + '<div class="imgnum"><img src="" class="tableBanner2"></div><div class="vote1" id="post1_vote1" onclick="voting1(this)">0 votes</div><div class="vote2" id="post1_vote2" onclick="voting2(this)">0 votes</div></div>';
         //document.getElementById("wall").innerHTML = oldcontent.innerHTML;
 
@@ -203,3 +203,4 @@ function voting2(element) {
     localStorage.setItem('counter2', counter2);
     element.innerHTML = counter2 + " votes";
 }
+
