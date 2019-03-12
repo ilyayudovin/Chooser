@@ -48,8 +48,8 @@ header{
 }
 .postlab{
     position: fixed;
-    width: 300px;
-    height: 270px;
+    width: 540px;
+    height: 400px;
 
     background-color: transparent;
     border-radius: 2px;
@@ -77,12 +77,16 @@ input[type="file"] {
 }
 .custom-file-upload {
     border: 1px solid black;
-    height: 140px;
-    width: 100px;
+
     display: inline-block;
     cursor: pointer;
     border-radius: 10px;
-    box-shadow: 0 0 20px darkgrey inset;
+    width: 150px;
+    height: 150px;
+    margin: 35px 0;
+    position: relative;
+    background-size: cover;
+    background-position: center center;
 }
 .wall{
     width: 650px;
@@ -98,6 +102,7 @@ input[type="file"] {
     float: right;
     right: 10px;
 }
+
 .pic1,.pic2 {
     position: relative;
     background-size: cover;
@@ -125,35 +130,21 @@ input[type="file"] {
     display: none;
 }
 .form1 , .form2{
-    width:100px;
     position: relative;
     display: inline-block;
     margin: 0 10px;
 }
 .imagearea1,.imagearea2{
-    position: absolute;
-    height: 100%;
-    width: 100%;
     display: none;
 }
-.imagearea1 img{
-    width: 102px;
-    height: 142px;
-    border-radius: 10px;
-    border: 1px solid #8ad5d8;
-}
-.imagearea2 img{
-    width: 102px;
-    height: 142px;
-    border-radius: 10px;
-    border: 1px solid #8ad5d8;
-}
+
 form.test{
     text-align: center;
     border: 1px solid lightgray;
-    padding-top: 15px;
     border-radius: 5px;
+    height: 340px;
 }
+
 .votes{
     position: absolute;
     color: #8ad5d8;
@@ -194,4 +185,65 @@ form.test{
 .fa-heart{
     font-size: 40px;
     color: #8ad5d8;
+}
+.processline{
+    width: 100%;
+    height: 3px;
+    position: absolute;
+    background-color: lightgrey;
+    z-index: -1;
+    border-radius: 5px 5px 0 0;
+}
+.process{
+    width: 0%;
+    height: 3px;
+    background-color: #4dc247;
+    margin-bottom: 15px;
+    border-radius: 5px 5px 0 0;
+    transition-duration: 1s;
+
+}
+.fa-arrow-right{
+    position: absolute;
+    top: 50%;
+    right:15px;
+    color: #8ad5d8;
+    font-size: 23px;
+    cursor: pointer;
+}
+.step{
+    width: 45px;
+    position: absolute;
+    bottom: 0px;
+    right: 10px;
+}
+.movingnumbers{
+    display: inline-block;
+    height: 22px;
+    overflow: hidden;
+    transform: translate(0,5px);
+}
+.movingnumbers ul{
+    transition-duration: 1s;
+}
+.stepexplain{
+    display: grid;
+    margin: 5px 0;
+    font-size: 25px;
+}
+.movingheaders{
+    height: 35px;
+    overflow: hidden;
+}
+.movingheaders ul li{
+    font-size: 25px;
+}
+.movingul{
+    transition-duration: 1s;
+}
+.description{
+    width: 305px;
+    height: 110px;
+    margin: 45px 0;
+    display: none;
 }

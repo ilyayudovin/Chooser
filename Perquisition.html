@@ -18,9 +18,10 @@
 
     <link href="perquisition.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="media.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
 </head>
 <body>
-
 <div class="skin">
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark primary-color">
@@ -76,13 +77,14 @@
         </nav>
         <!--/.Navbar-->
     </header>
+
     <div class="bigcolumn">
 
         <div class="wall" id="wall">
             <div class="post post1 example hoverable" id="post1" style="position: relative">
                 <div class="pic1 view overlay" id="post1_pic1">
                     <div class="mask flex-center rgba-stylish-strong" id=mask1 >
-                        <i class="far fa-heart" id="heart1"  onclick="showvotes()"></i>
+                        <i class="fas fa-heart" id="heart1"  onclick="showvotes()"></i>
                         <div class="votes vote1" id="post1_vote1">101<i class="fas fa-heart" style="font-size: 27px"></i></div>
                     </div>
                 </div>
@@ -91,7 +93,7 @@
                 </div>
                 <div class="pic2 view overlay" id="post1_pic2">
                     <div class="mask flex-center rgba-stylish-strong" id="mask2">
-                        <i class="far fa-heart" id="heart2"  onclick="showvotes()"></i>
+                        <i class="fas fa-heart" id="heart2"  onclick="showvotes()"></i>
                         <div class="votes vote2" id="post1_vote2">100<i class="fas fa-heart" style="font-size: 27px"></i></div>
                     </div>
                 </div>
@@ -107,30 +109,57 @@
                 <div class="avatar_name">Ilya yudovin</div>
             </div>
             <form class="test example hoverable" id="forma">
-                <div class="form1">
+                <div class="processline" id="processline"></div>
+                <div class="process" id="process"></div>
+                <div class="movingheaders">
+                    <ul id="movingul" class="movingul">
+                        <li>Choose 1 pic</li>
+                        <li>Choose 2 pic</li>
+                        <li>Type a description</li>
+                        <li>Ready for posting!</li>
+                    </ul>
+                </div>
+                <div class="form1" id="form1">
                     <div class="imagearea1" id="imagearea1"></div>
-                    <label for="logo" class="custom-file-upload">
-                        <i class="fas fa-camera"></i>
+                    <label for="logo" class="custom-file-upload" id="labelimg">
+                        <i class="fas fa-camera" id="camera"></i>
                         <i class="fa fa-cloud-upload"></i>
                     </label>
                     <input onchange="attach1(this);" class="classhere" type="file" name="logo" id="logo"/>
                 </div>
-                <div class="form2">
+                <span class="error-message show" id="errortext1" style="display:none;">Please fill the field before continuing</span>
+                <div class="form2" id="form2" style="display: none">
                     <div class="imagearea2" id="imagearea2"></div>
-                    <label for="logo2" class="custom-file-upload">
-                        <i class="fas fa-camera"></i>
+                    <label for="logo2" class="custom-file-upload" id="labelimg2">
+                        <i class="fas fa-camera" id="camera2"></i>
                         <i class="fa fa-cloud-upload"></i>
                     </label>
                     <input onchange="attach2(this);" class="classhere" type="file" name="logo" id="logo2"/>
                 </div>
-                <input type="text" id="description" class="description" placeholder="description for post" >
-                <div class="postbtn" id="postBtn" onclick="posting();">
+                <span class="error-message show" id="errortext2" style="display:none;">Please fill the field before continuing</span>
+                <textarea class="description" id="description"></textarea>
+               <!-- <input type="text" id="description" class="description" placeholder="description for post" style="display:none;" > -->
+                <div class="postbtn" id="postBtn" onclick="posting();" style="display: none">
                     <button type="button" class="btn btn-info" style="line-height: 0.5">Post it</button>
+                </div>
+                <i class="fas fa-arrow-right" id="arrow" onclick="postprocess();"></i>
+                <div class="step" id="step">
+                    <div class="movingnumbers">
+                        <ul id="movingnum">
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                        </ul>
+                    </div>
+                    <span>/</span>
+                    <span class="totalstep">4</span>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <!-- Bootstrap tooltips -->
 <script type="text/javascript" src="js/popper.min.js"></script>
@@ -140,7 +169,7 @@
 <script type="text/javascript" src="js/mdb.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script type="text/javascript" src="infinitescroll.js"></script>
+<script src="dropzone.js"></script>
 <script type="text/javascript" src="main.js"></script>
-
 </body>
 </html>

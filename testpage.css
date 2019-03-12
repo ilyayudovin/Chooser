@@ -5,23 +5,107 @@
 body{
 
 }
-.post {
-    height: 900px;
-    width: 400px;
+body {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: #34495e;
+}
+
+.spisok{
+    width: 130px;
+    height: 26px;
+    overflow: hidden;
+}
+.content__container__list{
+    animation-name: change;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+@keyframes opacity {
+    0%, 100% {opacity:0;}
+    50% {opacity:1;}
+}
+
+@keyframes change {
+    0%, 12.66%, 100% {transform:translate3d(0,0,0);}
+    16.66%, 29.32% {transform:translate3d(0,-25%,0);}
+    33.32%,45.98% {transform:translate3d(0,-50%,0);}
+    49.98%,62.64% {transform:translate3d(0,-75%,0);}
+    66.64%,79.3% {transform:translate3d(0,-50%,0);}
+    83.3%,95.96% {transform:translate3d(0,-25%,0);}
+}
+#dropzone{
+    height: 200px;
+    width: 350px;
     margin: 0 auto;
-    border:solid 1px #ccc;
-    background-color: #00aced;
 }
-.post:nth-child(2){
-    background-color: #4dc247;
+.dropzone.dz-clickable {
+    cursor: pointer;
+    width: 350px;
+    height: 200px;
+    background-color: white;
 }
-.block1,.c{
-    width: 100px;
-    height: 100px;
+.dropzone .dz-preview {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    margin: 16px;
+    min-height: 100px;
 }
-.block1{
-    background-color: #4dc247;
+.dropzone .dz-preview .dz-image{
+border-radius: 20px;
+overflow: hidden;
+width: 120px;
+height: 120px;
+position: relative;
+display: block;
+z-index: 10;
 }
-.c{
-    background-color: #00aced;
+.dropzone .dz-preview .dz-success-mark, .dropzone .dz-preview .dz-error-mark {
+    pointer-events: none;
+    opacity: 0;
+    z-index: 500;
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    margin-left: -27px;
+    margin-top: -27px;
+}
+.dropzone .dz-error-message{
+    display: none;
+}
+.dropzone .dz-details{
+    display: none;
+}
+.dropzone .dz-preview.dz-complete .dz-progress {
+    opacity: 0;
+    transition: opacity 0.4s ease-in;
+}
+.dropzone .dz-preview .dz-progress {
+    opacity: 1;
+    z-index: 1000;
+    pointer-events: none;
+    position: absolute;
+    height: 16px;
+    left: 50%;
+    top: 50%;
+    margin-top: -8px;
+    width: 80px;
+    margin-left: -40px;
+    background: rgba(255, 255, 255, 0.9);
+    -webkit-transform: scale(1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.dropzone .dz-preview .dz-progress .dz-upload {
+    background: #333;
+    background: linear-gradient(to bottom, #666, #444);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    transition: width 300ms ease-in-out;
 }
