@@ -39,7 +39,15 @@ $(document).ready(function () {
                 var bannerImgg = $('#' + postNum).find('.imgnum').find('img')[0];
                 bannerImgg.src = dataImage;
                 data1 = dataImage;
-                localStorage.setItem('data1', data1);
+                if(postsCounter==='1'){
+                    localStorage.setItem('data1', data1);
+                }
+                if(postsCounter==='2'){
+                    localStorage.setItem('data3', data1);
+                }
+                if(postsCounter==='3'){
+                    localStorage.setItem('data5',data1);
+                }
                 localStorage.removeItem('theImage');
             }
             if (counter % 2 === 0) {
@@ -51,7 +59,15 @@ $(document).ready(function () {
                 var bannerImgg2 = $('#' + postNum).find('.imgnum').find('img')[1];
                 bannerImgg2.src = dataImage;
                 data2 = dataImage;
-                localStorage.setItem('data2', data2);
+                if(postsCounter==='1'){
+                    localStorage.setItem('data2', data2);
+                }
+                if(postsCounter==='2'){
+                    localStorage.setItem('data4', data2);
+                }
+                if(postsCounter==='3'){
+                    localStorage.setItem('data6', data2);
+                }
                 localStorage.removeItem('theImage');
             }
             counter++;
@@ -62,9 +78,11 @@ $(document).ready(function () {
     counter++;
     localStorage.setItem('c', counter);
 });
-var postsCounter = 1;
-localStorage.setItem('pc', postsCounter);
-
+var postsCounter=1;
+if(localStorage.getItem('pc')>1){
+    postsCounter=localStorage.getItem('pc');
+}
+localStorage.setItem('pc',postsCounter);
 function posting(box) {
     var currentPost,
 
@@ -97,16 +115,25 @@ function posting(box) {
         $('#logo2').empty();
 
         var desc = document.forms["forma"].elements["description"].value;
+        if(postsCounter===1){
+            localStorage.setItem('text1',desc);
+        }
+        if(postsCounter===2){
+            localStorage.setItem('text2',desc);
+        }
+        if(postsCounter===3){
+            localStorage.setItem('text3',desc);
+        }
         var descarea = document.getElementById('description_area script' + (postsCounter));
         descarea.innerHTML = desc;
         $('#description').val('');
 
-        localStorage.setItem('show', 'true');
+        //localStorage.setItem('show', 'true');
 
 
         document.getElementById('post' + (postsCounter)).style.display = "block";
 
-        $("#wall").prepend("<div class='post'><div class='pic1'><div class='mask flex-center rgba-stylish-strong'><i class='fas fa-heart' onclick='showvotes()'></i><div class='votes vote1' id='vote'>100</div></div></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'><div class='mask flex-center rgba-stylish-strong'><i class='fas fa-heart' onclick='showvotes()'></i><div class='votes vote2' id='vote'>101</div></div></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        $("#wall").prepend("<div class='post'><div class='pic1'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
 
         postsCounter++;
         currentPost = $('.post').first();
@@ -120,38 +147,197 @@ function posting(box) {
         currentPost.find('.pic2').addClass('view overlay');
         currentPost.find('.description_area').addClass('script' + (postsCounter));
         currentPost.find('.description_area').attr('id', 'description_area script' + (postsCounter));
+        currentPost.find('.rgba-stylish-strong').attr('id','post' + (postsCounter) + '_mask1');
+        currentPost.find('.rgba-stylish-strong').eq(1).attr('id','post' + (postsCounter) + '_mask2');
         currentPost.find('.vote1').attr('id', 'post' + (postsCounter) + '_vote1');
         currentPost.find('.vote2').attr('id', 'post' + (postsCounter) + '_vote2');
+        currentPost.find('.fa_heart').attr('id','post' + (postsCounter) + 'heart1');
+        currentPost.find('.fa_heart').eq(1).attr('id','post' + (postsCounter) + 'heart2');
+
 
 
         document.getElementById('form1').style.display = "inline-block";
         document.getElementById('form2').style.display = "none";
         document.getElementById('description').style.display = "none";
         document.getElementById('postBtn').style.display = "none";
-        document.getElementById('process').style.width = "1%";
+        document.getElementById('process').style.width = "0%";
         document.getElementById('arrow').style.display = "block";
         document.getElementById('movingul').style.transform = "translate(0,0)";
         document.getElementById('movingnum').style.transform = "translate(0,0px)";
 
         document.getElementById('labelimg').style.backgroundImage="url()";
         document.getElementById('labelimg2').style.backgroundImage="url()";
+
         localStorage.setItem('pc', postsCounter);
 
+        localStorage.setItem('pn',postsCounter-1);
+
+
+        if(postsCounter-1===1){
+            localStorage.setItem('show1',true);
+        }
+        if(postsCounter-1===2){
+            localStorage.setItem('show2',true);
+        }
+        if(postsCounter-1===3){
+            localStorage.setItem('show3',true);
+        }
+        //localStorage.setItem('show',true);
     }
 }
 
 window.onload = function () {
-  var show = localStorage.getItem('show');
- if (show === 'true') {
-    document.getElementById('clear').style.display = "block";
-   document.getElementById('vote1').style.display = "inline-block";
-  document.getElementById('vote2').style.display = "inline-block";
+    if(localStorage.getItem('pn')>0){
+        postsCounter=localStorage.getItem('pc');
+    }
+  var show1 = localStorage.getItem('show1');
+ if (show1 === 'true') {
+   document.getElementById('post1').style.display="block";
+     $('#post1_pic1').each(function () {
+         var imgURL = localStorage.getItem('data1');
+         $(this).css('background-image', 'url(' + imgURL + ')');
+     });
+     $('#post1_pic2').each(function () {
+         var imgURL = localStorage.getItem('data2');
+         $(this).css('background-image', 'url(' + imgURL + ')');
+     });
+     var descarea = document.getElementById('description_area script' + (1));
+     if(descarea!=null){
+         descarea.innerHTML = localStorage.getItem('text1');
+     }
  }
-counter1 = localStorage.getItem('counter1');
-document.getElementById('vote1').innerHTML = counter1 + " votes";
+    var show2 = localStorage.getItem('show2');
+    if (show2 === 'true') {
+        $("#wall").prepend("<div class='post'><div class='pic1'><div class='mask flex-center rgba-stylish-strong' id='post2_mask1'><i class='fas fa-heart' id='post2_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'><div class='mask flex-center rgba-stylish-strong' id='post2_mask2'><i class='fas fa-heart' id='post2_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
 
-counter2 = localStorage.getItem('counter2');
-document.getElementById('vote2').innerHTML = counter2 + " votes";
+        var currentPost = $('.post').first();
+
+        currentPost.addClass('post' + (2));
+        currentPost.addClass('example hoverable');
+        currentPost.attr('id', 'post' + (2));
+        currentPost.find('.pic1').attr('id', 'post' + 2 + '_pic1');
+        currentPost.find('.pic1').addClass('view overlay');
+        currentPost.find('.pic2').attr('id', 'post' + 2 + '_pic2');
+        currentPost.find('.pic2').addClass('view overlay');
+        currentPost.find('.description_area').addClass('script' + (2));
+        currentPost.find('.description_area').attr('id', 'description_area script' + (2));
+        currentPost.find('.vote1').attr('id', 'post' + (2) + '_vote1');
+        currentPost.find('.vote2').attr('id', 'post' + (2) + '_vote2');
+
+        document.getElementById('post2').style.display="block";
+        $('#post2_pic1').each(function () {
+            var imgURL = localStorage.getItem('data3');
+            $(this).css('background-image', 'url(' + imgURL + ')');
+        });
+        $('#post2_pic2').each(function () {
+            var imgURL = localStorage.getItem('data4');
+            $(this).css('background-image', 'url(' + imgURL + ')');
+        });
+        descarea = document.getElementById('description_area script' + (2));
+        if(descarea!=null){
+            descarea.innerHTML = localStorage.getItem('text2');
+        }
+    }
+
+    var show3 = localStorage.getItem('show3');
+    if (show3 === 'true') {
+        $("#wall").prepend("<div class='post'><div class='pic1'><div class='mask flex-center rgba-stylish-strong' id='post3_mask1'><i class='fas fa-heart' id='post3_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'><div class='mask flex-center rgba-stylish-strong' id='post3_mask2'><i class='fas fa-heart' id='post3_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+
+         currentPost = $('.post').first();
+
+        currentPost.addClass('post' + (3));
+        currentPost.addClass('example hoverable');
+        currentPost.attr('id', 'post' + (3));
+        currentPost.find('.pic1').attr('id', 'post' + 3 + '_pic1');
+        currentPost.find('.pic1').addClass('view overlay');
+        currentPost.find('.pic2').attr('id', 'post' + 3 + '_pic2');
+        currentPost.find('.pic2').addClass('view overlay');
+        currentPost.find('.description_area').addClass('script' + (3));
+        currentPost.find('.description_area').attr('id', 'description_area script' + (3));
+        currentPost.find('.vote1').attr('id', 'post' + (3) + '_vote1');
+        currentPost.find('.vote2').attr('id', 'post' + (3) + '_vote2');
+
+        document.getElementById('post3').style.display="block";
+        $('#post3_pic1').each(function () {
+            var imgURL = localStorage.getItem('data5');
+            $(this).css('background-image', 'url(' + imgURL + ')');
+        });
+        $('#post3_pic2').each(function () {
+            var imgURL = localStorage.getItem('data6');
+            $(this).css('background-image', 'url(' + imgURL + ')');
+        });
+        descarea = document.getElementById('description_area script' + (3));
+        if (descarea!=null){
+            descarea.innerHTML = localStorage.getItem('text3');
+        }
+    }
+
+    if(localStorage.getItem('pn')>3){
+        postsCounter=4;
+        localStorage.setItem('pc', postsCounter);
+        localStorage.setItem('pn',postsCounter-1);
+    }
+
+    if(localStorage.getItem('pn')==='1'){
+        $("#wall").prepend("<div class='post'><div class='pic1'><div class='mask flex-center rgba-stylish-strong' id='post2_mask1'><i class='fas fa-heart' id='post2_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'><div class='mask flex-center rgba-stylish-strong' id='post2_mask2'><i class='fas fa-heart' id='post2_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        currentPost = $('.post').first();
+        currentPost.addClass('post' + (postsCounter));
+        currentPost.addClass('example hoverable');
+        currentPost.attr('id', 'post' + (postsCounter));
+        currentPost.find('.pic1').attr('id', 'post' + postsCounter + '_pic1');
+        currentPost.find('.pic1').addClass('view overlay');
+        currentPost.find('.pic2').attr('id', 'post' + postsCounter + '_pic2');
+        currentPost.find('.pic2').addClass('view overlay');
+        currentPost.find('.description_area').addClass('script' + (postsCounter));
+        currentPost.find('.description_area').attr('id', 'description_area script' + (postsCounter));
+        currentPost.find('.rgba-stylish-strong').attr('id','post' + (postsCounter) + '_mask1');
+        currentPost.find('.rgba-stylish-strong').eq(1).attr('id','post' + (postsCounter) + '_mask2');
+        currentPost.find('.vote1').attr('id', 'post' + (postsCounter) + '_vote1');
+        currentPost.find('.vote2').attr('id', 'post' + (postsCounter) + '_vote2');
+        currentPost.find('.fa_heart').attr('id','post' + (postsCounter) + 'heart1');
+        currentPost.find('.fa_heart').eq(1).attr('id','post' + (postsCounter) + 'heart2');
+
+    }
+    if(localStorage.getItem('pn')==='2'){
+        $("#wall").prepend("<div class='post'><div class='pic1'><div class='mask flex-center rgba-stylish-strong' id='post3_mask1'><i class='fas fa-heart' id='post3_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'><div class='mask flex-center rgba-stylish-strong' id='post3_mask2'><i class='fas fa-heart' id='post3_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        currentPost = $('.post').first();
+        currentPost.addClass('post' + (postsCounter));
+        currentPost.addClass('example hoverable');
+        currentPost.attr('id', 'post' + (postsCounter));
+        currentPost.find('.pic1').attr('id', 'post' + postsCounter + '_pic1');
+        currentPost.find('.pic1').addClass('view overlay');
+        currentPost.find('.pic2').attr('id', 'post' + postsCounter + '_pic2');
+        currentPost.find('.pic2').addClass('view overlay');
+        currentPost.find('.description_area').addClass('script' + (postsCounter));
+        currentPost.find('.description_area').attr('id', 'description_area script' + (postsCounter));
+        currentPost.find('.rgba-stylish-strong').attr('id','post' + (postsCounter) + '_mask1');
+        currentPost.find('.rgba-stylish-strong').eq(1).attr('id','post' + (postsCounter) + '_mask2');
+        currentPost.find('.vote1').attr('id', 'post' + (postsCounter) + '_vote1');
+        currentPost.find('.vote2').attr('id', 'post' + (postsCounter) + '_vote2');
+        currentPost.find('.fa_heart').attr('id','post' + (postsCounter) + 'heart1');
+        currentPost.find('.fa_heart').eq(1).attr('id','post' + (postsCounter) + 'heart2');
+    }
+
+    if(localStorage.getItem('pn')==='3'){
+        $("#wall").prepend("<div class='post'><div class='pic1'><div class='mask flex-center rgba-stylish-strong' id='post4_mask1'><i class='fas fa-heart' id='post4_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'><div class='mask flex-center rgba-stylish-strong' id='post4_mask2'><i class='fas fa-heart' id='post4_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        currentPost = $('.post').first();
+        currentPost.addClass('post' + (postsCounter));
+        currentPost.addClass('example hoverable');
+        currentPost.attr('id', 'post' + (postsCounter));
+        currentPost.find('.pic1').attr('id', 'post' + postsCounter + '_pic1');
+        currentPost.find('.pic1').addClass('view overlay');
+        currentPost.find('.pic2').attr('id', 'post' + postsCounter + '_pic2');
+        currentPost.find('.pic2').addClass('view overlay');
+        currentPost.find('.description_area').addClass('script' + (postsCounter));
+        currentPost.find('.description_area').attr('id', 'description_area script' + (postsCounter));
+        currentPost.find('.rgba-stylish-strong').attr('id','post' + (postsCounter) + '_mask1');
+        currentPost.find('.rgba-stylish-strong').eq(1).attr('id','post' + (postsCounter) + '_mask2');
+        currentPost.find('.vote1').attr('id', 'post' + (postsCounter) + '_vote1');
+        currentPost.find('.vote2').attr('id', 'post' + (postsCounter) + '_vote2');
+        currentPost.find('.fa_heart').attr('id','post' + (postsCounter) + 'heart1');
+        currentPost.find('.fa_heart').eq(1).attr('id','post' + (postsCounter) + 'heart2');
+    }
+
 }
 
 function attach1(file) {
@@ -163,45 +349,49 @@ function attach2(file) {
 
 }
 
-function showvotes(box) {
-    display = document.getElementById('post1_vote1').style.display;
+function showvotes(clicked_id) {
+
+    var e=document.getElementById(clicked_id).parentElement.id;
+    var d=document.getElementById(e).parentElement.id;
+    var f=document.getElementById(d).parentElement.id;
+
+    var likes1=document.getElementById(f + '_vote1');
+    var likes2=document.getElementById(f + '_vote2');
+    var counter1=1;
+    var counter2=1;
+    if(clicked_id=== f + '_heart1'){
+        likes1.innerText=counter1;
+        counter1++;
+    }
+    if(clicked_id===f + '_heart2'){
+        likes2.innerText=counter2;
+        counter2++;
+    }
+    display = document.getElementById(f + '_vote1').style.display;
     if (display === 'block') {
-        document.getElementById('post1_vote1').style.display = "none";
-        document.getElementById('heart1').style.display = "block";
+        document.getElementById(f + '_vote1').style.display = "none";
+        document.getElementById(f + '_heart1').style.display = "block";
     }
     else {
-        document.getElementById('post1_vote1').style.display = "block";
-        document.getElementById('heart1').style.display = "none";
+        document.getElementById(f + '_vote1').style.display = "block";
+        document.getElementById(f + '_heart1').style.display = "none";
     }
-    display = document.getElementById('post1_vote2').style.display;
+    display = document.getElementById(f + '_vote2').style.display;
     if (display === 'block') {
-        document.getElementById('post1_vote2').style.display = "none";
-        document.getElementById('heart2').style.display = "block";
+        document.getElementById(f + '_vote2').style.display = "none";
+        document.getElementById(f + '_heart2').style.display = "block";
     }
     else {
-        document.getElementById('post1_vote2').style.display = "block";
-        document.getElementById('heart2').style.display = "none";
+        document.getElementById(f + '_vote2').style.display = "block";
+        document.getElementById(f + '_heart2').style.display = "none";
     }
 }
 
-var counter1 = 0;
+function likescount(clicked_id) {
 
-function voting1(element) {
-    counter1++;
-    localStorage.setItem('counter1', counter1);
-    element.innerHTML = counter1 + " votes";
-}
-
-var counter2 = 0;
-
-function voting2(element) {
-    counter2++;
-    localStorage.setItem('counter2', counter2);
-    element.innerHTML = counter2 + " votes";
 }
 
 var progress = 1;
-
 function postprocess(box) {
 
     if (progress === 1) {
