@@ -31,7 +31,7 @@
 
             <!-- Collapse button -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-                    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+                    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation" onclick="phonepost()">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -68,7 +68,8 @@
 
                 <form class="form-inline">
                     <div class="md-form my-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                       <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
+                       <!-- <div class="phonepost">Create Post</div>-->
                     </div>
                 </form>
             </div>
@@ -78,11 +79,19 @@
         <!--/.Navbar-->
     </header>
 
-    <div class="bigcolumn">
+
+<!--phone postlab version -->
+    <div class="phonepostlab" id="phonelab">
+
+    </div>
+    <!--phone postlab version -->
+
+
+    <div class="bigcolumn" id="bigcolumn">
 
         <div class="wall" id="wall">
             <div class="post post1 example hoverable" id="post1" style="position: relative">
-                <div class="pic1 view overlay" id="post1_pic1">
+                <div class="pic1 view overlay" id="post1_pic1" onclick="maskshow(this.id)">
                     <div class="mask flex-center rgba-stylish-strong" id="post1_mask1" >
                         <i class="fas fa-heart" id="post1_heart1"  onclick="showvotes(this.id)"></i>
                         <div class="votes vote1" id="post1_vote1">0</div>
@@ -91,7 +100,7 @@
                 <div class="imgnum">
                     <img src="" id="tableBanner1" class="tableBanner1">
                 </div>
-                <div class="pic2 view overlay" id="post1_pic2">
+                <div class="pic2 view overlay" id="post1_pic2" onclick="maskshow(this.id)">
                     <div class="mask flex-center rgba-stylish-strong" id="post1_mask2">
                         <i class="fas fa-heart" id="post1_heart2"  onclick="showvotes(this.id)"></i>
                         <div class="votes vote2" id="post1_vote2">0</div>
@@ -106,7 +115,7 @@
         <div class="postlab" id="postlab">
             <div class="avatar">
                 <div class="avatar_pic"></div>
-                <div class="avatar_name">Ilya yudovin</div>
+                <div class="avatar_name">Your Nickname</div>
             </div>
             <form class="test example hoverable" id="forma">
                 <div class="processline" id="processline"></div>

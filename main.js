@@ -124,9 +124,13 @@ function posting(box) {
         if(postsCounter===3){
             localStorage.setItem('text3',desc);
         }
-        var descarea = document.getElementById('description_area script' + (postsCounter));
-        descarea.innerHTML = desc;
-        $('#description').val('');
+
+            var descarea = document.getElementById('description_area script' + (postsCounter));
+            descarea.innerHTML = desc;
+            $('#description').val('');
+      if(desc===''){
+          document.getElementById('description_area script' + (postsCounter)).style.height="0px";
+        }
 
         //localStorage.setItem('show', 'true');
 
@@ -156,7 +160,7 @@ function posting(box) {
 
 
 
-        document.getElementById('form1').style.display = "inline-block";
+        document.getElementById('form1').style.display = "block";
         document.getElementById('form2').style.display = "none";
         document.getElementById('description').style.display = "none";
         document.getElementById('postBtn').style.display = "none";
@@ -183,6 +187,12 @@ function posting(box) {
             localStorage.setItem('show3',true);
         }
         //localStorage.setItem('show',true);
+        document.getElementById('phonelab').style.display="none";
+        document.getElementById('wall').style.display="block";
+        document.getElementById('postlab').style.display="none";
+        document.getElementById('form1').style.display="none";
+
+
     }
 }
 
@@ -430,4 +440,83 @@ function postprocess(box) {
         progress = 0;
     }
     progress++;
+}
+
+var getElementsInArea = (function(docElm){
+    var viewportHeight = docElm.clientHeight;
+
+    return function(e, opts){
+        var found = [], i;
+
+        if( e && e.type == 'resize' )
+            viewportHeight = docElm.clientHeight;
+
+        for( i = opts.elements.length; i--; ){
+            var elm        = opts.elements[i],
+                pos        = elm.getBoundingClientRect(),
+                topPerc    = pos.top    / viewportHeight * 100,
+                bottomPerc = pos.bottom / viewportHeight * 100,
+                middle     = (topPerc + bottomPerc)/2,
+                inViewport = middle > opts.zone[1] &&
+                    middle < (100-opts.zone[1]);
+
+            elm.classList.toggle(opts.markedClass, inViewport);
+
+            if( inViewport )
+                found.push(elm);
+        }
+    };
+})(document.documentElement);
+
+
+////////////////////////////////////
+// How to use:
+
+window.addEventListener('scroll', f)
+window.addEventListener('resize', f)
+
+function f(e){
+    getElementsInArea(e, {
+        elements    : document.getElementsByClassName('post'),
+        markedClass : 'highlight--1',
+        zone        : [30, 30] // percentage distance from top & bottom
+    });
+
+}
+
+function phonepost(box) {
+    display=document.getElementById('phonelab').style.display;
+    if (display === 'block') {
+        document.getElementById('phonelab').style.display = "none";
+    }
+    else {
+        document.getElementById('phonelab').style.display = "block";
+    }
+    display=document.getElementById('wall').style.display;
+    if (display === 'none') {
+        document.getElementById('wall').style.display = "block";
+    }
+    else {
+        document.getElementById('wall').style.display = "none";
+    }
+
+    display=document.getElementById('postlab').style.display;
+    if (display === 'block') {
+        document.getElementById('postlab').style.display = "none";
+    }
+    else {
+        document.getElementById('postlab').style.display = "block";
+    }
+    position=document.getElementById('postlab').style.position="absolute"
+
+    display=document.getElementById('form1').style.display;
+    if (display === 'block') {
+        document.getElementById('form1').style.display = "none";
+    }
+    else {
+        document.getElementById('form1').style.display = "block";
+    }
+}
+function maskshow(clicked_id) {
+   display = $(clicked_id).children().style.display;
 }
