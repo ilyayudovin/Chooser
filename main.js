@@ -39,7 +39,7 @@ $(document).ready(function () {
                 var bannerImgg = $('#' + postNum).find('.imgnum').find('img')[0];
                 bannerImgg.src = dataImage;
                 data1 = dataImage;
-                if(postsCounter==='1'){
+                if(postsCounter===1){
                     localStorage.setItem('data1', data1);
                 }
                 if(postsCounter==='2'){
@@ -59,7 +59,7 @@ $(document).ready(function () {
                 var bannerImgg2 = $('#' + postNum).find('.imgnum').find('img')[1];
                 bannerImgg2.src = dataImage;
                 data2 = dataImage;
-                if(postsCounter==='1'){
+                if(postsCounter===1){
                     localStorage.setItem('data2', data2);
                 }
                 if(postsCounter==='2'){
@@ -137,7 +137,7 @@ function posting(box) {
 
         document.getElementById('post' + (postsCounter)).style.display = "block";
 
-        $("#wall").prepend("<div class='post'><div class='pic1'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        $("#wall").prepend("<div class='post'><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1'></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
 
         postsCounter++;
         currentPost = $('.post').first();
@@ -157,6 +157,10 @@ function posting(box) {
         currentPost.find('.vote2').attr('id', 'post' + (postsCounter) + '_vote2');
         currentPost.find('.fa_heart').attr('id','post' + (postsCounter) + 'heart1');
         currentPost.find('.fa_heart').eq(1).attr('id','post' + (postsCounter) + 'heart2');
+        currentPost.find('.phonelikes1').attr('id', 'post' + (postsCounter) + '_phonelikes1');
+        currentPost.find('.phonelikes2').attr('id', 'post' + (postsCounter) + '_phonelikes2');
+
+
 
 
 
@@ -187,10 +191,13 @@ function posting(box) {
             localStorage.setItem('show3',true);
         }
         //localStorage.setItem('show',true);
-        document.getElementById('phonelab').style.display="none";
-        document.getElementById('wall').style.display="block";
-        document.getElementById('postlab').style.display="none";
-        document.getElementById('form1').style.display="none";
+        if(document.body.clientWidth<510) {
+            document.getElementById('phonelab').style.display = "none";
+            document.getElementById('wall').style.display = "block";
+            document.getElementById('postlab').style.display = "none";
+            document.getElementById('form1').style.display = "none";
+        }
+
 
 
     }
@@ -218,7 +225,7 @@ window.onload = function () {
  }
     var show2 = localStorage.getItem('show2');
     if (show2 === 'true') {
-        $("#wall").prepend("<div class='post'><div class='pic1'><div class='mask flex-center rgba-stylish-strong' id='post2_mask1'><i class='fas fa-heart' id='post2_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'><div class='mask flex-center rgba-stylish-strong' id='post2_mask2'><i class='fas fa-heart' id='post2_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        $("#wall").prepend("<div class='post'><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post2_mask1'><i class='fas fa-heart' id='post2_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post2_phonelikes1'></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post2_mask2'><i class='fas fa-heart' id='post2_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post2_phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
 
         var currentPost = $('.post').first();
 
@@ -251,7 +258,7 @@ window.onload = function () {
 
     var show3 = localStorage.getItem('show3');
     if (show3 === 'true') {
-        $("#wall").prepend("<div class='post'><div class='pic1'><div class='mask flex-center rgba-stylish-strong' id='post3_mask1'><i class='fas fa-heart' id='post3_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'><div class='mask flex-center rgba-stylish-strong' id='post3_mask2'><i class='fas fa-heart' id='post3_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        $("#wall").prepend("<div class='post'><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post3_mask1'><i class='fas fa-heart' id='post3_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post3_phonelikes1'></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post3_mask2'><i class='fas fa-heart' id='post3_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post3_phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
 
          currentPost = $('.post').first();
 
@@ -289,7 +296,7 @@ window.onload = function () {
     }
 
     if(localStorage.getItem('pn')==='1'){
-        $("#wall").prepend("<div class='post'><div class='pic1'><div class='mask flex-center rgba-stylish-strong' id='post2_mask1'><i class='fas fa-heart' id='post2_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'><div class='mask flex-center rgba-stylish-strong' id='post2_mask2'><i class='fas fa-heart' id='post2_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        $("#wall").prepend("<div class='post'><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post2_mask1'><i class='fas fa-heart' id='post2_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post2_phonelikes1'></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post2_mask2'><i class='fas fa-heart' id='post2_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post2_phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
         currentPost = $('.post').first();
         currentPost.addClass('post' + (postsCounter));
         currentPost.addClass('example hoverable');
@@ -309,7 +316,7 @@ window.onload = function () {
 
     }
     if(localStorage.getItem('pn')==='2'){
-        $("#wall").prepend("<div class='post'><div class='pic1'><div class='mask flex-center rgba-stylish-strong' id='post3_mask1'><i class='fas fa-heart' id='post3_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'><div class='mask flex-center rgba-stylish-strong' id='post3_mask2'><i class='fas fa-heart' id='post3_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        $("#wall").prepend("<div class='post'><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post3_mask1'><i class='fas fa-heart' id='post3_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post3_phonelikes1' ></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post3_mask2'><i class='fas fa-heart' id='post3_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post3_phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
         currentPost = $('.post').first();
         currentPost.addClass('post' + (postsCounter));
         currentPost.addClass('example hoverable');
@@ -329,7 +336,7 @@ window.onload = function () {
     }
 
     if(localStorage.getItem('pn')==='3'){
-        $("#wall").prepend("<div class='post'><div class='pic1'><div class='mask flex-center rgba-stylish-strong' id='post4_mask1'><i class='fas fa-heart' id='post4_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'><div class='mask flex-center rgba-stylish-strong' id='post4_mask2'><i class='fas fa-heart' id='post4_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        $("#wall").prepend("<div class='post'><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post4_mask1'><i class='fas fa-heart' id='post4_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post4_phonelikes1' ></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post4_mask2'><i class='fas fa-heart' id='post4_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post4_phonelikes2' ></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
         currentPost = $('.post').first();
         currentPost.addClass('post' + (postsCounter));
         currentPost.addClass('example hoverable');
@@ -499,15 +506,14 @@ function phonepost(box) {
     else {
         document.getElementById('wall').style.display = "none";
     }
-
-    display=document.getElementById('postlab').style.display;
-    if (display === 'block') {
-        document.getElementById('postlab').style.display = "none";
-    }
-    else {
-        document.getElementById('postlab').style.display = "block";
-    }
-    position=document.getElementById('postlab').style.position="absolute"
+        display=document.getElementById('postlab').style.display;
+        if (display === 'block') {
+            document.getElementById('postlab').style.display = "none";
+        }
+        else {
+            document.getElementById('postlab').style.display = "block";
+        }
+    position=document.getElementById('postlab').style.position="absolute";
 
     display=document.getElementById('form1').style.display;
     if (display === 'block') {
@@ -517,6 +523,19 @@ function phonepost(box) {
         document.getElementById('form1').style.display = "block";
     }
 }
-function maskshow(clicked_id) {
-   display = $(clicked_id).children().style.display;
-}
+
+    function maskshow(clicked_id) {
+        if(document.body.clientWidth<510) {
+            var e = document.getElementById(clicked_id).parentElement.id;
+            if (clicked_id === e + '_pic1') {
+                document.getElementById(e + '_phonelikes1').style.display = "block";
+                $('#' + e + '_phonelikes1').fadeOut(1000);
+                document.getElementById(e + '_pic1').style.boxShadow = "3px 3px 0px rgb(138, 213, 216), -3px -3px 0px rgb(138,213,216),3px -3px 0px rgb(138, 213, 216), -3px 3px 0px rgb(138,213,216)";
+            }
+            if (clicked_id === e + '_pic2') {
+                document.getElementById(e + '_phonelikes2').style.display = "block";
+                $('#' + e + '_phonelikes2').fadeOut(1000);
+                document.getElementById(e + '_pic2').style.boxShadow = "3px 3px 0px rgb(138, 213, 216), -3px -3px 0px rgb(138,213,216),3px -3px 0px rgb(138, 213, 216), -3px 3px 0px rgb(138,213,216)";
+            }
+        }
+    }
