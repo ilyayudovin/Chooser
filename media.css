@@ -92,8 +92,8 @@
 
     }
     .pic1,.pic2{
-        width:150px;
-        height: 200px;
+        width:140px;
+        height: 190px;
         margin: 20px 10px;
     }
     .pic1:hover .mask{
@@ -117,4 +117,9 @@
    .avatar{
        margin-left: 20px;
    }
+}
+@media only screen and (max-width: 320px) {
+    .pic1,.pic2{
+        margin: 20px 0;
+    }
 }

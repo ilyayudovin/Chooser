@@ -39,14 +39,14 @@ $(document).ready(function () {
                 var bannerImgg = $('#' + postNum).find('.imgnum').find('img')[0];
                 bannerImgg.src = dataImage;
                 data1 = dataImage;
-                if(postsCounter===1){
+                if (postsCounter === 1) {
                     localStorage.setItem('data1', data1);
                 }
-                if(postsCounter==='2'){
+                if (postsCounter === '2') {
                     localStorage.setItem('data3', data1);
                 }
-                if(postsCounter==='3'){
-                    localStorage.setItem('data5',data1);
+                if (postsCounter === '3') {
+                    localStorage.setItem('data5', data1);
                 }
                 localStorage.removeItem('theImage');
             }
@@ -59,13 +59,13 @@ $(document).ready(function () {
                 var bannerImgg2 = $('#' + postNum).find('.imgnum').find('img')[1];
                 bannerImgg2.src = dataImage;
                 data2 = dataImage;
-                if(postsCounter===1){
+                if (postsCounter === 1) {
                     localStorage.setItem('data2', data2);
                 }
-                if(postsCounter==='2'){
+                if (postsCounter === '2') {
                     localStorage.setItem('data4', data2);
                 }
-                if(postsCounter==='3'){
+                if (postsCounter === '3') {
                     localStorage.setItem('data6', data2);
                 }
                 localStorage.removeItem('theImage');
@@ -78,11 +78,12 @@ $(document).ready(function () {
     counter++;
     localStorage.setItem('c', counter);
 });
-var postsCounter=1;
-if(localStorage.getItem('pc')>1){
-    postsCounter=localStorage.getItem('pc');
+var postsCounter = 1;
+if (localStorage.getItem('pc') > 1) {
+    postsCounter = localStorage.getItem('pc');
 }
-localStorage.setItem('pc',postsCounter);
+localStorage.setItem('pc', postsCounter);
+
 function posting(box) {
     var currentPost,
 
@@ -115,21 +116,21 @@ function posting(box) {
         $('#logo2').empty();
 
         var desc = document.forms["forma"].elements["description"].value;
-        if(postsCounter===1){
-            localStorage.setItem('text1',desc);
+        if (postsCounter === 1) {
+            localStorage.setItem('text1', desc);
         }
-        if(postsCounter===2){
-            localStorage.setItem('text2',desc);
+        if (postsCounter === 2) {
+            localStorage.setItem('text2', desc);
         }
-        if(postsCounter===3){
-            localStorage.setItem('text3',desc);
+        if (postsCounter === 3) {
+            localStorage.setItem('text3', desc);
         }
 
-            var descarea = document.getElementById('description_area script' + (postsCounter));
-            descarea.innerHTML = desc;
-            $('#description').val('');
-      if(desc===''){
-          document.getElementById('description_area script' + (postsCounter)).style.height="0px";
+        var descarea = document.getElementById('description_area script' + (postsCounter));
+        descarea.innerHTML = desc;
+        $('#description').val('');
+        if (desc === '') {
+            document.getElementById('description_area script' + (postsCounter)).style.height = "0px";
         }
 
         //localStorage.setItem('show', 'true');
@@ -151,17 +152,14 @@ function posting(box) {
         currentPost.find('.pic2').addClass('view overlay');
         currentPost.find('.description_area').addClass('script' + (postsCounter));
         currentPost.find('.description_area').attr('id', 'description_area script' + (postsCounter));
-        currentPost.find('.rgba-stylish-strong').attr('id','post' + (postsCounter) + '_mask1');
-        currentPost.find('.rgba-stylish-strong').eq(1).attr('id','post' + (postsCounter) + '_mask2');
+        currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (postsCounter) + '_mask1');
+        currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (postsCounter) + '_mask2');
         currentPost.find('.vote1').attr('id', 'post' + (postsCounter) + '_vote1');
         currentPost.find('.vote2').attr('id', 'post' + (postsCounter) + '_vote2');
-        currentPost.find('.fa_heart').attr('id','post' + (postsCounter) + 'heart1');
-        currentPost.find('.fa_heart').eq(1).attr('id','post' + (postsCounter) + 'heart2');
+        currentPost.find('.fa_heart').attr('id', 'post' + (postsCounter) + 'heart1');
+        currentPost.find('.fa_heart').eq(1).attr('id', 'post' + (postsCounter) + 'heart2');
         currentPost.find('.phonelikes1').attr('id', 'post' + (postsCounter) + '_phonelikes1');
         currentPost.find('.phonelikes2').attr('id', 'post' + (postsCounter) + '_phonelikes2');
-
-
-
 
 
         document.getElementById('form1').style.display = "block";
@@ -173,25 +171,25 @@ function posting(box) {
         document.getElementById('movingul').style.transform = "translate(0,0)";
         document.getElementById('movingnum').style.transform = "translate(0,0px)";
 
-        document.getElementById('labelimg').style.backgroundImage="url()";
-        document.getElementById('labelimg2').style.backgroundImage="url()";
+        document.getElementById('labelimg').style.backgroundImage = "url()";
+        document.getElementById('labelimg2').style.backgroundImage = "url()";
 
         localStorage.setItem('pc', postsCounter);
 
-        localStorage.setItem('pn',postsCounter-1);
+        localStorage.setItem('pn', postsCounter - 1);
 
 
-        if(postsCounter-1===1){
-            localStorage.setItem('show1',true);
+        if (postsCounter - 1 === 1) {
+            localStorage.setItem('show1', true);
         }
-        if(postsCounter-1===2){
-            localStorage.setItem('show2',true);
+        if (postsCounter - 1 === 2) {
+            localStorage.setItem('show2', true);
         }
-        if(postsCounter-1===3){
-            localStorage.setItem('show3',true);
+        if (postsCounter - 1 === 3) {
+            localStorage.setItem('show3', true);
         }
         //localStorage.setItem('show',true);
-        if(document.body.clientWidth<510) {
+        if (document.body.clientWidth < 510) {
             document.getElementById('phonelab').style.display = "none";
             document.getElementById('wall').style.display = "block";
             document.getElementById('postlab').style.display = "none";
@@ -199,30 +197,29 @@ function posting(box) {
         }
 
 
-
     }
 }
 
 window.onload = function () {
-    if(localStorage.getItem('pn')>0){
-        postsCounter=localStorage.getItem('pc');
+    if (localStorage.getItem('pn') > 0) {
+        postsCounter = localStorage.getItem('pc');
     }
-  var show1 = localStorage.getItem('show1');
- if (show1 === 'true') {
-   document.getElementById('post1').style.display="block";
-     $('#post1_pic1').each(function () {
-         var imgURL = localStorage.getItem('data1');
-         $(this).css('background-image', 'url(' + imgURL + ')');
-     });
-     $('#post1_pic2').each(function () {
-         var imgURL = localStorage.getItem('data2');
-         $(this).css('background-image', 'url(' + imgURL + ')');
-     });
-     var descarea = document.getElementById('description_area script' + (1));
-     if(descarea!=null){
-         descarea.innerHTML = localStorage.getItem('text1');
-     }
- }
+    var show1 = localStorage.getItem('show1');
+    if (show1 === 'true') {
+        document.getElementById('post1').style.display = "block";
+        $('#post1_pic1').each(function () {
+            var imgURL = localStorage.getItem('data1');
+            $(this).css('background-image', 'url(' + imgURL + ')');
+        });
+        $('#post1_pic2').each(function () {
+            var imgURL = localStorage.getItem('data2');
+            $(this).css('background-image', 'url(' + imgURL + ')');
+        });
+        var descarea = document.getElementById('description_area script' + (1));
+        if (descarea != null) {
+            descarea.innerHTML = localStorage.getItem('text1');
+        }
+    }
     var show2 = localStorage.getItem('show2');
     if (show2 === 'true') {
         $("#wall").prepend("<div class='post'><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post2_mask1'><i class='fas fa-heart' id='post2_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post2_phonelikes1'></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post2_mask2'><i class='fas fa-heart' id='post2_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post2_phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
@@ -241,7 +238,7 @@ window.onload = function () {
         currentPost.find('.vote1').attr('id', 'post' + (2) + '_vote1');
         currentPost.find('.vote2').attr('id', 'post' + (2) + '_vote2');
 
-        document.getElementById('post2').style.display="block";
+        document.getElementById('post2').style.display = "block";
         $('#post2_pic1').each(function () {
             var imgURL = localStorage.getItem('data3');
             $(this).css('background-image', 'url(' + imgURL + ')');
@@ -251,7 +248,7 @@ window.onload = function () {
             $(this).css('background-image', 'url(' + imgURL + ')');
         });
         descarea = document.getElementById('description_area script' + (2));
-        if(descarea!=null){
+        if (descarea != null) {
             descarea.innerHTML = localStorage.getItem('text2');
         }
     }
@@ -260,7 +257,7 @@ window.onload = function () {
     if (show3 === 'true') {
         $("#wall").prepend("<div class='post'><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post3_mask1'><i class='fas fa-heart' id='post3_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post3_phonelikes1'></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post3_mask2'><i class='fas fa-heart' id='post3_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post3_phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
 
-         currentPost = $('.post').first();
+        currentPost = $('.post').first();
 
         currentPost.addClass('post' + (3));
         currentPost.addClass('example hoverable');
@@ -274,7 +271,7 @@ window.onload = function () {
         currentPost.find('.vote1').attr('id', 'post' + (3) + '_vote1');
         currentPost.find('.vote2').attr('id', 'post' + (3) + '_vote2');
 
-        document.getElementById('post3').style.display="block";
+        document.getElementById('post3').style.display = "block";
         $('#post3_pic1').each(function () {
             var imgURL = localStorage.getItem('data5');
             $(this).css('background-image', 'url(' + imgURL + ')');
@@ -284,18 +281,18 @@ window.onload = function () {
             $(this).css('background-image', 'url(' + imgURL + ')');
         });
         descarea = document.getElementById('description_area script' + (3));
-        if (descarea!=null){
+        if (descarea != null) {
             descarea.innerHTML = localStorage.getItem('text3');
         }
     }
 
-    if(localStorage.getItem('pn')>3){
-        postsCounter=4;
+    if (localStorage.getItem('pn') > 3) {
+        postsCounter = 4;
         localStorage.setItem('pc', postsCounter);
-        localStorage.setItem('pn',postsCounter-1);
+        localStorage.setItem('pn', postsCounter - 1);
     }
 
-    if(localStorage.getItem('pn')==='1'){
+    if (localStorage.getItem('pn') === '1') {
         $("#wall").prepend("<div class='post'><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post2_mask1'><i class='fas fa-heart' id='post2_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post2_phonelikes1'></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post2_mask2'><i class='fas fa-heart' id='post2_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post2_phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
         currentPost = $('.post').first();
         currentPost.addClass('post' + (postsCounter));
@@ -307,15 +304,15 @@ window.onload = function () {
         currentPost.find('.pic2').addClass('view overlay');
         currentPost.find('.description_area').addClass('script' + (postsCounter));
         currentPost.find('.description_area').attr('id', 'description_area script' + (postsCounter));
-        currentPost.find('.rgba-stylish-strong').attr('id','post' + (postsCounter) + '_mask1');
-        currentPost.find('.rgba-stylish-strong').eq(1).attr('id','post' + (postsCounter) + '_mask2');
+        currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (postsCounter) + '_mask1');
+        currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (postsCounter) + '_mask2');
         currentPost.find('.vote1').attr('id', 'post' + (postsCounter) + '_vote1');
         currentPost.find('.vote2').attr('id', 'post' + (postsCounter) + '_vote2');
-        currentPost.find('.fa_heart').attr('id','post' + (postsCounter) + 'heart1');
-        currentPost.find('.fa_heart').eq(1).attr('id','post' + (postsCounter) + 'heart2');
+        currentPost.find('.fa_heart').attr('id', 'post' + (postsCounter) + 'heart1');
+        currentPost.find('.fa_heart').eq(1).attr('id', 'post' + (postsCounter) + 'heart2');
 
     }
-    if(localStorage.getItem('pn')==='2'){
+    if (localStorage.getItem('pn') === '2') {
         $("#wall").prepend("<div class='post'><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post3_mask1'><i class='fas fa-heart' id='post3_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post3_phonelikes1' ></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post3_mask2'><i class='fas fa-heart' id='post3_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post3_phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
         currentPost = $('.post').first();
         currentPost.addClass('post' + (postsCounter));
@@ -327,15 +324,15 @@ window.onload = function () {
         currentPost.find('.pic2').addClass('view overlay');
         currentPost.find('.description_area').addClass('script' + (postsCounter));
         currentPost.find('.description_area').attr('id', 'description_area script' + (postsCounter));
-        currentPost.find('.rgba-stylish-strong').attr('id','post' + (postsCounter) + '_mask1');
-        currentPost.find('.rgba-stylish-strong').eq(1).attr('id','post' + (postsCounter) + '_mask2');
+        currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (postsCounter) + '_mask1');
+        currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (postsCounter) + '_mask2');
         currentPost.find('.vote1').attr('id', 'post' + (postsCounter) + '_vote1');
         currentPost.find('.vote2').attr('id', 'post' + (postsCounter) + '_vote2');
-        currentPost.find('.fa_heart').attr('id','post' + (postsCounter) + 'heart1');
-        currentPost.find('.fa_heart').eq(1).attr('id','post' + (postsCounter) + 'heart2');
+        currentPost.find('.fa_heart').attr('id', 'post' + (postsCounter) + 'heart1');
+        currentPost.find('.fa_heart').eq(1).attr('id', 'post' + (postsCounter) + 'heart2');
     }
 
-    if(localStorage.getItem('pn')==='3'){
+    if (localStorage.getItem('pn') === '3') {
         $("#wall").prepend("<div class='post'><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post4_mask1'><i class='fas fa-heart' id='post4_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post4_phonelikes1' ></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post4_mask2'><i class='fas fa-heart' id='post4_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post4_phonelikes2' ></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
         currentPost = $('.post').first();
         currentPost.addClass('post' + (postsCounter));
@@ -347,41 +344,41 @@ window.onload = function () {
         currentPost.find('.pic2').addClass('view overlay');
         currentPost.find('.description_area').addClass('script' + (postsCounter));
         currentPost.find('.description_area').attr('id', 'description_area script' + (postsCounter));
-        currentPost.find('.rgba-stylish-strong').attr('id','post' + (postsCounter) + '_mask1');
-        currentPost.find('.rgba-stylish-strong').eq(1).attr('id','post' + (postsCounter) + '_mask2');
+        currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (postsCounter) + '_mask1');
+        currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (postsCounter) + '_mask2');
         currentPost.find('.vote1').attr('id', 'post' + (postsCounter) + '_vote1');
         currentPost.find('.vote2').attr('id', 'post' + (postsCounter) + '_vote2');
-        currentPost.find('.fa_heart').attr('id','post' + (postsCounter) + 'heart1');
-        currentPost.find('.fa_heart').eq(1).attr('id','post' + (postsCounter) + 'heart2');
+        currentPost.find('.fa_heart').attr('id', 'post' + (postsCounter) + 'heart1');
+        currentPost.find('.fa_heart').eq(1).attr('id', 'post' + (postsCounter) + 'heart2');
     }
 
 }
 
 function attach1(file) {
- document.getElementById('camera').style.display="none";
+    document.getElementById('camera').style.display = "none";
 }
 
 function attach2(file) {
-    document.getElementById('camera2').style.display="none";
+    document.getElementById('camera2').style.display = "none";
 
 }
 
 function showvotes(clicked_id) {
 
-    var e=document.getElementById(clicked_id).parentElement.id;
-    var d=document.getElementById(e).parentElement.id;
-    var f=document.getElementById(d).parentElement.id;
+    var e = document.getElementById(clicked_id).parentElement.id;
+    var d = document.getElementById(e).parentElement.id;
+    var f = document.getElementById(d).parentElement.id;
 
-    var likes1=document.getElementById(f + '_vote1');
-    var likes2=document.getElementById(f + '_vote2');
-    var counter1=1;
-    var counter2=1;
-    if(clicked_id=== f + '_heart1'){
-        likes1.innerText=counter1;
+    var likes1 = document.getElementById(f + '_vote1');
+    var likes2 = document.getElementById(f + '_vote2');
+    var counter1 = 1;
+    var counter2 = 1;
+    if (clicked_id === f + '_heart1') {
+        likes1.innerText = counter1;
         counter1++;
     }
-    if(clicked_id===f + '_heart2'){
-        likes2.innerText=counter2;
+    if (clicked_id === f + '_heart2') {
+        likes2.innerText = counter2;
         counter2++;
     }
     display = document.getElementById(f + '_vote1').style.display;
@@ -409,6 +406,7 @@ function likescount(clicked_id) {
 }
 
 var progress = 1;
+
 function postprocess(box) {
 
     if (progress === 1) {
@@ -449,27 +447,27 @@ function postprocess(box) {
     progress++;
 }
 
-var getElementsInArea = (function(docElm){
+var getElementsInArea = (function (docElm) {
     var viewportHeight = docElm.clientHeight;
 
-    return function(e, opts){
+    return function (e, opts) {
         var found = [], i;
 
-        if( e && e.type == 'resize' )
+        if (e && e.type == 'resize')
             viewportHeight = docElm.clientHeight;
 
-        for( i = opts.elements.length; i--; ){
-            var elm        = opts.elements[i],
-                pos        = elm.getBoundingClientRect(),
-                topPerc    = pos.top    / viewportHeight * 100,
+        for (i = opts.elements.length; i--;) {
+            var elm = opts.elements[i],
+                pos = elm.getBoundingClientRect(),
+                topPerc = pos.top / viewportHeight * 100,
                 bottomPerc = pos.bottom / viewportHeight * 100,
-                middle     = (topPerc + bottomPerc)/2,
+                middle = (topPerc + bottomPerc) / 2,
                 inViewport = middle > opts.zone[1] &&
-                    middle < (100-opts.zone[1]);
+                    middle < (100 - opts.zone[1]);
 
             elm.classList.toggle(opts.markedClass, inViewport);
 
-            if( inViewport )
+            if (inViewport)
                 found.push(elm);
         }
     };
@@ -482,40 +480,40 @@ var getElementsInArea = (function(docElm){
 window.addEventListener('scroll', f)
 window.addEventListener('resize', f)
 
-function f(e){
+function f(e) {
     getElementsInArea(e, {
-        elements    : document.getElementsByClassName('post'),
-        markedClass : 'highlight--1',
-        zone        : [30, 30] // percentage distance from top & bottom
+        elements: document.getElementsByClassName('post'),
+        markedClass: 'highlight--1',
+        zone: [30, 30] // percentage distance from top & bottom
     });
 
 }
 
 function phonepost(box) {
-    display=document.getElementById('phonelab').style.display;
+    display = document.getElementById('phonelab').style.display;
     if (display === 'block') {
         document.getElementById('phonelab').style.display = "none";
     }
     else {
         document.getElementById('phonelab').style.display = "block";
     }
-    display=document.getElementById('wall').style.display;
+    display = document.getElementById('wall').style.display;
     if (display === 'none') {
         document.getElementById('wall').style.display = "block";
     }
     else {
         document.getElementById('wall').style.display = "none";
     }
-        display=document.getElementById('postlab').style.display;
-        if (display === 'block') {
-            document.getElementById('postlab').style.display = "none";
-        }
-        else {
-            document.getElementById('postlab').style.display = "block";
-        }
-    position=document.getElementById('postlab').style.position="absolute";
+    display = document.getElementById('postlab').style.display;
+    if (display === 'block') {
+        document.getElementById('postlab').style.display = "none";
+    }
+    else {
+        document.getElementById('postlab').style.display = "block";
+    }
+    position = document.getElementById('postlab').style.position = "absolute";
 
-    display=document.getElementById('form1').style.display;
+    display = document.getElementById('form1').style.display;
     if (display === 'block') {
         document.getElementById('form1').style.display = "none";
     }
@@ -524,18 +522,41 @@ function phonepost(box) {
     }
 }
 
-    function maskshow(clicked_id) {
-        if(document.body.clientWidth<510) {
-            var e = document.getElementById(clicked_id).parentElement.id;
-            if (clicked_id === e + '_pic1') {
-                document.getElementById(e + '_phonelikes1').style.display = "block";
-                $('#' + e + '_phonelikes1').fadeOut(1000);
-                document.getElementById(e + '_pic1').style.boxShadow = "3px 3px 0px rgb(138, 213, 216), -3px -3px 0px rgb(138,213,216),3px -3px 0px rgb(138, 213, 216), -3px 3px 0px rgb(138,213,216)";
-            }
-            if (clicked_id === e + '_pic2') {
-                document.getElementById(e + '_phonelikes2').style.display = "block";
-                $('#' + e + '_phonelikes2').fadeOut(1000);
-                document.getElementById(e + '_pic2').style.boxShadow = "3px 3px 0px rgb(138, 213, 216), -3px -3px 0px rgb(138,213,216),3px -3px 0px rgb(138, 213, 216), -3px 3px 0px rgb(138,213,216)";
-            }
+function maskshow(clicked_id) {
+    if (document.body.clientWidth < 510) {
+        var e = document.getElementById(clicked_id).parentElement.id;
+        if (clicked_id === e + '_pic1') {
+            document.getElementById(e + '_phonelikes1').style.display = "block";
+            $('#' + e + '_phonelikes1').fadeOut(1000);
+            document.getElementById(e + '_pic1').style.boxShadow = "3px 3px 0px rgb(138, 213, 216), -3px -3px 0px rgb(138,213,216),3px -3px 0px rgb(138, 213, 216), -3px 3px 0px rgb(138,213,216)";
+        }
+        if (clicked_id === e + '_pic2') {
+            document.getElementById(e + '_phonelikes2').style.display = "block";
+            $('#' + e + '_phonelikes2').fadeOut(1000);
+            document.getElementById(e + '_pic2').style.boxShadow = "3px 3px 0px rgb(138, 213, 216), -3px -3px 0px rgb(138,213,216),3px -3px 0px rgb(138, 213, 216), -3px 3px 0px rgb(138,213,216)";
         }
     }
+}
+
+$(document).ready(function () {
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['image1','image2'],
+            datasets: [{
+                label: '1 image',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [5, 0],
+            },
+                {
+                    label: '2 image',
+                    backgroundColor: '#8ad5d8',
+                    borderColor: '#8ad5d8',
+                    data: [0, 10],
+                }]
+        },
+        options: {}
+    })
+});
