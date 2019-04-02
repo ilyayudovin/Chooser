@@ -67,7 +67,7 @@ color: #8ad5d8!important;
 }
 .btn-primary{
     background-color: #8ad5d8!important;
-    width: 320px;
+    width: 80%;
 }
 input#inputMDEx.form-control,input#inputValidationEx.form-control.validate,
 input#numberExample.form-control,input#inputValidationEx2.form-control.validate{
