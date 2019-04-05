@@ -92,6 +92,29 @@
 
         <div class="wall" id="wall">
             <div class="post post1 example hoverable" id="post1" style="position: relative">
+                <div class="statistics" id="chart1" onclick="showchart(this.id);"><i class="far fa-chart-bar"></i></div>
+                <div class="chart-area" id="post1_chart_area">
+                    <div class="settings">
+                        <div class="select nation">
+                            <select>
+                                <option value="0" class="disabled active">select country</option>
+                                <option value="1">Belarus</option>
+                                <option value="2">Lithuania</option>
+                                <option value="3">Israel</option>
+                            </select>
+                        </div>
+                        <div class="select sex">
+                            <select>
+                                <option value="0">Sex</option>
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+                                <option value="3">Both</option>
+                            </select>
+                        </div>
+                    </div>
+                   <!-- <canvas id="myChart"></canvas>-->
+                    <div id="regions_div" style="width:556px;height: 347px;margin: 0 auto"></div>
+                </div>
                 <div class="pic1 view overlay" id="post1_pic1" ondblclick="maskshow(this.id)">
                     <div class="mask flex-center rgba-stylish-strong" id="post1_mask1" >
                         <i class="fas fa-heart" id="post1_heart1"  onclick="showvotes(this.id)"></i>
@@ -114,7 +137,7 @@
                 </div>
                 <div>
                 </div>
-                <div id="description_area script1" class="description_area script1"></div>
+                <div id="post1_script" class="description_area script1"></div>
             </div>
         </div>
         <div class="postlab" id="postlab">
@@ -186,6 +209,7 @@
 <script type="text/javascript" src="infinitescroll.js"></script>
 <script src="dropzone.js"></script>
 <!-- MDBootstrap Steppers Pro  -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="js/addons-pro/stepper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script type="text/javascript" src="main.js"></script>

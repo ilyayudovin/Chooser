@@ -126,11 +126,11 @@ function posting(box) {
             localStorage.setItem('text3', desc);
         }
 
-        var descarea = document.getElementById('description_area script' + (postsCounter));
+        var descarea = document.getElementById('post' +(postsCounter)+'_script');
         descarea.innerHTML = desc;
         $('#description').val('');
         if (desc === '') {
-            document.getElementById('description_area script' + (postsCounter)).style.height = "0px";
+            document.getElementById('post' +(postsCounter)+'_script').style.height = "0px";
         }
 
         //localStorage.setItem('show', 'true');
@@ -138,7 +138,7 @@ function posting(box) {
 
         document.getElementById('post' + (postsCounter)).style.display = "block";
 
-        $("#wall").prepend("<div class='post'><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1'></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        $("#wall").prepend("<div class='post'><div class='statistics' onclick=\"showchart(this.id);\"><i class='far fa-chart-bar'></i></div><div class=\"chart-area\"></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1'></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
 
         postsCounter++;
         currentPost = $('.post').first();
@@ -151,7 +151,7 @@ function posting(box) {
         currentPost.find('.pic2').attr('id', 'post' + postsCounter + '_pic2');
         currentPost.find('.pic2').addClass('view overlay');
         currentPost.find('.description_area').addClass('script' + (postsCounter));
-        currentPost.find('.description_area').attr('id', 'description_area script' + (postsCounter));
+        currentPost.find('.description_area').attr('id', 'post' +(postsCounter)+'_script');
         currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (postsCounter) + '_mask1');
         currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (postsCounter) + '_mask2');
         currentPost.find('.vote1').attr('id', 'post' + (postsCounter) + '_vote1');
@@ -160,6 +160,9 @@ function posting(box) {
         currentPost.find('.fa_heart').eq(1).attr('id', 'post' + (postsCounter) + 'heart2');
         currentPost.find('.phonelikes1').attr('id', 'post' + (postsCounter) + '_phonelikes1');
         currentPost.find('.phonelikes2').attr('id', 'post' + (postsCounter) + '_phonelikes2');
+        currentPost.find('.statistics').attr('id', 'chart' + (postsCounter));
+        currentPost.find('.chart-area').attr('id', 'post' +(postsCounter)+ '_chart_area');
+
 
 
         document.getElementById('form1').style.display = "block";
@@ -215,14 +218,14 @@ window.onload = function () {
             var imgURL = localStorage.getItem('data2');
             $(this).css('background-image', 'url(' + imgURL + ')');
         });
-        var descarea = document.getElementById('description_area script' + (1));
+        var descarea = document.getElementById('post' +(1)+'_script');
         if (descarea != null) {
             descarea.innerHTML = localStorage.getItem('text1');
         }
     }
     var show2 = localStorage.getItem('show2');
     if (show2 === 'true') {
-        $("#wall").prepend("<div class='post'><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post2_mask1'><i class='fas fa-heart' id='post2_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post2_phonelikes1'></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post2_mask2'><i class='fas fa-heart' id='post2_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post2_phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        $("#wall").prepend("<div class='post'><div class=\"statistics\" onclick=\"showchart(this.id);\"><i class=\"far fa-chart-bar\"></i></div><div class=\"chart-area\"></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post2_mask1'><i class='fas fa-heart' id='post2_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post2_phonelikes1'></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post2_mask2'><i class='fas fa-heart' id='post2_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post2_phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
 
         var currentPost = $('.post').first();
 
@@ -234,9 +237,11 @@ window.onload = function () {
         currentPost.find('.pic2').attr('id', 'post' + 2 + '_pic2');
         currentPost.find('.pic2').addClass('view overlay');
         currentPost.find('.description_area').addClass('script' + (2));
-        currentPost.find('.description_area').attr('id', 'description_area script' + (2));
+        currentPost.find('.description_area').attr('id', 'post' +(2)+'_script');
         currentPost.find('.vote1').attr('id', 'post' + (2) + '_vote1');
         currentPost.find('.vote2').attr('id', 'post' + (2) + '_vote2');
+        currentPost.find('.statistics').attr('id', 'chart' + (2));
+        currentPost.find('.chart-area').attr('id', 'post' +(2)+ '_chart_area');
 
         document.getElementById('post2').style.display = "block";
         $('#post2_pic1').each(function () {
@@ -247,7 +252,7 @@ window.onload = function () {
             var imgURL = localStorage.getItem('data4');
             $(this).css('background-image', 'url(' + imgURL + ')');
         });
-        descarea = document.getElementById('description_area script' + (2));
+        descarea = document.getElementById('post' +(2)+'_script');
         if (descarea != null) {
             descarea.innerHTML = localStorage.getItem('text2');
         }
@@ -255,7 +260,7 @@ window.onload = function () {
 
     var show3 = localStorage.getItem('show3');
     if (show3 === 'true') {
-        $("#wall").prepend("<div class='post'><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post3_mask1'><i class='fas fa-heart' id='post3_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post3_phonelikes1'></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post3_mask2'><i class='fas fa-heart' id='post3_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post3_phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        $("#wall").prepend("<div class='post'><div class=\"statistics\" onclick=\"showchart(this.id);\"><i class=\"far fa-chart-bar\"></i></div><div class=\"chart-area\"></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post3_mask1'><i class='fas fa-heart' id='post3_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post3_phonelikes1'></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post3_mask2'><i class='fas fa-heart' id='post3_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post3_phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
 
         currentPost = $('.post').first();
 
@@ -267,9 +272,11 @@ window.onload = function () {
         currentPost.find('.pic2').attr('id', 'post' + 3 + '_pic2');
         currentPost.find('.pic2').addClass('view overlay');
         currentPost.find('.description_area').addClass('script' + (3));
-        currentPost.find('.description_area').attr('id', 'description_area script' + (3));
+        currentPost.find('.description_area').attr('id', 'post' +(3)+'_script');
         currentPost.find('.vote1').attr('id', 'post' + (3) + '_vote1');
         currentPost.find('.vote2').attr('id', 'post' + (3) + '_vote2');
+        currentPost.find('.statistics').attr('id', 'chart' + (3));
+        currentPost.find('.chart-area').attr('id', 'post' +(3)+ '_chart_area');
 
         document.getElementById('post3').style.display = "block";
         $('#post3_pic1').each(function () {
@@ -280,7 +287,7 @@ window.onload = function () {
             var imgURL = localStorage.getItem('data6');
             $(this).css('background-image', 'url(' + imgURL + ')');
         });
-        descarea = document.getElementById('description_area script' + (3));
+        descarea = document.getElementById('post' +(3)+'_script');
         if (descarea != null) {
             descarea.innerHTML = localStorage.getItem('text3');
         }
@@ -293,7 +300,7 @@ window.onload = function () {
     }
 
     if (localStorage.getItem('pn') === '1') {
-        $("#wall").prepend("<div class='post'><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post2_mask1'><i class='fas fa-heart' id='post2_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post2_phonelikes1'></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post2_mask2'><i class='fas fa-heart' id='post2_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post2_phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        $("#wall").prepend("<div class='post'><div class=\"statistics\" onclick=\"showchart(this.id);\"><i class=\"far fa-chart-bar\"></i></div><div class=\"chart-area\"></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post2_mask1'><i class='fas fa-heart' id='post2_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post2_phonelikes1'></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post2_mask2'><i class='fas fa-heart' id='post2_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post2_phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
         currentPost = $('.post').first();
         currentPost.addClass('post' + (postsCounter));
         currentPost.addClass('example hoverable');
@@ -303,17 +310,19 @@ window.onload = function () {
         currentPost.find('.pic2').attr('id', 'post' + postsCounter + '_pic2');
         currentPost.find('.pic2').addClass('view overlay');
         currentPost.find('.description_area').addClass('script' + (postsCounter));
-        currentPost.find('.description_area').attr('id', 'description_area script' + (postsCounter));
+        currentPost.find('.description_area').attr('id', 'post' +(postsCounter)+'_script');
         currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (postsCounter) + '_mask1');
         currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (postsCounter) + '_mask2');
         currentPost.find('.vote1').attr('id', 'post' + (postsCounter) + '_vote1');
         currentPost.find('.vote2').attr('id', 'post' + (postsCounter) + '_vote2');
         currentPost.find('.fa_heart').attr('id', 'post' + (postsCounter) + 'heart1');
         currentPost.find('.fa_heart').eq(1).attr('id', 'post' + (postsCounter) + 'heart2');
+        currentPost.find('.statistics').attr('id', 'chart' + (postsCounter));
+        currentPost.find('.chart-area').attr('id', 'post' +(postsCounter)+ '_chart_area');
 
     }
     if (localStorage.getItem('pn') === '2') {
-        $("#wall").prepend("<div class='post'><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post3_mask1'><i class='fas fa-heart' id='post3_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post3_phonelikes1' ></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post3_mask2'><i class='fas fa-heart' id='post3_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post3_phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        $("#wall").prepend("<div class='post'><div class=\"statistics\" onclick=\"showchart(this.id);\"><i class=\"far fa-chart-bar\"></i></div><div class=\"chart-area\"></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post3_mask1'><i class='fas fa-heart' id='post3_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post3_phonelikes1' ></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post3_mask2'><i class='fas fa-heart' id='post3_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post3_phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
         currentPost = $('.post').first();
         currentPost.addClass('post' + (postsCounter));
         currentPost.addClass('example hoverable');
@@ -323,17 +332,18 @@ window.onload = function () {
         currentPost.find('.pic2').attr('id', 'post' + postsCounter + '_pic2');
         currentPost.find('.pic2').addClass('view overlay');
         currentPost.find('.description_area').addClass('script' + (postsCounter));
-        currentPost.find('.description_area').attr('id', 'description_area script' + (postsCounter));
+        currentPost.find('.description_area').attr('id', 'post' +(postsCounter)+'_script');
         currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (postsCounter) + '_mask1');
         currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (postsCounter) + '_mask2');
         currentPost.find('.vote1').attr('id', 'post' + (postsCounter) + '_vote1');
         currentPost.find('.vote2').attr('id', 'post' + (postsCounter) + '_vote2');
         currentPost.find('.fa_heart').attr('id', 'post' + (postsCounter) + 'heart1');
         currentPost.find('.fa_heart').eq(1).attr('id', 'post' + (postsCounter) + 'heart2');
+        currentPost.find('.statistics').attr('id', 'chart' + (postsCounter));
+        currentPost.find('.chart-area').attr('id', 'post' +(postsCounter)+ '_chart_area');
     }
-
     if (localStorage.getItem('pn') === '3') {
-        $("#wall").prepend("<div class='post'><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post4_mask1'><i class='fas fa-heart' id='post4_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post4_phonelikes1' ></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post4_mask2'><i class='fas fa-heart' id='post4_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post4_phonelikes2' ></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        $("#wall").prepend("<div class='post'><div class=\"statistics\"><i class=\"far fa-chart-bar\" onclick=\"showchart(this.id);\"></i></div><div class=\"chart-area\"></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post4_mask1'><i class='fas fa-heart' id='post4_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post4_phonelikes1' ></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post4_mask2'><i class='fas fa-heart' id='post4_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post4_phonelikes2' ></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
         currentPost = $('.post').first();
         currentPost.addClass('post' + (postsCounter));
         currentPost.addClass('example hoverable');
@@ -343,13 +353,16 @@ window.onload = function () {
         currentPost.find('.pic2').attr('id', 'post' + postsCounter + '_pic2');
         currentPost.find('.pic2').addClass('view overlay');
         currentPost.find('.description_area').addClass('script' + (postsCounter));
-        currentPost.find('.description_area').attr('id', 'description_area script' + (postsCounter));
+        currentPost.find('.description_area').attr('id', 'post' +(postsCounter)+'_script');
         currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (postsCounter) + '_mask1');
         currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (postsCounter) + '_mask2');
         currentPost.find('.vote1').attr('id', 'post' + (postsCounter) + '_vote1');
         currentPost.find('.vote2').attr('id', 'post' + (postsCounter) + '_vote2');
         currentPost.find('.fa_heart').attr('id', 'post' + (postsCounter) + 'heart1');
         currentPost.find('.fa_heart').eq(1).attr('id', 'post' + (postsCounter) + 'heart2');
+        currentPost.find('.statistics').attr('id', 'chart' + (postsCounter));
+        currentPost.find('.chart-area').attr('id', 'post' +(postsCounter)+ '_chart_area');
+
     }
 
 }
@@ -511,7 +524,6 @@ function phonepost(box) {
     else {
         document.getElementById('postlab').style.display = "block";
     }
-    position = document.getElementById('postlab').style.position = "absolute";
 
     display = document.getElementById('form1').style.display;
     if (display === 'block') {
@@ -560,3 +572,93 @@ $(document).ready(function () {
         options: {}
     })
 });
+
+function hideintro(box) {
+    display = document.getElementById('intro').style.display;
+    if (display === 'none') {
+        document.getElementById('intro').style.display = "block";
+    }
+    else {
+        document.getElementById('intro').style.display = "none";
+    }
+    display = document.getElementById('basicExampleNav').style.display;
+    if (display === 'block') {
+        document.getElementById('basicExampleNav').style.display = "none";
+    }
+    else {
+        document.getElementById('basicExampleNav').style.display = "block";
+    }
+    $('ul li').each(function(i)
+    {
+        $(this).css('display','block');
+    });
+}
+
+function showchart(clicked_id) {
+    var e = document.getElementById(clicked_id).parentElement.id;
+    display = document.getElementById(e + '_pic1').style.display;
+    if (display === 'none') {
+        document.getElementById(e + '_pic1').style.display = "block";
+    }
+    else {
+        document.getElementById(e + '_pic1').style.display = "none";
+    }
+    display = document.getElementById(e + '_pic2').style.display;
+    if (display === 'none') {
+        document.getElementById(e + '_pic2').style.display = "block";
+    }
+    else {
+        document.getElementById(e + '_pic2').style.display = "none";
+    }
+    display = document.getElementById(e + '_script').style.display;
+    if (display === 'none') {
+        document.getElementById(e + '_script').style.display = "block";
+    }
+    else {
+        document.getElementById(e + '_script').style.display = "none";
+    }
+    display = document.getElementById(e + '_chart_area').style.display;
+    if (display === 'block') {
+        document.getElementById(e + '_chart_area').style.display = "none";
+    }
+    else {
+        document.getElementById(e + '_chart_area').style.display = "block";
+    }
+    display = document.getElementById(e + '_chart_area').style.display;
+    if (display === 'block') {
+        document.getElementById(clicked_id).style.color = "#8ad5d8";
+    }
+    else {
+        document.getElementById(clicked_id).style.display = "black";
+    }
+}
+
+google.charts.load('current', {
+    'packages':['geochart'],
+    // Note: you will need to get a mapsApiKey for your project.
+    // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+    'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+});
+google.charts.setOnLoadCallback(drawRegionsMap);
+
+function drawRegionsMap() {
+    var data = google.visualization.arrayToDataTable([
+        ['Country', 'Likes'],
+        ['Germany', 200],
+        ['United States', 300],
+        ['Brazil', 400],
+        ['Canada', 500],
+        ['France', 600],
+        ['RU', 700]
+    ]);
+
+    var options = {
+        backgroundColor: 'whitesmoke',
+        defaultColor: '#f5f5f5',
+        colorAxis: {colors: ['#8ad5d8']},
+    };
+
+    var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+    chart.draw(data, options);
+}

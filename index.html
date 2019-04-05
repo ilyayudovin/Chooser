@@ -18,38 +18,6 @@
 
     <link rel="stylesheet" href="startupmainpage.css">
     <link rel="stylesheet" href="media.css">
-    <script>
-        function openbox(box){
-            display=document.getElementById('intro').style.display;
-            if(display==='none'){
-                document.getElementById('intro').style.display="block"
-            }
-            else{
-                document.getElementById('intro').style.display="none"
-            }
-            display=document.getElementById('menu2').style.display;
-            if(display==='block'){
-                document.getElementById('menu2').style.display="none"
-            }
-            else{
-                document.getElementById('menu2').style.display="block"
-            }
-            position=document.getElementById('header').style.position;
-            if(position==='absolute'){
-                document.getElementById('header').style.position=""
-            }
-            else{
-                document.getElementById('header').style.position="absolute"
-            }
-            display=document.getElementById('footer').style.display;
-            if(display==='none'){
-                document.getElementById('footer').style.display="block"
-            }
-            else{
-                document.getElementById('footer').style.display="none"
-            }
-        }
-    </script>
 
 </head>
 <body>
@@ -63,7 +31,7 @@
             <!-- Collapse button -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
                     aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon" onclick="hideintro();"></span>
             </button>
 
             <!-- Collapsible content -->
@@ -146,6 +114,7 @@
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="js/mdb.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
 
 </body>
 </html>
