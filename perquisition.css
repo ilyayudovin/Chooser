@@ -36,6 +36,9 @@ header{
     width: 100%;
     z-index: 3;
 }
+.phonehome{
+    display: none;
+}
 .navbar-brand img{
     height: 140px;
     transform: translate(0,-50px);
@@ -109,7 +112,7 @@ input[type="file"] {
     background-position: center center;
     display: inline-block;
     width: 300px;
-    margin-top: 40px;
+    margin-top: 5px;
     height: 400px;
     /*border: 1px solid black;*/
     cursor: pointer;
@@ -199,6 +202,21 @@ form.test{
     z-index: -1;
     border-radius: 5px 5px 0 0;
 }
+.fa-times-circle{
+    position: absolute;
+    right: -10px;
+    top: 25px;
+    z-index: 2;
+    font-size: 22px;
+    display: none;
+    color: lightblue;
+    cursor: pointer;
+}
+.fa-times{
+    position: absolute;
+    left: 3.5px;
+    color: whitesmoke;
+}
 .process{
     width: 0;
     height: 3px;
@@ -222,7 +240,7 @@ form.test{
 .step{
     width: 45px;
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
     right: 10px;
 }
 .movingnumbers{
@@ -271,23 +289,25 @@ form.test{
     display: none;
 }
 .phonelikes1, .phonelikes2{
+    position: absolute;
+    font-size: 27px;
+    right: 10px;
+    bottom: 10px;
+    color: whitesmoke;
     display: none;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    z-index: 9999;
-    top: 50%;
-    left: 50%;
-    transition-duration: 2s;
 }
-.statistics{
-    position: absolute;
-    right: 5px;
-    z-index: 2;
+.statistics1,.statistics2{
+    display: inline-block;
     cursor: pointer;
-    top: 5px;
+    margin-right: 10px;
+    margin-top: 7px;
 }
-.statistics:hover{
+.statistics1:hover{
     color:#8ad5d8;
+
+}
+.statistics2:hover{
+    color: #8ad5d8;
 }
 .chart-area{
     width: 100%;
@@ -297,22 +317,14 @@ form.test{
     z-index: 2;
     top: 40px;
     display: none;
-    margin-top: 40px;
 }
-.select{
-    text-align: left;
+.analytica1,.analytica2{
+    width:100%;
+    height: 347px;
+    margin: 0 auto;
+    display: none;
 }
-.select:focus{
-    border: none;
-}
-.select select{
-    border: none;
-    background-color: transparent;
-    border-bottom: 1px solid #ced4da;
-    cursor: pointer;
-    padding-bottom: 5px;
-    width: 180px;
-}
-.select select option:hover{
-    background-color: #8ad5d8;
+.stats{
+    width: 100%;
+    text-align: right;
 }

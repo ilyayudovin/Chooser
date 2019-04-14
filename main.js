@@ -27,7 +27,7 @@ $(document).ready(function () {
 
             var dataImage = localStorage.getItem('theImage');
 
-
+            counter=localStorage.getItem('c');
             var postNum = 'post' + postsCounter;
 
             if (counter % 2 === 1) {
@@ -39,13 +39,13 @@ $(document).ready(function () {
                 var bannerImgg = $('#' + postNum).find('.imgnum').find('img')[0];
                 bannerImgg.src = dataImage;
                 data1 = dataImage;
-                if (postsCounter === 1) {
+                if (postsCounter === 1 || postsCounter=== '1') {
                     localStorage.setItem('data1', data1);
                 }
-                if (postsCounter === '2') {
+                if (postsCounter === 2 || postsCounter=== '2') {
                     localStorage.setItem('data3', data1);
                 }
-                if (postsCounter === '3') {
+                if (postsCounter === 3 || postsCounter==='3') {
                     localStorage.setItem('data5', data1);
                 }
                 localStorage.removeItem('theImage');
@@ -59,13 +59,13 @@ $(document).ready(function () {
                 var bannerImgg2 = $('#' + postNum).find('.imgnum').find('img')[1];
                 bannerImgg2.src = dataImage;
                 data2 = dataImage;
-                if (postsCounter === 1) {
+                if (postsCounter === 1 || postsCounter==='1') {
                     localStorage.setItem('data2', data2);
                 }
-                if (postsCounter === '2') {
+                if (postsCounter === 2 || postsCounter==='2') {
                     localStorage.setItem('data4', data2);
                 }
-                if (postsCounter === '3') {
+                if (postsCounter === 3 || postsCounter==='3') {
                     localStorage.setItem('data6', data2);
                 }
                 localStorage.removeItem('theImage');
@@ -74,10 +74,12 @@ $(document).ready(function () {
             localStorage.setItem('c', counter);
         }
         reader.readAsDataURL(file);//attempts to read the file in question.
+
     });
     counter++;
     localStorage.setItem('c', counter);
 });
+
 var postsCounter = 1;
 if (localStorage.getItem('pc') > 1) {
     postsCounter = localStorage.getItem('pc');
@@ -85,6 +87,7 @@ if (localStorage.getItem('pc') > 1) {
 localStorage.setItem('pc', postsCounter);
 
 function posting(box) {
+
     var currentPost,
 
         pic1Id = 'post' + postsCounter + '_pic1',
@@ -129,16 +132,15 @@ function posting(box) {
         var descarea = document.getElementById('post' +(postsCounter)+'_script');
         descarea.innerHTML = desc;
         $('#description').val('');
-        if (desc === '') {
-            document.getElementById('post' +(postsCounter)+'_script').style.height = "0px";
-        }
+       // if (desc === '') {
+         //   document.getElementById('post' +(postsCounter)+'_script').style.height = "0px";
+        //}
 
-        //localStorage.setItem('show', 'true');
 
 
         document.getElementById('post' + (postsCounter)).style.display = "block";
 
-        $("#wall").prepend("<div class='post'><div class='statistics' onclick=\"showchart(this.id);\"><i class='far fa-chart-bar'></i></div><div class=\"chart-area\"></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1'></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        $("#wall").prepend("<div class='post'><div class='stats'><div class=\"statistics1\" id=\"post1_worldicon\" onclick=\"showchart(this.id);\" style=\"right: 10px\"><i class=\"far fas fa-globe-americas\"></i></div><div class=\"statistics2\" id=\"post1_charticon\" onclick=\"showchart(this.id);\" style=\"right: 45px\"><i class=\"far fa-chart-bar\"></i></div></div><div class=\"chart-area\" id=\"post1_chart_area\"><div class=\"analytica1\" id=\"regions_div\"></div><div class=\"analytica2\" id=\"chartContainer\"></div></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='heart1 fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='heart2 fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
 
         postsCounter++;
         currentPost = $('.post').first();
@@ -156,16 +158,19 @@ function posting(box) {
         currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (postsCounter) + '_mask2');
         currentPost.find('.vote1').attr('id', 'post' + (postsCounter) + '_vote1');
         currentPost.find('.vote2').attr('id', 'post' + (postsCounter) + '_vote2');
-        currentPost.find('.fa_heart').attr('id', 'post' + (postsCounter) + 'heart1');
-        currentPost.find('.fa_heart').eq(1).attr('id', 'post' + (postsCounter) + 'heart2');
+        currentPost.find('.heart1').attr('id', 'post' + (postsCounter) + '_heart1');
+        currentPost.find('.heart2').attr('id', 'post' + (postsCounter) + '_heart2');
         currentPost.find('.phonelikes1').attr('id', 'post' + (postsCounter) + '_phonelikes1');
         currentPost.find('.phonelikes2').attr('id', 'post' + (postsCounter) + '_phonelikes2');
-        currentPost.find('.statistics').attr('id', 'chart' + (postsCounter));
+        currentPost.find('.stats').attr('id','post' + (postsCounter) + '_stats');
+        currentPost.find('.statistics1').attr('id', 'post' + (postsCounter) + '_worldicon');
+        currentPost.find('.statistics2').attr('id', 'post' + (postsCounter) + '_charticon');
         currentPost.find('.chart-area').attr('id', 'post' +(postsCounter)+ '_chart_area');
+        currentPost.find('.analytica1').attr('id', 'post' +(postsCounter)+ '_regions_div');
+        currentPost.find('.analytica2').attr('id', 'post' +(postsCounter)+ '_chartContainer');
 
 
-
-        document.getElementById('form1').style.display = "block";
+        document.getElementById('form1').style.display = "inline-block";
         document.getElementById('form2').style.display = "none";
         document.getElementById('description').style.display = "none";
         document.getElementById('postBtn').style.display = "none";
@@ -207,6 +212,7 @@ window.onload = function () {
     if (localStorage.getItem('pn') > 0) {
         postsCounter = localStorage.getItem('pc');
     }
+    localStorage.setItem('c',postsCounter*2-1);
     var show1 = localStorage.getItem('show1');
     if (show1 === 'true') {
         document.getElementById('post1').style.display = "block";
@@ -225,7 +231,7 @@ window.onload = function () {
     }
     var show2 = localStorage.getItem('show2');
     if (show2 === 'true') {
-        $("#wall").prepend("<div class='post'><div class=\"statistics\" onclick=\"showchart(this.id);\"><i class=\"far fa-chart-bar\"></i></div><div class=\"chart-area\"></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post2_mask1'><i class='fas fa-heart' id='post2_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post2_phonelikes1'></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post2_mask2'><i class='fas fa-heart' id='post2_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post2_phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        $("#wall").prepend("<div class='post'><div class='stats'><div class=\"statistics1\" id=\"post1_worldicon\" onclick=\"showchart(this.id);\" style=\"right: 10px\"><i class=\"far fas fa-globe-americas\"></i></div><div class=\"statistics2\" id=\"post1_charticon\" onclick=\"showchart(this.id);\" style=\"right: 45px\"><i class=\"far fa-chart-bar\"></i></div></div><div class=\"chart-area\" id=\"post1_chart_area\"><div class=\"analytica1\" id=\"regions_div\"></div><div class=\"analytica2\" id=\"chartContainer\"></div></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='heart1 fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='heart2 fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
 
         var currentPost = $('.post').first();
 
@@ -240,8 +246,18 @@ window.onload = function () {
         currentPost.find('.description_area').attr('id', 'post' +(2)+'_script');
         currentPost.find('.vote1').attr('id', 'post' + (2) + '_vote1');
         currentPost.find('.vote2').attr('id', 'post' + (2) + '_vote2');
-        currentPost.find('.statistics').attr('id', 'chart' + (2));
+        currentPost.find('.heart1').attr('id', 'post' + (2) + '_heart1');
+        currentPost.find('.heart2').attr('id', 'post' + (2) + '_heart2');
+        currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (2) + '_mask1');
+        currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (2) + '_mask2');
+        currentPost.find('.phonelikes1').attr('id', 'post' + (2) + '_phonelikes1');
+        currentPost.find('.phonelikes2').attr('id', 'post' + (2) + '_phonelikes2');
+        currentPost.find('.stats').attr('id','post' + (2) + '_stats');
+        currentPost.find('.statistics1').attr('id', 'post' + (2) + '_worldicon');
+        currentPost.find('.statistics2').attr('id', 'post' + (2) + '_charticon');
         currentPost.find('.chart-area').attr('id', 'post' +(2)+ '_chart_area');
+        currentPost.find('.analytica1').attr('id', 'post' +(2)+ '_regions_div');
+        currentPost.find('.analytica2').attr('id', 'post' +(2)+ '_chartContainer');
 
         document.getElementById('post2').style.display = "block";
         $('#post2_pic1').each(function () {
@@ -260,7 +276,7 @@ window.onload = function () {
 
     var show3 = localStorage.getItem('show3');
     if (show3 === 'true') {
-        $("#wall").prepend("<div class='post'><div class=\"statistics\" onclick=\"showchart(this.id);\"><i class=\"far fa-chart-bar\"></i></div><div class=\"chart-area\"></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post3_mask1'><i class='fas fa-heart' id='post3_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post3_phonelikes1'></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2'ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post3_mask2'><i class='fas fa-heart' id='post3_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post3_phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        $("#wall").prepend("<div class='post'><div class='stats'><div class=\"statistics1\" id=\"post1_worldicon\" onclick=\"showchart(this.id);\" style=\"right: 10px\"><i class=\"far fas fa-globe-americas\"></i></div><div class=\"statistics2\" id=\"post1_charticon\" onclick=\"showchart(this.id);\" style=\"right: 45px\"><i class=\"far fa-chart-bar\"></i></div></div><div class=\"chart-area\" id=\"post1_chart_area\"><div class=\"analytica1\" id=\"regions_div\"></div><div class=\"analytica2\" id=\"chartContainer\"></div></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='heart1 fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='heart2 fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
 
         currentPost = $('.post').first();
 
@@ -275,8 +291,18 @@ window.onload = function () {
         currentPost.find('.description_area').attr('id', 'post' +(3)+'_script');
         currentPost.find('.vote1').attr('id', 'post' + (3) + '_vote1');
         currentPost.find('.vote2').attr('id', 'post' + (3) + '_vote2');
-        currentPost.find('.statistics').attr('id', 'chart' + (3));
+        currentPost.find('.heart1').attr('id', 'post' + (3) + '_heart1');
+        currentPost.find('.heart2').attr('id', 'post' + (3) + '_heart2');
+        currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (3) + '_mask1');
+        currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (3) + '_mask2');
+        currentPost.find('.phonelikes1').attr('id', 'post' + (3) + '_phonelikes1');
+        currentPost.find('.phonelikes2').attr('id', 'post' + (3) + '_phonelikes2');
+        currentPost.find('.stats').attr('id','post' + (3) + '_stats');
+        currentPost.find('.statistics1').attr('id', 'post' + (3) + '_worldicon');
+        currentPost.find('.statistics2').attr('id', 'post' + (3) + '_charticon');
         currentPost.find('.chart-area').attr('id', 'post' +(3)+ '_chart_area');
+        currentPost.find('.analytica1').attr('id', 'post' +(3)+ '_regions_div');
+        currentPost.find('.analytica2').attr('id', 'post' +(3)+ '_chartContainer');
 
         document.getElementById('post3').style.display = "block";
         $('#post3_pic1').each(function () {
@@ -300,7 +326,7 @@ window.onload = function () {
     }
 
     if (localStorage.getItem('pn') === '1') {
-        $("#wall").prepend("<div class='post'><div class=\"statistics\" onclick=\"showchart(this.id);\"><i class=\"far fa-chart-bar\"></i></div><div class=\"chart-area\"></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post2_mask1'><i class='fas fa-heart' id='post2_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post2_phonelikes1'></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post2_mask2'><i class='fas fa-heart' id='post2_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post2_phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        $("#wall").prepend("<div class='post'><div class='stats'><div class=\"statistics1\" id=\"post1_worldicon\" onclick=\"showchart(this.id);\" style=\"right: 10px\"><i class=\"far fas fa-globe-americas\"></i></div><div class=\"statistics2\" id=\"post1_charticon\" onclick=\"showchart(this.id);\" style=\"right: 45px\"><i class=\"far fa-chart-bar\"></i></div></div><div class=\"chart-area\" id=\"post1_chart_area\"><div class=\"analytica1\" id=\"regions_div\"></div><div class=\"analytica2\" id=\"chartContainer\"></div></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='heart1 fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='heart2 fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
         currentPost = $('.post').first();
         currentPost.addClass('post' + (postsCounter));
         currentPost.addClass('example hoverable');
@@ -315,14 +341,22 @@ window.onload = function () {
         currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (postsCounter) + '_mask2');
         currentPost.find('.vote1').attr('id', 'post' + (postsCounter) + '_vote1');
         currentPost.find('.vote2').attr('id', 'post' + (postsCounter) + '_vote2');
-        currentPost.find('.fa_heart').attr('id', 'post' + (postsCounter) + 'heart1');
-        currentPost.find('.fa_heart').eq(1).attr('id', 'post' + (postsCounter) + 'heart2');
-        currentPost.find('.statistics').attr('id', 'chart' + (postsCounter));
+        currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (postsCounter) + '_mask1');
+        currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (postsCounter) + '_mask2');
+        currentPost.find('.phonelikes1').attr('id', 'post' + (postsCounter) + '_phonelikes1');
+        currentPost.find('.phonelikes2').attr('id', 'post' + (postsCounter) + '_phonelikes2');
+        currentPost.find('.heart1').attr('id', 'post' + (postsCounter) + '_heart1');
+        currentPost.find('.heart2').attr('id', 'post' + (postsCounter) + '_heart2');
+        currentPost.find('.stats').attr('id','post' + (postsCounter) + '_stats');
+        currentPost.find('.statistics1').attr('id', 'post' + (postsCounter) + '_worldicon');
+        currentPost.find('.statistics2').attr('id', 'post' + (postsCounter) + '_charticon');
         currentPost.find('.chart-area').attr('id', 'post' +(postsCounter)+ '_chart_area');
+        currentPost.find('.analytica1').attr('id', 'post' +(postsCounter)+ '_regions_div');
+        currentPost.find('.analytica2').attr('id', 'post' +(postsCounter)+ '_chartContainer');
 
     }
     if (localStorage.getItem('pn') === '2') {
-        $("#wall").prepend("<div class='post'><div class=\"statistics\" onclick=\"showchart(this.id);\"><i class=\"far fa-chart-bar\"></i></div><div class=\"chart-area\"></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post3_mask1'><i class='fas fa-heart' id='post3_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post3_phonelikes1' ></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post3_mask2'><i class='fas fa-heart' id='post3_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post3_phonelikes2'></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        $("#wall").prepend("<div class='post'><div class='stats'><div class=\"statistics1\" id=\"post1_worldicon\" onclick=\"showchart(this.id);\" style=\"right: 10px\"><i class=\"far fas fa-globe-americas\"></i></div><div class=\"statistics2\" id=\"post1_charticon\" onclick=\"showchart(this.id);\" style=\"right: 45px\"><i class=\"far fa-chart-bar\"></i></div></div><div class=\"chart-area\" id=\"post1_chart_area\"><div class=\"analytica1\" id=\"regions_div\"></div><div class=\"analytica2\" id=\"chartContainer\"></div></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='heart1 fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='heart2 fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
         currentPost = $('.post').first();
         currentPost.addClass('post' + (postsCounter));
         currentPost.addClass('example hoverable');
@@ -335,15 +369,21 @@ window.onload = function () {
         currentPost.find('.description_area').attr('id', 'post' +(postsCounter)+'_script');
         currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (postsCounter) + '_mask1');
         currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (postsCounter) + '_mask2');
+        currentPost.find('.phonelikes1').attr('id', 'post' + (postsCounter) + '_phonelikes1');
+        currentPost.find('.phonelikes2').attr('id', 'post' + (postsCounter) + '_phonelikes2');
         currentPost.find('.vote1').attr('id', 'post' + (postsCounter) + '_vote1');
         currentPost.find('.vote2').attr('id', 'post' + (postsCounter) + '_vote2');
-        currentPost.find('.fa_heart').attr('id', 'post' + (postsCounter) + 'heart1');
-        currentPost.find('.fa_heart').eq(1).attr('id', 'post' + (postsCounter) + 'heart2');
-        currentPost.find('.statistics').attr('id', 'chart' + (postsCounter));
+        currentPost.find('.heart1').attr('id', 'post' + (postsCounter) + '_heart1');
+        currentPost.find('.heart2').attr('id', 'post' + (postsCounter) + '_heart2');
+        currentPost.find('.stats').attr('id','post' + (postsCounter) + '_stats');
+        currentPost.find('.statistics1').attr('id', 'post' + (postsCounter) + '_worldicon');
+        currentPost.find('.statistics2').attr('id', 'post' + (postsCounter) + '_charticon');
         currentPost.find('.chart-area').attr('id', 'post' +(postsCounter)+ '_chart_area');
+        currentPost.find('.analytica1').attr('id', 'post' +(postsCounter)+ '_regions_div');
+        currentPost.find('.analytica2').attr('id', 'post' +(postsCounter)+ '_chartContainer');
     }
     if (localStorage.getItem('pn') === '3') {
-        $("#wall").prepend("<div class='post'><div class=\"statistics\"><i class=\"far fa-chart-bar\" onclick=\"showchart(this.id);\"></i></div><div class=\"chart-area\"></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post4_mask1'><i class='fas fa-heart' id='post4_heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' id='post4_phonelikes1' ></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='post4_mask2'><i class='fas fa-heart' id='post4_heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' id='post4_phonelikes2' ></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+        $("#wall").prepend("<div class='post'><div class='stats'><div class=\"statistics1\" id=\"post1_worldicon\" onclick=\"showchart(this.id);\" style=\"right: 10px\"><i class=\"far fas fa-globe-americas\"></i></div><div class=\"statistics2\" id=\"post1_charticon\" onclick=\"showchart(this.id);\" style=\"right: 45px\"><i class=\"far fa-chart-bar\"></i></div></div><div class=\"chart-area\" id=\"post1_chart_area\"><div class=\"analytica1\" id=\"regions_div\"></div><div class=\"analytica2\" id=\"chartContainer\"></div></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='heart1 fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='heart2 fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
         currentPost = $('.post').first();
         currentPost.addClass('post' + (postsCounter));
         currentPost.addClass('example hoverable');
@@ -356,24 +396,56 @@ window.onload = function () {
         currentPost.find('.description_area').attr('id', 'post' +(postsCounter)+'_script');
         currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (postsCounter) + '_mask1');
         currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (postsCounter) + '_mask2');
+        currentPost.find('.phonelikes1').attr('id', 'post' + (postsCounter) + '_phonelikes1');
+        currentPost.find('.phonelikes2').attr('id', 'post' + (postsCounter) + '_phonelikes2');
         currentPost.find('.vote1').attr('id', 'post' + (postsCounter) + '_vote1');
         currentPost.find('.vote2').attr('id', 'post' + (postsCounter) + '_vote2');
-        currentPost.find('.fa_heart').attr('id', 'post' + (postsCounter) + 'heart1');
-        currentPost.find('.fa_heart').eq(1).attr('id', 'post' + (postsCounter) + 'heart2');
-        currentPost.find('.statistics').attr('id', 'chart' + (postsCounter));
+        currentPost.find('.heart1').attr('id', 'post' + (postsCounter) + '_heart1');
+        currentPost.find('.heart2').attr('id', 'post' + (postsCounter) + '_heart2');
+        currentPost.find('.stats').attr('id','post' + (postsCounter) + '_stats');
+        currentPost.find('.statistics1').attr('id', 'post' + (postsCounter) + '_worldicon');
+        currentPost.find('.statistics2').attr('id', 'post' + (postsCounter) + '_charticon');
         currentPost.find('.chart-area').attr('id', 'post' +(postsCounter)+ '_chart_area');
-
+        currentPost.find('.analytica1').attr('id', 'post' +(postsCounter)+ '_regions_div');
+        currentPost.find('.analytica2').attr('id', 'post' +(postsCounter)+ '_chartContainer');
     }
 
 }
 
 function attach1(file) {
     document.getElementById('camera').style.display = "none";
+    document.getElementById('deletepic1').style.display="block";
 }
 
 function attach2(file) {
     document.getElementById('camera2').style.display = "none";
-
+    document.getElementById('deletepic2').style.display="block";
+}
+function deletepic(clicked_id){
+    if(clicked_id==='deletepic1'){
+        $(".imagearea1").empty();
+        document.getElementById('camera').style.display="block";
+        $('#labelimg').each(function () {
+            var imgURL = $('#imagearea1').find('img').attr('src');
+            $(this).css('background-image', 'url(' + imgURL + ')');
+        });
+        var counter = localStorage.getItem('c');
+        counter--;
+        localStorage.setItem('c',counter);
+        document.getElementById(clicked_id).style.display="none";
+    }
+   if(clicked_id==='deletepic2'){
+       $(".imagearea2").empty();
+       document.getElementById('camera2').style.display="block";
+       $('#labelimg2').each(function () {
+           var imgURL = $('#imagearea2').find('img').attr('src');
+           $(this).css('background-image', 'url(' + imgURL + ')');
+       });
+        counter = localStorage.getItem('c');
+       counter--;
+       localStorage.setItem('c',counter);
+       document.getElementById(clicked_id).style.display="none";
+   }
 }
 
 function showvotes(clicked_id) {
@@ -414,10 +486,6 @@ function showvotes(clicked_id) {
     }
 }
 
-function likescount(clicked_id) {
-
-}
-
 var progress = 1;
 
 function postprocess(box) {
@@ -429,6 +497,8 @@ function postprocess(box) {
         document.getElementById('errortext1').style.display = "none";
         document.getElementById('movingul').style.transform = "translate(0,-37px)";
         document.getElementById('movingnum').style.transform = "translate(0,-24px)";
+        document.getElementById('deletepic1').style.display='none';
+
     }
     // else{
     //   document.getElementById('errortext1').style.display="block";
@@ -441,6 +511,7 @@ function postprocess(box) {
         document.getElementById('errortext2').style.display = "none";
         document.getElementById('movingul').style.transform = "translate(0,-74px)";
         document.getElementById('movingnum').style.transform = "translate(0,-48px)";
+        document.getElementById('deletepic2').style.display='none';
     }
     // else if (progress===2) {
     //   document.getElementById('errortext2').style.display="block";
@@ -530,11 +601,27 @@ function phonepost(box) {
         document.getElementById('form1').style.display = "none";
     }
     else {
-        document.getElementById('form1').style.display = "block";
+        document.getElementById('form1').style.display = "inline-block";
     }
 }
 
-function maskshow(clicked_id) {
+function phonelikes(clicked_id) {
+    document.getElementById(clicked_id).style.color="#8ad5d8";
+    var e = document.getElementById(clicked_id).parentElement.id;
+    var p = document.getElementById(e).parentElement.id;
+    if(e===p +'_pic1'){
+        document.getElementById(p + '_pic1').style.boxShadow = "3px 3px 0px rgb(138, 213, 216), -3px -3px 0px rgb(138,213,216),3px -3px 0px rgb(138, 213, 216), -3px 3px 0px rgb(138,213,216)";
+    }
+    if(e===p +'_pic2'){
+        document.getElementById(p + '_pic2').style.boxShadow = "3px 3px 0px rgb(138, 213, 216), -3px -3px 0px rgb(138,213,216),3px -3px 0px rgb(138, 213, 216), -3px 3px 0px rgb(138,213,216)";
+    }
+    $('#' + p + '_phonelikes1').fadeOut(1000);
+    $('#' + p + '_phonelikes2').fadeOut(1000);
+}
+
+
+
+/*function maskshow(clicked_id) {
     if (document.body.clientWidth < 510) {
         var e = document.getElementById(clicked_id).parentElement.id;
         if (clicked_id === e + '_pic1') {
@@ -548,31 +635,7 @@ function maskshow(clicked_id) {
             document.getElementById(e + '_pic2').style.boxShadow = "3px 3px 0px rgb(138, 213, 216), -3px -3px 0px rgb(138,213,216),3px -3px 0px rgb(138, 213, 216), -3px 3px 0px rgb(138,213,216)";
         }
     }
-}
-
-$(document).ready(function () {
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myBarChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['image1','image2'],
-            datasets: [{
-                label: '1 image',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: [5, 0],
-            },
-                {
-                    label: '2 image',
-                    backgroundColor: '#8ad5d8',
-                    borderColor: '#8ad5d8',
-                    data: [0, 10],
-                }]
-        },
-        options: {}
-    })
-});
-
+}*/
 function hideintro(box) {
     display = document.getElementById('intro').style.display;
     if (display === 'none') {
@@ -594,71 +657,166 @@ function hideintro(box) {
     });
 }
 
+var clicked1 = true;
+var clicked2=true;
 function showchart(clicked_id) {
+    $(window).resize(function(){
+        drawRegionsMap();
+    });
     var e = document.getElementById(clicked_id).parentElement.id;
-    display = document.getElementById(e + '_pic1').style.display;
-    if (display === 'none') {
-        document.getElementById(e + '_pic1').style.display = "block";
+    var p = document.getElementById(e).parentElement.id;
+
+    if((clicked1===true && clicked2===true) || (clicked1===true && clicked2===false && clicked_id=== p + '_charticon') || (clicked1===false && clicked2===true && clicked_id===p + '_worldicon')){
+       display = document.getElementById(p + '_pic1').style.display;
+       if (display === 'none') {
+           document.getElementById(p + '_pic1').style.display = "block";
+       }
+       else {
+           document.getElementById(p + '_pic1').style.display = "none";
+       }
+       display = document.getElementById(p + '_pic2').style.display;
+       if (display === 'none') {
+           document.getElementById(p + '_pic2').style.display = "block";
+       }
+       else {
+           document.getElementById(p + '_pic2').style.display = "none";
+       }
+       display = document.getElementById(p + '_script').style.display;
+       if (display === 'none') {
+           document.getElementById(p + '_script').style.display = "block";
+       }
+       else {
+           document.getElementById(p + '_script').style.display = "none";
+       }
+       display = document.getElementById(p + '_chart_area').style.display;
+       if (display === 'block') {
+           document.getElementById(p + '_chart_area').style.display = "none";
+       }
+       else {
+           document.getElementById(p + '_chart_area').style.display = "block";
+       }
+   }
+    if(clicked_id=== p + '_worldicon'){
+        document.getElementById(p + '_regions_div').style.display="block";
+
+        //google geo charts
+        google.charts.load('current', {
+            'packages':['geochart'],
+            // Note: you will need to get a mapsApiKey for your project.
+            // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+            'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+        });
+        google.charts.setOnLoadCallback(drawRegionsMap);
+
+        function drawRegionsMap() {
+            var data = google.visualization.arrayToDataTable([
+                ['Country', 'Likes'],
+                ['Germany', 200],
+                ['United States', 300],
+                ['Brazil', 400],
+                ['Canada', 500],
+                ['France', 600],
+                ['RU', 700]
+            ]);
+
+            var options = {
+                backgroundColor: 'whitesmoke',
+                defaultColor: '#f5f5f5',
+                colorAxis: {colors: ['#8ad5d8']},
+            };
+
+            var chart = new google.visualization.GeoChart(document.getElementById(p + '_regions_div'));
+
+            chart.draw(data, options);
+
+        }
+       //finish geochart
+
+        if(clicked1){
+            document.getElementById(p + '_worldicon').style.color='#8ad5d8';
+            if(clicked2===false){
+                document.getElementById(p + '_charticon').style.color='black';
+                clicked2  = true;
+                document.getElementById(p + '_chartContainer').style.display="none";
+                document.getElementById(p + '_chart_area').style.display="block";
+            }
+            clicked1  = false;
+        } else {
+            document.getElementById(p + '_worldicon').style.color='black';
+            clicked1  = true;
+            document.getElementById(p + '_regions_div').style.display="none";
+        }
+
     }
-    else {
-        document.getElementById(e + '_pic1').style.display = "none";
+    if(clicked_id===p + '_charticon'){
+        document.getElementById(p + '_chartContainer').style.display="block";
+
+        //bars cahrts
+
+        var chart = new CanvasJS.Chart(p + "_chartContainer", {
+            animationEnabled: true,
+            backgroundColor:"whitesmoke",
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor:"pointer",
+                itemclick: toggleDataSeries
+            },
+            data: [{
+                type: "column",
+                color:"#8ad5d8",
+                name: "Men likes",
+                legendText: "Men",
+                showInLegend: true,
+                dataPoints:[
+                    { label: "Image1", y: 266 },
+                    { label: "Image2", y: 302 },
+
+                ]
+            },
+                {
+                    type: "column",
+                    color:"lightpink",
+                    name: "Women likes",
+                    legendText: "Women",
+                    showInLegend: true,
+                    dataPoints:[
+                        { label: "Image1", y: 100 },
+                        { label: "Image2", y: 200 },
+
+                    ]
+                }]
+        });
+        chart.render();
+
+        function toggleDataSeries(e) {
+            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            }
+            else {
+                e.dataSeries.visible = true;
+            }
+            chart.render();
+        }
+
+        //finish bars chart
+        if(clicked2){
+            document.getElementById(p + '_charticon').style.color='#8ad5d8';
+            if(clicked1===false){
+                document.getElementById(p + '_worldicon').style.color='black';
+                clicked1=true;
+                document.getElementById(p + '_regions_div').style.display="none";
+            }
+            clicked2  = false;
+        } else {
+            document.getElementById(p + '_charticon').style.color='black';
+            clicked2  = true;
+            document.getElementById(p + '_chartContainer').style.display="none";
+
+        }
+
     }
-    display = document.getElementById(e + '_pic2').style.display;
-    if (display === 'none') {
-        document.getElementById(e + '_pic2').style.display = "block";
-    }
-    else {
-        document.getElementById(e + '_pic2').style.display = "none";
-    }
-    display = document.getElementById(e + '_script').style.display;
-    if (display === 'none') {
-        document.getElementById(e + '_script').style.display = "block";
-    }
-    else {
-        document.getElementById(e + '_script').style.display = "none";
-    }
-    display = document.getElementById(e + '_chart_area').style.display;
-    if (display === 'block') {
-        document.getElementById(e + '_chart_area').style.display = "none";
-    }
-    else {
-        document.getElementById(e + '_chart_area').style.display = "block";
-    }
-    display = document.getElementById(e + '_chart_area').style.display;
-    if (display === 'block') {
-        document.getElementById(clicked_id).style.color = "#8ad5d8";
-    }
-    else {
-        document.getElementById(clicked_id).style.display = "black";
-    }
+
 }
 
-google.charts.load('current', {
-    'packages':['geochart'],
-    // Note: you will need to get a mapsApiKey for your project.
-    // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
-    'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
-});
-google.charts.setOnLoadCallback(drawRegionsMap);
-
-function drawRegionsMap() {
-    var data = google.visualization.arrayToDataTable([
-        ['Country', 'Likes'],
-        ['Germany', 200],
-        ['United States', 300],
-        ['Brazil', 400],
-        ['Canada', 500],
-        ['France', 600],
-        ['RU', 700]
-    ]);
-
-    var options = {
-        backgroundColor: 'whitesmoke',
-        defaultColor: '#f5f5f5',
-        colorAxis: {colors: ['#8ad5d8']},
-    };
-
-    var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
-
-    chart.draw(data, options);
-}

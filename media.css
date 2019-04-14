@@ -87,11 +87,7 @@
         border-radius: 0;
 
     }
-    .pic1,.pic2{
-        width:140px;
-        height: 190px;
-        margin: 20px 10px;
-    }
+
     .pic1:hover .mask{
         display: none;
     }
@@ -114,12 +110,30 @@
        margin-left: 20px;
    }
 }
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 376px){
     .pic1,.pic2{
-        margin: 20px 0;
+        margin: 5px 0;
+        width:150px;
+        height: 200px;
+    }
+    .navbar-brand{
+        margin-right: -4rem;
+    }
+    .phonehome{
+        display: list-item;
+        color: black;
+        cursor: pointer;
+        font-size: 19px;
+    }
+    .far{
+        font-size: 20px;
     }
     .intro{
-        padding: 70px 0;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: 0;
     }
     .intro h1{
         font-size: 25px;
@@ -152,5 +166,16 @@
     .btn-primary{
         width: 80%;
     }
-
+    .chart-area{
+        height: 345px;
+    }
+    .fa-times-circle{
+        color: darkgray;
+    }
+    .fa-times{
+        color: black;
+    }
+    .phonelikes1, .phonelikes2{
+        display: block;
+    }
 }

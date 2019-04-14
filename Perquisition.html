@@ -28,11 +28,13 @@
         <nav class="navbar navbar-expand-lg navbar-dark primary-color">
 
             <!-- Navbar brand -->
-            <a class="navbar-brand" href="#"  style="height: 60px"><img src="logo.png"></a>
+            <a class="navbar-brand" href="#" style="height: 60px"><img src="logo.png"></a>
 
+            <a href="index.html" class="phonehome">Home</a>
             <!-- Collapse button -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-                    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation" onclick="phonepost()">
+                    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"
+                    onclick="phonepost()">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -55,7 +57,8 @@
 
                     <!-- Dropdown -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                           aria-haspopup="true"
                            aria-expanded="false">Dropdown</a>
                         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="#">Action</a>
@@ -69,8 +72,8 @@
 
                 <form class="form-inline">
                     <div class="md-form my-0">
-                       <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
-                       <!-- <div class="phonepost">Create Post</div>-->
+                        <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
+                        <!-- <div class="phonepost">Create Post</div>-->
                     </div>
                 </form>
             </div>
@@ -81,7 +84,7 @@
     </header>
 
 
-<!--phone postlab version -->
+    <!--phone postlab version -->
     <div class="phonepostlab" id="phonelab">
 
     </div>
@@ -92,45 +95,32 @@
 
         <div class="wall" id="wall">
             <div class="post post1 example hoverable" id="post1" style="position: relative">
-                <div class="statistics" id="chart1" onclick="showchart(this.id);"><i class="far fa-chart-bar"></i></div>
-                <div class="chart-area" id="post1_chart_area">
-                    <div class="settings">
-                        <div class="select nation">
-                            <select>
-                                <option value="0" class="disabled active">select country</option>
-                                <option value="1">Belarus</option>
-                                <option value="2">Lithuania</option>
-                                <option value="3">Israel</option>
-                            </select>
-                        </div>
-                        <div class="select sex">
-                            <select>
-                                <option value="0">Sex</option>
-                                <option value="1">Male</option>
-                                <option value="2">Female</option>
-                                <option value="3">Both</option>
-                            </select>
-                        </div>
-                    </div>
-                   <!-- <canvas id="myChart"></canvas>-->
-                    <div id="regions_div" style="width:556px;height: 347px;margin: 0 auto"></div>
+                <div class="stats" id="post1_stats">
+                    <div class="statistics1" id="post1_worldicon" onclick="showchart(this.id);" style="right: 10px"><i
+                            class="far fas fa-globe-americas"></i></div>
+                    <div class="statistics2" id="post1_charticon" onclick="showchart(this.id);" style="right: 45px"><i
+                            class="far fa-chart-bar"></i></div>
                 </div>
-                <div class="pic1 view overlay" id="post1_pic1" ondblclick="maskshow(this.id)">
-                    <div class="mask flex-center rgba-stylish-strong" id="post1_mask1" >
-                        <i class="fas fa-heart" id="post1_heart1"  onclick="showvotes(this.id)"></i>
+                <div class="chart-area" id="post1_chart_area">
+                    <div class="analytica1" id="post1_regions_div"></div>
+                    <div class="analytica2" id="post1_chartContainer"></div>
+                </div>
+                <div class="pic1 view overlay" id="post1_pic1">
+                    <div class="mask flex-center rgba-stylish-strong" id="post1_mask1">
+                        <i class="heart1 fas fa-heart" id="post1_heart1" onclick="showvotes(this.id)"></i>
                         <div class="votes vote1" id="post1_vote1">0</div>
                     </div>
-                    <i class="fas fa-heart phonelikes1" id="post1_phonelikes1"></i>
+                    <i class="fas fa-heart phonelikes1" id="post1_phonelikes1" onclick="phonelikes(this.id);"></i>
                 </div>
                 <div class="imgnum">
                     <img src="" id="tableBanner1" class="tableBanner1">
                 </div>
-                <div class="pic2 view overlay" id="post1_pic2" ondblclick="maskshow(this.id)">
+                <div class="pic2 view overlay" id="post1_pic2">
                     <div class="mask flex-center rgba-stylish-strong" id="post1_mask2">
-                        <i class="fas fa-heart" id="post1_heart2"  onclick="showvotes(this.id)"></i>
+                        <i class="heart2 fas fa-heart" id="post1_heart2" onclick="showvotes(this.id)"></i>
                         <div class="votes vote2" id="post1_vote2">0</div>
                     </div>
-                    <i class="fas fa-heart phonelikes2" id="post1_phonelikes2"></i>
+                    <i class="fas fa-heart phonelikes2" id="post1_phonelikes2" onclick="phonelikes(this.id);"></i>
                 </div>
                 <div class="imgnum">
                     <img src="" id="tableBanner2" class="tableBanner2">
@@ -156,8 +146,9 @@
                         <li>Ready for posting!</li>
                     </ul>
                 </div>
-                <div class="form1" id="form1">
+                <div class="form1" id="form1" >
                     <div class="imagearea1" id="imagearea1"></div>
+                    <i class="fas fa-times-circle" id="deletepic1" onclick="deletepic(this.id);"><i class="fas fa-times"></i></i>
                     <label for="logo" class="custom-file-upload" id="labelimg">
                         <i class="fas fa-camera" id="camera"></i>
                         <i class="fa fa-cloud-upload"></i>
@@ -167,6 +158,7 @@
                 <span class="error-message show" id="errortext1" style="display:none;">Please fill the field before continuing</span>
                 <div class="form2" id="form2" style="display: none">
                     <div class="imagearea2" id="imagearea2"></div>
+                    <i class="fas fa-times-circle" id="deletepic2" onclick="deletepic(this.id);"><i class="fas fa-times"></i></i>
                     <label for="logo2" class="custom-file-upload" id="labelimg2">
                         <i class="fas fa-camera" id="camera2"></i>
                         <i class="fa fa-cloud-upload"></i>
@@ -175,7 +167,7 @@
                 </div>
                 <span class="error-message show" id="errortext2" style="display:none;">Please fill the field before continuing</span>
                 <textarea class="description" id="description"></textarea>
-               <!-- <input type="text" id="description" class="description" placeholder="description for post" style="display:none;" > -->
+                <!-- <input type="text" id="description" class="description" placeholder="description for post" style="display:none;" > -->
                 <div class="postbtn" id="postBtn" onclick="posting();" style="display: none">
                     <button type="button" class="btn btn-info" style="line-height: 0.5">Post it</button>
                 </div>
@@ -209,6 +201,7 @@
 <script type="text/javascript" src="infinitescroll.js"></script>
 <script src="dropzone.js"></script>
 <!-- MDBootstrap Steppers Pro  -->
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="js/addons-pro/stepper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
