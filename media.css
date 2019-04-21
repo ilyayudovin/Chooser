@@ -110,11 +110,26 @@
        margin-left: 20px;
    }
 }
+
+@media only screen and (max-width: 415px){
+    .pic1,.pic2{
+        margin: 5px 0;
+        width:180px;
+        height: 260px;
+    }
+    .phonelikes1, .phonelikes2{
+        display: block;
+    }
+    .chart-area{
+        height: 345px;
+    }
+}
+
 @media only screen and (max-width: 376px){
     .pic1,.pic2{
         margin: 5px 0;
-        width:150px;
-        height: 200px;
+        width:160px;
+        height: 210px;
     }
     .navbar-brand{
         margin-right: -4rem;
@@ -134,6 +149,7 @@
         top: 50%;
         left: 50%;
         margin: 0;
+        padding: 0;
     }
     .intro h1{
         font-size: 25px;
@@ -166,16 +182,18 @@
     .btn-primary{
         width: 80%;
     }
-    .chart-area{
-        height: 345px;
-    }
+
     .fa-times-circle{
         color: darkgray;
     }
     .fa-times{
         color: black;
     }
-    .phonelikes1, .phonelikes2{
-        display: block;
+
+}
+@media only screen and (max-width: 321px) {
+    .pic1,.pic2{
+        width:147px;
+        height: 200px;
     }
 }

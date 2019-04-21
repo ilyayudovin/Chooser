@@ -143,7 +143,7 @@ input[type="file"] {
     display: none;
 }
 
-form.test{
+.test{
     position: relative;
     text-align: center;
     border: 1px solid lightgray;
@@ -212,7 +212,7 @@ form.test{
     color: lightblue;
     cursor: pointer;
 }
-.fa-times{
+#cross,#cross2{
     position: absolute;
     left: 3.5px;
     color: whitesmoke;
@@ -296,7 +296,7 @@ form.test{
     color: whitesmoke;
     display: none;
 }
-.statistics1,.statistics2{
+.statistics1,.statistics2,.statistics3{
     display: inline-block;
     cursor: pointer;
     margin-right: 10px;
@@ -308,6 +308,9 @@ form.test{
 }
 .statistics2:hover{
     color: #8ad5d8;
+}
+.statistics3:hover{
+    color:#8ad5d8;
 }
 .chart-area{
     width: 100%;
@@ -327,4 +330,7 @@ form.test{
 .stats{
     width: 100%;
     text-align: right;
+}
+.statistics3{
+    display: none;
 }

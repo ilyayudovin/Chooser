@@ -32,9 +32,10 @@ body{
 }
 .phonehome{
     color: whitesmoke;
+    margin-top: 15px;
+    font-size: 25px;
+    right: 10px;
     position: absolute;
-    top: 10px;
-    left: 10px;
 }
 form{
     width: 333px;

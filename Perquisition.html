@@ -16,6 +16,7 @@
     <!-- Your custom styles (optional) -->
     <link href="css/style.css" rel="stylesheet">
 
+    <link href="dropzone.css" rel="stylesheet" type="text/css">
     <link href="perquisition.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="media.css" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
@@ -30,7 +31,7 @@
             <!-- Navbar brand -->
             <a class="navbar-brand" href="#" style="height: 60px"><img src="logo.png"></a>
 
-            <a href="index.html" class="phonehome">Home</a>
+            <a href="index.html" class="phonehome navbar-brand" style="color: black">Home</a>
             <!-- Collapse button -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
                     aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"
@@ -96,9 +97,11 @@
         <div class="wall" id="wall">
             <div class="post post1 example hoverable" id="post1" style="position: relative">
                 <div class="stats" id="post1_stats">
-                    <div class="statistics1" id="post1_worldicon" onclick="showchart(this.id);" style="right: 10px"><i
+                    <div class="statistics3" id="post1_deleteicon" onclick="deletepost(this.id);">
+                        <i class="fas fa-times" style="display: block;font-size: 27px"></i></div>
+                    <div class="statistics1" id="post1_worldicon" onclick="showchart(this.id);"><i
                             class="far fas fa-globe-americas"></i></div>
-                    <div class="statistics2" id="post1_charticon" onclick="showchart(this.id);" style="right: 45px"><i
+                    <div class="statistics2" id="post1_charticon" onclick="showchart(this.id);"><i
                             class="far fa-chart-bar"></i></div>
                 </div>
                 <div class="chart-area" id="post1_chart_area">
@@ -135,7 +138,7 @@
                 <div class="avatar_pic"></div>
                 <div class="avatar_name">Your Nickname</div>
             </div>
-            <form class="test example hoverable" id="forma">
+            <div class="test example hoverable" id="forma">
                 <div class="processline" id="processline"></div>
                 <div class="process" id="process"></div>
                 <div class="movingheaders">
@@ -146,28 +149,27 @@
                         <li>Ready for posting!</li>
                     </ul>
                 </div>
+
                 <div class="form1" id="form1" >
                     <div class="imagearea1" id="imagearea1"></div>
-                    <i class="fas fa-times-circle" id="deletepic1" onclick="deletepic(this.id);"><i class="fas fa-times"></i></i>
+                    <i class="fas fa-times-circle" id="deletepic1" onclick="deletepic(this.id);"><i class="fas fa-times" id="cross"></i></i>
                     <label for="logo" class="custom-file-upload" id="labelimg">
                         <i class="fas fa-camera" id="camera"></i>
                         <i class="fa fa-cloud-upload"></i>
                     </label>
                     <input onchange="attach1(this);" class="classhere" type="file" name="logo" id="logo"/>
                 </div>
-                <span class="error-message show" id="errortext1" style="display:none;">Please fill the field before continuing</span>
+
                 <div class="form2" id="form2" style="display: none">
                     <div class="imagearea2" id="imagearea2"></div>
-                    <i class="fas fa-times-circle" id="deletepic2" onclick="deletepic(this.id);"><i class="fas fa-times"></i></i>
+                    <i class="fas fa-times-circle" id="deletepic2" onclick="deletepic(this.id);"><i class="fas fa-times" id="cross2"></i></i>
                     <label for="logo2" class="custom-file-upload" id="labelimg2">
                         <i class="fas fa-camera" id="camera2"></i>
                         <i class="fa fa-cloud-upload"></i>
                     </label>
                     <input onchange="attach2(this);" class="classhere" type="file" name="logo" id="logo2"/>
                 </div>
-                <span class="error-message show" id="errortext2" style="display:none;">Please fill the field before continuing</span>
                 <textarea class="description" id="description"></textarea>
-                <!-- <input type="text" id="description" class="description" placeholder="description for post" style="display:none;" > -->
                 <div class="postbtn" id="postBtn" onclick="posting();" style="display: none">
                     <button type="button" class="btn btn-info" style="line-height: 0.5">Post it</button>
                 </div>
@@ -184,10 +186,11 @@
                     <span>/</span>
                     <span class="totalstep">4</span>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
+
 
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <!-- Bootstrap tooltips -->

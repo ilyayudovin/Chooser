@@ -533,6 +533,7 @@ var Dropzone = function (_Emitter) {
         },
 
 
+
         /**
          * The callback that will be invoked when all chunks have been uploaded for a file.
          * It gets the file for which the chunks have been uploaded as the first parameter,

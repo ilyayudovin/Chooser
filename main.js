@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-
     var counter = 0;
 
     //You might want to do if check to see if localstorage set for theImage here
@@ -23,7 +22,24 @@ $(document).ready(function () {
             var img = new Image();
 
             img.src = reader.result;
-            localStorage.theImage = reader.result; //stores the image to localStorage
+            var ida=img.src;
+            function check(value) {
+                try {
+                    localStorage.setItem('ска', value);
+                } catch(e) {
+                    if (e.code == 22) {
+                        alert('storage is probably full');
+                    }
+                }
+            }
+                try {
+                    localStorage.theImage = reader.result; //stores the image to localStorage
+                } catch(e) {
+                    if (e.code == 22) {
+                        alert('storage is probably full2');
+                    }
+                }
+           // localStorage.theImage = reader.result; //stores the image to localStorage
 
             var dataImage = localStorage.getItem('theImage');
 
@@ -40,12 +56,15 @@ $(document).ready(function () {
                 bannerImgg.src = dataImage;
                 data1 = dataImage;
                 if (postsCounter === 1 || postsCounter=== '1') {
+                    check(data1);
                     localStorage.setItem('data1', data1);
                 }
                 if (postsCounter === 2 || postsCounter=== '2') {
+                    check(data1);
                     localStorage.setItem('data3', data1);
                 }
                 if (postsCounter === 3 || postsCounter==='3') {
+                    check(data1);
                     localStorage.setItem('data5', data1);
                 }
                 localStorage.removeItem('theImage');
@@ -60,12 +79,15 @@ $(document).ready(function () {
                 bannerImgg2.src = dataImage;
                 data2 = dataImage;
                 if (postsCounter === 1 || postsCounter==='1') {
+                    check(data2);
                     localStorage.setItem('data2', data2);
                 }
                 if (postsCounter === 2 || postsCounter==='2') {
+                    check(data2);
                     localStorage.setItem('data4', data2);
                 }
                 if (postsCounter === 3 || postsCounter==='3') {
+                    check(data2);
                     localStorage.setItem('data6', data2);
                 }
                 localStorage.removeItem('theImage');
@@ -97,8 +119,7 @@ function posting(box) {
     var imgsrc2 = $('#post' + postsCounter).find('.imgnum').find('img')[1];
 
     event.preventDefault();
-    localStorage.setItem('ID', pic1Id);
-    localStorage.setItem('ID2', pic2Id);
+
 
     if (imgsrc1.src.length > 81 && imgsrc2.src.length > 81) {
         event.preventDefault();
@@ -114,27 +135,27 @@ function posting(box) {
         $("div#imagearea1").empty();
         $('#logo').empty();
 
-        document.getElementsByClassName("imagearea2")[0].style.display = "none";//change color to label
+       document.getElementsByClassName("imagearea2")[0].style.display = "none";//change color to label
         $("div#imagearea2").empty();
         $('#logo2').empty();
 
-        var desc = document.forms["forma"].elements["description"].value;
-        if (postsCounter === 1) {
+        var desc = document.getElementById("description").value;
+        if (postsCounter === 1 || postsCounter=== "1") {
             localStorage.setItem('text1', desc);
         }
-        if (postsCounter === 2) {
+        if (postsCounter === 2 || postsCounter=== "2") {
             localStorage.setItem('text2', desc);
         }
-        if (postsCounter === 3) {
+        if (postsCounter === 3 || postsCounter=== "3") {
             localStorage.setItem('text3', desc);
         }
 
         var descarea = document.getElementById('post' +(postsCounter)+'_script');
-        descarea.innerHTML = desc;
-        $('#description').val('');
-       // if (desc === '') {
+       descarea.innerHTML = desc;
+        //$('#description').val('');
+        //if (desc === '') {
          //   document.getElementById('post' +(postsCounter)+'_script').style.height = "0px";
-        //}
+      //  }
 
 
 
@@ -448,6 +469,11 @@ function deletepic(clicked_id){
    }
 }
 
+function deletepost(clicked_id) {
+    var p=document.getElementById(clicked_id).parentElement.id;
+    var e = document.getElementById(p).parentElement.id;
+    $('#' + e).remove();
+}
 function showvotes(clicked_id) {
 
     var e = document.getElementById(clicked_id).parentElement.id;
@@ -491,38 +517,30 @@ var progress = 1;
 function postprocess(box) {
 
     if (progress === 1) {
+
         document.getElementById('form2').style.display = "inline-block";
         document.getElementById('form1').style.display = "none";
         document.getElementById('process').style.width = "33%";
-        document.getElementById('errortext1').style.display = "none";
         document.getElementById('movingul').style.transform = "translate(0,-37px)";
         document.getElementById('movingnum').style.transform = "translate(0,-24px)";
         document.getElementById('deletepic1').style.display='none';
 
     }
-    // else{
-    //   document.getElementById('errortext1').style.display="block";
-    //   progress--;
-    //}
+
     if (progress === 2) {
         document.getElementById('description').style.display = "inline-block";
         document.getElementById('form2').style.display = "none";
         document.getElementById('process').style.width = "67%";
-        document.getElementById('errortext2').style.display = "none";
         document.getElementById('movingul').style.transform = "translate(0,-74px)";
         document.getElementById('movingnum').style.transform = "translate(0,-48px)";
         document.getElementById('deletepic2').style.display='none';
     }
-    // else if (progress===2) {
-    //   document.getElementById('errortext2').style.display="block";
-    // progress--;
-    //}
+
     if (progress === 3) {
         document.getElementById('process').style.width = "100%";
         document.getElementById('description').style.display = "none";
         document.getElementById('postBtn').style.display = "block";
         document.getElementById('arrow').style.display = "none";
-        document.getElementById('errortext2').style.display = "none";
         document.getElementById('movingul').style.transform = "translate(0,-111px)";
         document.getElementById('movingnum').style.transform = "translate(0,-72px)";
 
@@ -620,22 +638,6 @@ function phonelikes(clicked_id) {
 }
 
 
-
-/*function maskshow(clicked_id) {
-    if (document.body.clientWidth < 510) {
-        var e = document.getElementById(clicked_id).parentElement.id;
-        if (clicked_id === e + '_pic1') {
-            document.getElementById(e + '_phonelikes1').style.display = "block";
-            $('#' + e + '_phonelikes1').fadeOut(1000);
-            document.getElementById(e + '_pic1').style.boxShadow = "3px 3px 0px rgb(138, 213, 216), -3px -3px 0px rgb(138,213,216),3px -3px 0px rgb(138, 213, 216), -3px 3px 0px rgb(138,213,216)";
-        }
-        if (clicked_id === e + '_pic2') {
-            document.getElementById(e + '_phonelikes2').style.display = "block";
-            $('#' + e + '_phonelikes2').fadeOut(1000);
-            document.getElementById(e + '_pic2').style.boxShadow = "3px 3px 0px rgb(138, 213, 216), -3px -3px 0px rgb(138,213,216),3px -3px 0px rgb(138, 213, 216), -3px 3px 0px rgb(138,213,216)";
-        }
-    }
-}*/
 function hideintro(box) {
     display = document.getElementById('intro').style.display;
     if (display === 'none') {
@@ -819,4 +821,5 @@ function showchart(clicked_id) {
     }
 
 }
+
 
