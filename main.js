@@ -475,42 +475,57 @@ window.onload = function () {
         currentPost.find('.analytica2').attr('id', 'post' + (postsCounter) + '_chartContainer');
     }
 
-  /*  var post_amount = localStorage.getItem('pn');
+    var post_amount = localStorage.getItem('pn');
     if (post_amount >= 1) {
-        var j = 1;
-        var i = 0;
-        var k = 1;
+        var j = i = k = 1;
         var storage = firebase.storage();
-        loop();
 
-        function loop() {
-            i++;
-            var imagename = localStorage.getItem('image' + i);
+        while (!!(imagename = this.localStorage.getItem('image' + i++))) {
             var imgRef = storage.ref('images/' + imagename);
             imgRef.getDownloadURL().then(function (url) {
                 console.log("images download");
                 console.log(url);
-
                 $('#post' + j + '_pic' + (j * 2 - k)).each(function () {
                     $(this).css('background-image', 'url(' + url + ')');
                 });
-                if (i % 2 === 1) {
-                    k = 0;
-                }
-                if (i % 2 === 0) {
-                    j = i / 2;
-                    k = 1;
-                }
-            })
-            if (i === post_amount) {
-
-            }
-            else {
-                loop();
-            }
+                // if (i % 2 === 1) {
+                //     k = 0;
+                // }
+                // if (i % 2 === 0) {
+                //     j = i / 2;
+                //     k = 1;
+                // }
+            }).catch(function (error) {
+                this.alert(error);
+            });
         }
+        // function loop() {
+        //     var imagename = localStorage.getItem('image' + i);
+        //     var imgRef = storage.ref('images/' + imagename);
+        //     imgRef.getDownloadURL().then(function (url) {
+        //         console.log("images download");
+        //         console.log(url);
+
+        //         $('#post' + j + '_pic' + (j * 2 - k)).each(function () {
+        //             $(this).css('background-image', 'url(' + url + ')');
+        //         });
+        //         if (i % 2 === 1) {
+        //             k = 0;
+        //         }
+        //         if (i % 2 === 0) {
+        //             j = i / 2;
+        //             k = 1;
+        //         }
+        //     })
+        //     if (i === post_amount) {
+
+        //     }
+        //     else {
+        //         loop();
+        //     }
+        // }
     }
-*/
+
 }
 
 function attach1(file) {
