@@ -84,19 +84,7 @@ $(document).ready(function () {
                 });
                 var bannerImgg = $('#' + postNum).find('.imgnum').find('img')[0];
                 bannerImgg.src = dataImage;
-                data1 = dataImage;
-                if (postsCounter === 1 || postsCounter === '1') {
-                    check(data1);
-                    localStorage.setItem('data1', data1);
-                }
-                if (postsCounter === 2 || postsCounter === '2') {
-                    check(data1);
-                    localStorage.setItem('data3', data1);
-                }
-                if (postsCounter === 3 || postsCounter === '3') {
-                    check(data1);
-                    localStorage.setItem('data5', data1);
-                }
+
                 localStorage.removeItem('theImage');
             }
             if (counter % 2 === 0) {
@@ -107,19 +95,7 @@ $(document).ready(function () {
                 });
                 var bannerImgg2 = $('#' + postNum).find('.imgnum').find('img')[1];
                 bannerImgg2.src = dataImage;
-                data2 = dataImage;
-                if (postsCounter === 1 || postsCounter === '1') {
-                    check(data2);
-                    localStorage.setItem('data2', data2);
-                }
-                if (postsCounter === 2 || postsCounter === '2') {
-                    check(data2);
-                    localStorage.setItem('data4', data2);
-                }
-                if (postsCounter === 3 || postsCounter === '3') {
-                    check(data2);
-                    localStorage.setItem('data6', data2);
-                }
+
                 localStorage.removeItem('theImage');
             }
             counter++;
@@ -140,7 +116,7 @@ if (localStorage.getItem('pc') > 1) {
 }
 localStorage.setItem('pc', postsCounter);
 
-var i = 0;
+var z = 0;
 function posting(box) {
 
         var currentPost,
@@ -149,31 +125,33 @@ function posting(box) {
         pic2Id = 'post' + postsCounter + '_pic2';
 
     event.preventDefault();
-    //   if (imgsrc1.src.length > 81 && imgsrc2.src.length > 81) {
     event.preventDefault();
     var storage = firebase.storage();
-    i++;
-    var imagename = localStorage.getItem('image' + i);
+
+    z++;
+    var imagename = localStorage.getItem('image' + z);
     var imgRef = storage.ref('images/' + imagename);
     imgRef.getDownloadURL().then(function (url) {
         var img = $('#' + pic1Id).next('.imgnum').find('img');
         img.src = url;
     });
-   /* $('#' + pic1Id).each(function () {
+    $('#' + pic1Id).each(function () {
         var imgURL = $('#' + pic1Id).next('.imgnum').find('img').attr('src');
         $(this).css('background-image', 'url(' + imgURL + ')');
-    });*/
-    i++;
-    imagename = localStorage.getItem('image' + i);
+    });
+
+    z++;
+    imagename = localStorage.getItem('image' + z);
     imgRef = storage.ref('images/' + imagename);
     imgRef.getDownloadURL().then(function (url) {
-        var img2 = $('#' + pic1Id).next('.imgnum').find('img');
+        var img2 = $('#' + pic2Id).next('.imgnum').find('img');
         img2.src = url;
     });
-   /* $('#' + pic2Id).each(function () {
+    $('#' + pic2Id).each(function () {
         var imgURL = $('#' + pic2Id).next('.imgnum').find('img').attr('src');
         $(this).css('background-image', 'url(' + imgURL + ')');
-    });*/
+    });
+
     document.getElementsByClassName("imagearea1")[0].style.display = "none";//change color to label
     $("div#imagearea1").empty();
     $('#logo').empty();
@@ -272,9 +250,20 @@ function posting(box) {
 }
 
 window.onload = function () {
+    document.getElementById('post' + 1).style.display="block";
+    var post_amount = localStorage.getItem('pn');
+    if(post_amount>1){
+        for(var i = 2;i<post_amount+1;i++){
+            $("#wall").prepend("<div class='post'><div class='stats'><div class=\"statistics1\" id=\"post1_worldicon\" onclick=\"showchart(this.id);\" style=\"right: 10px\"><i class=\"far fas fa-globe-americas\"></i></div><div class=\"statistics2\" id=\"post1_charticon\" onclick=\"showchart(this.id);\" style=\"right: 45px\"><i class=\"far fa-chart-bar\"></i></div></div><div class=\"chart-area\" id=\"post1_chart_area\"><div class=\"analytica1\" id=\"regions_div\"></div><div class=\"analytica2\" id=\"chartContainer\"></div></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='heart1 fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='heart2 fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+            var currentPost = $('.post').first();
+            currentPost.addClass('post' + (i));
+            currentPost.addClass('example hoverable');
+            currentPost.attr('id', 'post' + (i));
+            document.getElementById('post' + i).style.display="block";
+        }
+    }
 
-
-    if (localStorage.getItem('pn') > 0) {
+  /*  if (localStorage.getItem('pn') > 0) {
         postsCounter = localStorage.getItem('pc');
     }
     localStorage.setItem('c', postsCounter * 2 - 1);
@@ -474,8 +463,7 @@ window.onload = function () {
         currentPost.find('.analytica1').attr('id', 'post' + (postsCounter) + '_regions_div');
         currentPost.find('.analytica2').attr('id', 'post' + (postsCounter) + '_chartContainer');
     }
-
-    var post_amount = localStorage.getItem('pn');
+*/
     if (post_amount >= 1) {
         var j = i = k = 1;
         var storage = firebase.storage();
