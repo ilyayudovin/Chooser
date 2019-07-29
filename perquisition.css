@@ -21,6 +21,16 @@ body{
 /*:root {
     --main-bg-color: lightskyblue;
 }*/
+.tan{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: .5;
+    display: none;
+    z-index: 5;
+    bottom: 0%;
+}
 .skin{
     position: absolute;
     width: 100%;
@@ -36,6 +46,10 @@ header{
     width: 100%;
     z-index: 3;
 }
+.navbar{
+    height: 80px;
+    transition-duration: 0.5s;
+}
 .phonehome{
     display: none;
 }
@@ -43,29 +57,65 @@ header{
     height: 140px;
     transform: translate(0,-50px);
 }
+
+
+/*this is for the stepper */
+.row{
+    margin-right: 0;
+    margin-left: 0;
+}
+.row ul.stepper{
+    margin: 0;
+    padding: 0;
+}
+/* this is for the stepper*/
+
+.understepper{
+    width: 100%;
+    height: 157px;
+}
+.stepperbtn{
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+}
+
 .bigcolumn{
-    width: 980px;
+    width: 650px;
     margin: 0 auto;
-    padding-top:90px;
-    display: -webkit-box;
+    padding-top:100px;
+    text-align: -webkit-center;
 }
 .postlab{
-    position: fixed;
-    width: 380px;
-    height: 335px;
-    background-color: transparent;
+    width: 650px;
+    /*height: 33px;*/
+    position: relative;
+    margin-bottom: 20px;
+    background-color: white;
     border-radius: 2px;
-    z-index: 4;
+    border: 1px solid lightgrey;
+    z-index: 2;
+}
+.postlabtop{
+    font-size: 21px;
+    height: 33px;
+    width: 100%;
+}
+.postlabbottom{
+    width: 100%;
+    height: 242px;
+    border-top:1px solid lightgray;
+    display: none;
 }
 .avatar{
-    width: 300px;
-    height: 50px;
-    margin-bottom: 10px;
+    width: 175px;
+    height: 60px;
     display: flex;
 }
 .avatar_pic{
-    width: 50px;
-    height:50px;
+    width: 40px;
+    height:40px;
+    margin-top: 10px;
     background-color: whitesmoke;
     border-radius: 50%;
     border: 1px solid black;
@@ -74,22 +124,22 @@ header{
 }
 .avatar_name{
     padding-left: 15px;
+    padding-top: 15px;
 }
 input[type="file"] {
     display: none;
 }
 .custom-file-upload {
-    border: 1px solid black;
-    box-shadow: 0 0 5px;
-    display: inline-block;
+  /*  border: 1px solid black;
+    box-shadow: 0 0 5px;*/
     cursor: pointer;
-    border-radius: 10px;
-    width: 150px;
-    height: 150px;
     margin: 35px 0;
     position: relative;
-    background-size: cover;
-    background-position: center center;
+
+}
+.custom-file-upload span{
+    color: lightgray;
+    padding-left: 15px;
 }
 .wall{
     width: 650px;
@@ -125,12 +175,6 @@ input[type="file"] {
 .wall .post .imgnum{
     display: none;
 }
-.post{
-    background-color: #fff;
-    margin-bottom: 20px;
-    position: relative;
-}
-
 .tableBanner,.tableBanner2{
     display: none;
 }
@@ -139,10 +183,46 @@ input[type="file"] {
     display: inline-block;
     margin: 0 10px;
 }
+.removepic{
+    position: relative;
+    display: none;
+    margin: 59px 0px;
+    border: 0;
+    width: 80px;
+    line-height: 29px;
+    border-radius: 2px;
+    background-color: #ff3547;
+    color: white;
+    cursor: pointer;
+    z-index: 2;
+}
 .imagearea1,.imagearea2{
     display: none;
 }
-
+.labelimg{
+    display: none;
+    width: 120px;
+    height: 145px;
+    border-radius: 5px;
+    background-size: cover;
+    background-position: center center;
+}
+.labelimg:hover .removepic{
+    display: inline;
+}
+.labelimg:hover .labeltan{
+    display: block;
+}
+.labeltan{
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.6;
+    border-radius: 5px;
+    z-index: 1;
+}
 .test{
     position: relative;
     text-align: center;
@@ -185,14 +265,31 @@ input[type="file"] {
 .post{
    /*height: 480px;*/
     border:solid 1px #ccc;
+    background-color: #fff;
+    position: relative;
+    width: 650px;
+    height: 510px;
+    z-index: 2;
+}
+.postgroup{
+    display: none;
+    position: relative;
+    transition-duration: 1s;
+    margin-bottom: 20px;
+    width: 650px;
+    overflow: hidden;
+    z-index: 2;
+}
+.animated{
+    width: 650px;
+    height: 510px;
+    background-color: white;
+    border: 1px solid lightgrey;
     display: none;
 }
 .fa-heart{
     font-size: 40px;
     color: #8ad5d8;
-}
-.far {
-    font-size: 27px;
 }
 .processline{
     width: 100%;
@@ -243,35 +340,20 @@ input[type="file"] {
     bottom: 0;
     right: 10px;
 }
-.movingnumbers{
-    display: inline-block;
-    height: 22px;
-    overflow: hidden;
-    transform: translate(0,5px);
+.description{
+    display: none;
+    margin-right: 280px;
+    width: 280px;
 }
-.movingnumbers ul{
-    transition-duration: 1s;
-}
-.stepexplain{
-    display: grid;
-    margin: 5px 0;
-    font-size: 25px;
-}
-.movingheaders{
-    height: 35px;
-    overflow: hidden;
+.postingspan{
+    font-size: 21px;
+    display: none;
 }
 .movingheaders ul li{
     font-size: 25px;
 }
 .movingul{
     transition-duration: 1s;
-}
-.description{
-    width: 280px;
-    height: 110px;
-    margin: 45px 0;
-    display: none;
 }
 .fas.fa-envelope.prefix.active {
     color: #8ad5d8;
@@ -301,6 +383,10 @@ input[type="file"] {
     cursor: pointer;
     margin-right: 10px;
     margin-top: 7px;
+    font-size: 25px;
+}
+.statistics1{
+    color:#8ad5d8;
 }
 .statistics1:hover{
     color:#8ad5d8;
@@ -314,25 +400,55 @@ input[type="file"] {
 }
 .chart-area{
     width: 100%;
-    /*position: absolute;*/
+    position: absolute;
     background-color: whitesmoke;
     height: 468px;
     z-index: 2;
     top: 40px;
+}
+.analytica1{
+    background-color: #00bcd4;
+}
+.analytica2{
+    background-color: #9575cd;
     display: none;
 }
 .analytica1,.analytica2{
     width:100%;
-    height: 347px;
+    height: 100%;
     margin: 0 auto;
-    display: none;
+}
+.animated .stats{
+    position: absolute;
 }
 .stats{
     width: 100%;
     text-align: right;
+    height: 50px;
 }
-.statistics3{
+.totop{
+    position: fixed;
+    bottom: 50px;
+    font-size: 65px;
+    left: 30px;
+    color: #8ad5d8;
+    opacity: 0.5;
     display: none;
 }
+.totop:hover{
+    opacity:1;
+    cursor: pointer;
+}
+.file-field.big .file-path-wrapper {
+    height: 3.2rem; }
+.file-field.big .file-path-wrapper .file-path {
+    height: 3rem; }
 
-
+.circle .done{
+    color: limegreen;
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

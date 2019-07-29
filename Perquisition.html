@@ -24,9 +24,10 @@
     <link href="css/addons-pro/stepper.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="skin">
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark primary-color">
+<div class="tan" id="tan" onclick="hidetan();"></div>
+<div class="skin" id="skin">
+    <header id="header">
+        <nav class="navbar navbar-expand-lg navbar-dark primary-color" id="navbar">
 
             <!-- Navbar brand -->
             <a class="navbar-brand" href="#" style="height: 60px"><img src="logo.png"></a>
@@ -79,9 +80,13 @@
                 </form>
             </div>
             <!-- Collapsible content -->
-
+            <div class="avatar">
+                <div class="avatar_pic"></div>
+                <div class="avatar_name">Your Nickname</div>
+            </div>
         </nav>
         <!--/.Navbar-->
+
     </header>
 
 
@@ -94,51 +99,78 @@
 
     <div class="bigcolumn" id="bigcolumn">
 
-        <div class="wall" id="wall">
-            <div class="post post1 example hoverable" id="post1" style="position: relative">
-                <div class="stats" id="post1_stats">
-                    <div class="statistics3" id="post1_deleteicon" onclick="deletepost(this.id);">
-                        <i class="fas fa-times" style="display: block;font-size: 27px"></i></div>
-                    <div class="statistics1" id="post1_worldicon" onclick="showchart(this.id);"><i
-                            class="far fas fa-globe-americas"></i></div>
-                    <div class="statistics2" id="post1_charticon" onclick="showchart(this.id);"><i
-                            class="far fa-chart-bar"></i></div>
-                </div>
-                <div class="chart-area" id="post1_chart_area">
-                    <div class="analytica1" id="post1_regions_div"></div>
-                    <div class="analytica2" id="post1_chartContainer"></div>
-                </div>
-                <div class="pic1 view overlay" id="post1_pic1">
-                    <div class="mask flex-center rgba-stylish-strong" id="post1_mask1">
-                        <i class="heart1 fas fa-heart" id="post1_heart1" onclick="showvotes(this.id)"></i>
-                        <div class="votes vote1" id="post1_vote1">0</div>
+        <div class="postlab" id="postlab" >
+            <div class="postlabtop" id="postlabtop" onclick="tanscreen();">Create a Poll</div>
+            <div class="postlabbottom" id="postlabbottom">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <!-- Stepers Wrapper -->
+                        <ul class="stepper stepper-horizontal">
+
+                            <!-- First Step -->
+                            <li class="completed">
+                                <a href="#!">
+                                    <span class="circle" id="1stepcircle" style="background-color:#8ad5d8!important;">1</span>
+                                    <span class="label">First image</span>
+                                </a>
+                            </li>
+
+                            <!-- Second Step -->
+                            <li class="active">
+                                <a href="#!">
+                                    <span class="circle" id="2stepcircle" style="background-color:#8ad5d8!important;">2</span>
+                                    <span class="label">Second image</span>
+                                </a>
+                            </li>
+
+                            <!-- Third Step -->
+                            <li class="warning">
+                                <a href="#!">
+                                    <span class="circle" id="3stepcircle" style="background-color:#8ad5d8!important;">3</span>
+                                    <span class="label">text</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                        <!-- /.Stepers Wrapper -->
+
                     </div>
-                    <i class="fas fa-heart phonelikes1" id="post1_phonelikes1" onclick="phonelikes(this.id);"></i>
                 </div>
-                <div class="imgnum">
-                    <img src="" id="tableBanner1" class="tableBanner1">
-                </div>
-                <div class="pic2 view overlay" id="post1_pic2">
-                    <div class="mask flex-center rgba-stylish-strong" id="post1_mask2">
-                        <i class="heart2 fas fa-heart" id="post1_heart2" onclick="showvotes(this.id)"></i>
-                        <div class="votes vote2" id="post1_vote2">0</div>
+                <div class="understepper">
+                    <div class="form1" id="form1">
+                        <div class="imagearea1" id="imagearea1"></div>
+                        <input onchange="attach1(this); " class="classhere" type="file" name="logo" id="logo"/>
+                        <label for="logo" class="custom-file-upload" id="label1" >
+                            <i class="fas fa-cloud-upload-alt"
+                               style="font-size: 27px;color: lightblue"><span>choose 1 file</span></i>
+                        </label>
+                        <div class="labelimg" id="labelimg1">
+                            <div class="labeltan" id="labeltan1"></div>
+                            <button class="removepic" id="removepic1" onclick="deleteimg(this.id);">remove</button>
+                        </div>
                     </div>
-                    <i class="fas fa-heart phonelikes2" id="post1_phonelikes2" onclick="phonelikes(this.id);"></i>
+                    <div class="form2" id="form2" style="display: none">
+                        <div class="imagearea2" id="imagearea2"></div>
+                        <input onchange="attach2(this); " class="classhere" type="file" name="logo2" id="logo2"/>
+                        <label for="logo2" class="custom-file-upload" id="label2">
+                            <i class="fas fa-cloud-upload-alt"
+                               style="font-size: 27px;color: lightblue"><span>choose 2 file</span></i>
+                        </label>
+                        <div class="labelimg" id="labelimg2">
+                            <div class="labeltan" id="labeltan2"></div>
+                            <button class="removepic" id="removepic2" onclick="deleteimg(this.id);">remove</button>
+                        </div>
+                    </div>
+                    <div class="md-form description" id="description">
+                        <textarea id="form7" class="md-textarea form-control" rows="3"></textarea>
+                        <label for="form7">Material textarea</label>
+                    </div>
+                    <span class="postingspan" id="postingspan">Your Poll was successfully created!<br>Tap 'post' to post it</span>
+                    <button type="button" class=" stepperbtn btn btn-info" id="stepperbtn"  onclick="postprocess();">Next</button>
                 </div>
-                <div class="imgnum">
-                    <img src="" id="tableBanner2" class="tableBanner2">
-                </div>
-                <div>
-                </div>
-                <div id="post1_script" class="description_area script1"></div>
             </div>
-        </div>
-        <div class="postlab" id="postlab">
-            <div class="avatar">
-                <div class="avatar_pic"></div>
-                <div class="avatar_name">Your Nickname</div>
-            </div>
-            <div class="test example hoverable" id="forma">
+            <!--<div class="test example hoverable" id="forma">
                 <div class="processline" id="processline"></div>
                 <div class="process" id="process"></div>
                 <div class="movingheaders">
@@ -150,9 +182,10 @@
                     </ul>
                 </div>
 
-                <div class="form1" id="form1" >
+                <div class="form1" id="form1">
                     <div class="imagearea1" id="imagearea1"></div>
-                    <i class="fas fa-times-circle" id="deletepic1" onclick="deletepic(this.id);"><i class="fas fa-times" id="cross"></i></i>
+                    <i class="fas fa-times-circle" id="deletepic1" onclick="deletepic(this.id);"><i class="fas fa-times"
+                                                                                                    id="cross"></i></i>
                     <label for="logo" class="custom-file-upload" id="labelimg">
                         <i class="fas fa-camera" id="camera"></i>
                         <i class="fa fa-cloud-upload"></i>
@@ -162,7 +195,8 @@
 
                 <div class="form2" id="form2" style="display: none">
                     <div class="imagearea2" id="imagearea2"></div>
-                    <i class="fas fa-times-circle" id="deletepic2" onclick="deletepic(this.id);"><i class="fas fa-times" id="cross2"></i></i>
+                    <i class="fas fa-times-circle" id="deletepic2" onclick="deletepic(this.id);"><i class="fas fa-times"
+                                                                                                    id="cross2"></i></i>
                     <label for="logo2" class="custom-file-upload" id="labelimg2">
                         <i class="fas fa-camera" id="camera2"></i>
                         <i class="fa fa-cloud-upload"></i>
@@ -186,10 +220,59 @@
                     <span>/</span>
                     <span class="totalstep">4</span>
                 </div>
+            </div>-->
+        </div>
+
+        <div class="wall" id="wall">
+            <div class="postgroup postgroup1" id="postgroup1">
+                <div class="post post1 example hoverable shadowroll" id="post1" style="position: relative">
+                    <div class="stats" id="post1_showstats">
+                        <div class="statistics3" id="post1_open" onclick="openchart(this.id);">
+                            <i class="fas fa-bars"></i></div>
+                    </div>
+
+                    <div class="pic1 view overlay" id="post1_pic1">
+                        <div class="mask flex-center rgba-stylish-strong" id="post1_mask1">
+                            <i class="heart1 fas fa-heart" id="post1_heart1" onclick="showvotes(this.id)"></i>
+                            <div class="votes vote1" id="post1_vote1">0</div>
+                        </div>
+                        <i class="fas fa-heart phonelikes1" id="post1_phonelikes1" onclick="phonelikes(this.id);"></i>
+                    </div>
+                    <div class="imgnum">
+                        <img src="" id="tableBanner1" class="tableBanner1">
+                    </div>
+                    <div class="pic2 view overlay" id="post1_pic2">
+                        <div class="mask flex-center rgba-stylish-strong" id="post1_mask2">
+                            <i class="heart2 fas fa-heart" id="post1_heart2" onclick="showvotes(this.id)"></i>
+                            <div class="votes vote2" id="post1_vote2">0</div>
+                        </div>
+                        <i class="fas fa-heart phonelikes2" id="post1_phonelikes2" onclick="phonelikes(this.id);"></i>
+                    </div>
+                    <div class="imgnum">
+                        <img src="" id="tableBanner2" class="tableBanner2">
+                    </div>
+                    <div id="post1_script" class="description_area script1"></div>
+                </div>
+                <div class=" animated fadeInLeft" alt="Transparent MDB Logo" id="animated-post1">
+                    <div class="stats" id="post1_stats">
+                        <div class="statistics1" id="post1_worldicon" onclick="showchart(this.id);"><i
+                                class="far fas fa-globe-americas"></i></div>
+                        <div class="statistics2" id="post1_charticon" onclick="showchart(this.id);"><i
+                                class="far fa-chart-bar"></i></div>
+                    </div>
+                    <div class="chart-area" id="post1_chart_area">
+                        <div class="analytica1" id="post1_regions_div"></div>
+                        <div class="analytica2" id="post1_chartContainer"></div>
+                    </div>
+                </div>
             </div>
         </div>
+        <!-- <div  style="width: 650px;height: 510px;background-color: lightblue;display: none" class="animated fadeInLeft"
+               alt="Transparent MDB Logo" id="animated-img1"> </div>-->
     </div>
+    <div class="totop" onclick="topFunction()" id="myBtn"><i class="fas fa-arrow-circle-up"></i></div>
 </div>
+
 
 <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
 

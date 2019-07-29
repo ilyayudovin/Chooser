@@ -11,16 +11,19 @@ $(document).ready(function () {
     var storage = firebase.storage();
     var fileButton = document.getElementById('logo');
     var fileButton2 = document.getElementById('logo2');
-    var s = 1;
-
     var counter = 0;
+    var s= localStorage.getItem('s');
+    if(s===null){
+        s=1;
+        localStorage.setItem('s',s);
+    }
     var img = new Image();
     img.src = localStorage.theImage;
 
     $("body").on("change", ".classhere", function (e) {
-
         var fileAll = e.target.files[0];
         var fileName = e.target.files[0].name;
+        var s= localStorage.getItem('s');
         localStorage.setItem('image' + s, fileName);
         alert(fileName);
         var storageRef = firebase.storage().ref('images/' + fileName);
@@ -35,7 +38,7 @@ $(document).ready(function () {
 
             }
         );
-        s++;
+
 
 
         var fileInput = $(this)[0];//returns a HTML DOM object by putting the [0] since it's really an associative array.
@@ -78,7 +81,7 @@ $(document).ready(function () {
 
             if (counter % 2 === 1) {
                 $(".imagearea1").html(img);
-                $('#labelimg').each(function () {
+                $('#labelimg1').each(function () {
                     var imgURL = $('#imagearea1').find('img').attr('src');
                     $(this).css('background-image', 'url(' + imgURL + ')');
                 });
@@ -179,12 +182,14 @@ function posting(box) {
     //  }
 
 
-    document.getElementById('post' + (postsCounter)).style.display = "block";
+    document.getElementById('postgroup' + (postsCounter)).style.display = "-webkit-box";
 
-    $("#wall").prepend("<div class='post'><div class='stats'><div class=\"statistics1\" id=\"post1_worldicon\" onclick=\"showchart(this.id);\" style=\"right: 10px\"><i class=\"far fas fa-globe-americas\"></i></div><div class=\"statistics2\" id=\"post1_charticon\" onclick=\"showchart(this.id);\" style=\"right: 45px\"><i class=\"far fa-chart-bar\"></i></div></div><div class=\"chart-area\" id=\"post1_chart_area\"><div class=\"analytica1\" id=\"regions_div\"></div><div class=\"analytica2\" id=\"chartContainer\"></div></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='heart1 fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='heart2 fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+    $("#wall").prepend("<div class='postgroup'><div class='post'><div class='stats'><div class='statistics3' onclick='openchart(this.id);'><i class=\"fas fa-bars\"></i></div></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='heart1 fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='heart2 fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div><div class=\" animated fadeInLeft\" alt=\"Transparent MDB Logo\"><div class=\"stats\" id=\"post1_stats\">\n" + "<div class=\"statistics1\" id=\"post1_worldicon\" onclick=\"showchart(this.id);\"><i class=\"far fas fa-globe-americas\"></i></div>\n" + "<div class=\"statistics2\" id=\"post1_charticon\" onclick=\"showchart(this.id);\"><i class=\"far fa-chart-bar\"></i></div>\n" + "</div>\n" + "<div class=\"chart-area\">\n" + "<div class=\"analytica1\"></div>\n" + "<div class=\"analytica2\"></div>\n" + "</div></div></div>");
 
     postsCounter++;
     currentPost = $('.post').first();
+    var postgroup = $('.postgroup').first();
+    var animated = $('.animated').first();
 
     currentPost.addClass('post' + (postsCounter));
     currentPost.addClass('example hoverable');
@@ -203,22 +208,24 @@ function posting(box) {
     currentPost.find('.heart2').attr('id', 'post' + (postsCounter) + '_heart2');
     currentPost.find('.phonelikes1').attr('id', 'post' + (postsCounter) + '_phonelikes1');
     currentPost.find('.phonelikes2').attr('id', 'post' + (postsCounter) + '_phonelikes2');
-    currentPost.find('.stats').attr('id', 'post' + (postsCounter) + '_stats');
-    currentPost.find('.statistics1').attr('id', 'post' + (postsCounter) + '_worldicon');
-    currentPost.find('.statistics2').attr('id', 'post' + (postsCounter) + '_charticon');
-    currentPost.find('.chart-area').attr('id', 'post' + (postsCounter) + '_chart_area');
-    currentPost.find('.analytica1').attr('id', 'post' + (postsCounter) + '_regions_div');
-    currentPost.find('.analytica2').attr('id', 'post' + (postsCounter) + '_chartContainer');
+    currentPost.find('.stats').attr('id', 'post' + (postsCounter) + '_showstats');
+    animated.find('.stats').attr('id', 'post' + (postsCounter) + '_stats');
+    animated.find('.statistics1').attr('id', 'post' + (postsCounter) + '_worldicon');
+    animated.find('.statistics2').attr('id', 'post' + (postsCounter) + '_charticon');
+    currentPost.find('.statistics3').attr('id', 'post' + (postsCounter) + '_open');
+    animated.find('.chart-area').attr('id', 'post' + (postsCounter) + '_chart_area');
+    animated.find('.analytica1').attr('id', 'post' + (postsCounter) + '_regions_div');
+    animated.find('.analytica2').attr('id', 'post' + (postsCounter) + '_chartContainer');
+    postgroup.find('.animated').attr('id', 'animated-post'+ (postsCounter));
+
+    postgroup.addClass('postgroup' + postsCounter);
+    postgroup.attr('id', 'postgroup' + postsCounter);
+
 
 
     document.getElementById('form1').style.display = "inline-block";
     document.getElementById('form2').style.display = "none";
-    document.getElementById('description').style.display = "none";
-    document.getElementById('postBtn').style.display = "none";
-    document.getElementById('process').style.width = "0%";
-    document.getElementById('arrow').style.display = "block";
-    document.getElementById('movingul').style.transform = "translate(0,0)";
-    document.getElementById('movingnum').style.transform = "translate(0,0px)";
+    document.getElementById('postingspan').style.display = "none";
 
     document.getElementById('labelimg').style.backgroundImage = "url()";
     document.getElementById('labelimg2').style.backgroundImage = "url()";
@@ -245,237 +252,88 @@ function posting(box) {
         document.getElementById('form1').style.display = "none";
     }
 
+    document.getElementById('1stepcircle').innerHTML="1";
+    document.getElementById('2stepcircle').innerHTML="2";
+    document.getElementById('3stepcircle').innerHTML="3";
 
     //}
 }
 
 window.onload = function () {
-    document.getElementById('post' + 1).style.display="block";
-    var post_amount = localStorage.getItem('pn');
-    if(post_amount>1){
-        for(var i = 2;i<post_amount+1;i++){
-            $("#wall").prepend("<div class='post'><div class='stats'><div class=\"statistics1\" id=\"post1_worldicon\" onclick=\"showchart(this.id);\" style=\"right: 10px\"><i class=\"far fas fa-globe-americas\"></i></div><div class=\"statistics2\" id=\"post1_charticon\" onclick=\"showchart(this.id);\" style=\"right: 45px\"><i class=\"far fa-chart-bar\"></i></div></div><div class=\"chart-area\" id=\"post1_chart_area\"><div class=\"analytica1\" id=\"regions_div\"></div><div class=\"analytica2\" id=\"chartContainer\"></div></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='heart1 fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='heart2 fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
+  //  document.getElementById('postgroup' + 1).style.display="-webkit-box";
+    var post_amount = +localStorage.getItem('pn');
+    var x=post_amount*2+1;
+    localStorage.setItem('s',x);
+    if(post_amount>1 || post_amount===1){
+        document.getElementById('postgroup' + 1).style.display="-webkit-box";
+        for(var i = 2;i<post_amount+2;i++){
+            $("#wall").prepend("<div class='postgroup'><div class='post'><div class='stats'><div class='statistics3' onclick='openchart(this.id);'><i class=\"fas fa-bars\"></i></div></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='heart1 fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='heart2 fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div><div class=\" animated fadeInLeft\" alt=\"Transparent MDB Logo\"><div class=\"stats\" id=\"post1_stats\">\n" + "<div class=\"statistics1\" id=\"post1_worldicon\" onclick=\"showchart(this.id);\"><i class=\"far fas fa-globe-americas\"></i></div>\n" + "<div class=\"statistics2\" id=\"post1_charticon\" onclick=\"showchart(this.id);\"><i class=\"far fa-chart-bar\"></i></div>\n" + "</div>\n" + "<div class=\"chart-area\">\n" + "<div class=\"analytica1\"></div>\n" + "<div class=\"analytica2\"></div>\n" + "</div></div></div>");
             var currentPost = $('.post').first();
+            var postgroup = $('.postgroup').first();
+            var animated = $('.animated').first();
             currentPost.addClass('post' + (i));
             currentPost.addClass('example hoverable');
             currentPost.attr('id', 'post' + (i));
-            document.getElementById('post' + i).style.display="block";
+            currentPost.find('.pic1').attr('id', 'post' + i + '_pic1');
+            currentPost.find('.pic1').addClass('view overlay');
+            currentPost.find('.pic2').attr('id', 'post' + i + '_pic2');
+            currentPost.find('.pic2').addClass('view overlay');
+            currentPost.find('.description_area').addClass('script' + (i));
+            currentPost.find('.description_area').attr('id', 'post' + (i) + '_script');
+            currentPost.find('.vote1').attr('id', 'post' + (i) + '_vote1');
+            currentPost.find('.vote2').attr('id', 'post' + (i) + '_vote2');
+            currentPost.find('.heart1').attr('id', 'post' + (i) + '_heart1');
+            currentPost.find('.heart2').attr('id', 'post' + (i) + '_heart2');
+            currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (i) + '_mask1');
+            currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (i) + '_mask2');
+            currentPost.find('.phonelikes1').attr('id', 'post' + (i) + '_phonelikes1');
+            currentPost.find('.phonelikes2').attr('id', 'post' + (i) + '_phonelikes2');
+            currentPost.find('.stats').attr('id', 'post' + (i) + '_showstats');
+            animated.find('.stats').attr('id','post' + (i) + '_stats');
+            animated.find('.statistics1').attr('id', 'post' + (i) + '_worldicon');
+            animated.find('.statistics2').attr('id', 'post' + (i) + '_charticon');
+            currentPost.find('.statistics3').attr('id', 'post' + (i) + '_open');
+            animated.find('.chart-area').attr('id', 'post' + (i) + '_chart_area');
+            animated.find('.analytica1').attr('id', 'post' + (i) + '_regions_div');
+            animated.find('.analytica2').attr('id', 'post' + (i) + '_chartContainer');
+            postgroup.find('.animated').attr('id', 'animated-post'+ (i));
+            postgroup.addClass('postgroup' + i);
+            postgroup.attr('id', 'postgroup' + i);
+            document.getElementById('postgroup' + i).style.display="-webkit-box";
         }
+       // post_amount++;
+        document.getElementById('postgroup' + (post_amount+1)).style.display="none";
     }
 
-  /*  if (localStorage.getItem('pn') > 0) {
-        postsCounter = localStorage.getItem('pc');
-    }
-    localStorage.setItem('c', postsCounter * 2 - 1);
-    var show1 = localStorage.getItem('show1');
-    if (show1 === 'true') {
-        document.getElementById('post1').style.display = "block";
-        $('#post1_pic1').each(function () {
-            var imgURL = localStorage.getItem('data1');
-            $(this).css('background-image', 'url(' + imgURL + ')');
-        });
-        $('#post1_pic2').each(function () {
-            var imgURL = localStorage.getItem('data2');
-            $(this).css('background-image', 'url(' + imgURL + ')');
-        });
-        var descarea = document.getElementById('post' + (1) + '_script');
-        if (descarea != null) {
-            descarea.innerHTML = localStorage.getItem('text1');
-        }
-    }
-    var show2 = localStorage.getItem('show2');
-    if (show2 === 'true') {
-        $("#wall").prepend("<div class='post'><div class='stats'><div class=\"statistics1\" id=\"post1_worldicon\" onclick=\"showchart(this.id);\" style=\"right: 10px\"><i class=\"far fas fa-globe-americas\"></i></div><div class=\"statistics2\" id=\"post1_charticon\" onclick=\"showchart(this.id);\" style=\"right: 45px\"><i class=\"far fa-chart-bar\"></i></div></div><div class=\"chart-area\" id=\"post1_chart_area\"><div class=\"analytica1\" id=\"regions_div\"></div><div class=\"analytica2\" id=\"chartContainer\"></div></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='heart1 fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='heart2 fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
 
-        var currentPost = $('.post').first();
-
-        currentPost.addClass('post' + (2));
-        currentPost.addClass('example hoverable');
-        currentPost.attr('id', 'post' + (2));
-        currentPost.find('.pic1').attr('id', 'post' + 2 + '_pic1');
-        currentPost.find('.pic1').addClass('view overlay');
-        currentPost.find('.pic2').attr('id', 'post' + 2 + '_pic2');
-        currentPost.find('.pic2').addClass('view overlay');
-        currentPost.find('.description_area').addClass('script' + (2));
-        currentPost.find('.description_area').attr('id', 'post' + (2) + '_script');
-        currentPost.find('.vote1').attr('id', 'post' + (2) + '_vote1');
-        currentPost.find('.vote2').attr('id', 'post' + (2) + '_vote2');
-        currentPost.find('.heart1').attr('id', 'post' + (2) + '_heart1');
-        currentPost.find('.heart2').attr('id', 'post' + (2) + '_heart2');
-        currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (2) + '_mask1');
-        currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (2) + '_mask2');
-        currentPost.find('.phonelikes1').attr('id', 'post' + (2) + '_phonelikes1');
-        currentPost.find('.phonelikes2').attr('id', 'post' + (2) + '_phonelikes2');
-        currentPost.find('.stats').attr('id', 'post' + (2) + '_stats');
-        currentPost.find('.statistics1').attr('id', 'post' + (2) + '_worldicon');
-        currentPost.find('.statistics2').attr('id', 'post' + (2) + '_charticon');
-        currentPost.find('.chart-area').attr('id', 'post' + (2) + '_chart_area');
-        currentPost.find('.analytica1').attr('id', 'post' + (2) + '_regions_div');
-        currentPost.find('.analytica2').attr('id', 'post' + (2) + '_chartContainer');
-
-        document.getElementById('post2').style.display = "block";
-        $('#post2_pic1').each(function () {
-            var imgURL = localStorage.getItem('data3');
-            $(this).css('background-image', 'url(' + imgURL + ')');
-        });
-        $('#post2_pic2').each(function () {
-            var imgURL = localStorage.getItem('data4');
-            $(this).css('background-image', 'url(' + imgURL + ')');
-        });
-        descarea = document.getElementById('post' + (2) + '_script');
-        if (descarea != null) {
-            descarea.innerHTML = localStorage.getItem('text2');
-        }
-    }
-
-    var show3 = localStorage.getItem('show3');
-    if (show3 === 'true') {
-        $("#wall").prepend("<div class='post'><div class='stats'><div class=\"statistics1\" id=\"post1_worldicon\" onclick=\"showchart(this.id);\" style=\"right: 10px\"><i class=\"far fas fa-globe-americas\"></i></div><div class=\"statistics2\" id=\"post1_charticon\" onclick=\"showchart(this.id);\" style=\"right: 45px\"><i class=\"far fa-chart-bar\"></i></div></div><div class=\"chart-area\" id=\"post1_chart_area\"><div class=\"analytica1\" id=\"regions_div\"></div><div class=\"analytica2\" id=\"chartContainer\"></div></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='heart1 fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='heart2 fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
-
-        currentPost = $('.post').first();
-
-        currentPost.addClass('post' + (3));
-        currentPost.addClass('example hoverable');
-        currentPost.attr('id', 'post' + (3));
-        currentPost.find('.pic1').attr('id', 'post' + 3 + '_pic1');
-        currentPost.find('.pic1').addClass('view overlay');
-        currentPost.find('.pic2').attr('id', 'post' + 3 + '_pic2');
-        currentPost.find('.pic2').addClass('view overlay');
-        currentPost.find('.description_area').addClass('script' + (3));
-        currentPost.find('.description_area').attr('id', 'post' + (3) + '_script');
-        currentPost.find('.vote1').attr('id', 'post' + (3) + '_vote1');
-        currentPost.find('.vote2').attr('id', 'post' + (3) + '_vote2');
-        currentPost.find('.heart1').attr('id', 'post' + (3) + '_heart1');
-        currentPost.find('.heart2').attr('id', 'post' + (3) + '_heart2');
-        currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (3) + '_mask1');
-        currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (3) + '_mask2');
-        currentPost.find('.phonelikes1').attr('id', 'post' + (3) + '_phonelikes1');
-        currentPost.find('.phonelikes2').attr('id', 'post' + (3) + '_phonelikes2');
-        currentPost.find('.stats').attr('id', 'post' + (3) + '_stats');
-        currentPost.find('.statistics1').attr('id', 'post' + (3) + '_worldicon');
-        currentPost.find('.statistics2').attr('id', 'post' + (3) + '_charticon');
-        currentPost.find('.chart-area').attr('id', 'post' + (3) + '_chart_area');
-        currentPost.find('.analytica1').attr('id', 'post' + (3) + '_regions_div');
-        currentPost.find('.analytica2').attr('id', 'post' + (3) + '_chartContainer');
-
-        document.getElementById('post3').style.display = "block";
-        $('#post3_pic1').each(function () {
-            var imgURL = localStorage.getItem('data5');
-            $(this).css('background-image', 'url(' + imgURL + ')');
-        });
-        $('#post3_pic2').each(function () {
-            var imgURL = localStorage.getItem('data6');
-            $(this).css('background-image', 'url(' + imgURL + ')');
-        });
-        descarea = document.getElementById('post' + (3) + '_script');
-        if (descarea != null) {
-            descarea.innerHTML = localStorage.getItem('text3');
-        }
-    }
-
-    if (localStorage.getItem('pn') > 3) {
-        postsCounter = 4;
-        localStorage.setItem('pc', postsCounter);
-        localStorage.setItem('pn', postsCounter - 1);
-    }
-
-    if (localStorage.getItem('pn') === '1') {
-        $("#wall").prepend("<div class='post'><div class='stats'><div class=\"statistics1\" id=\"post1_worldicon\" onclick=\"showchart(this.id);\" style=\"right: 10px\"><i class=\"far fas fa-globe-americas\"></i></div><div class=\"statistics2\" id=\"post1_charticon\" onclick=\"showchart(this.id);\" style=\"right: 45px\"><i class=\"far fa-chart-bar\"></i></div></div><div class=\"chart-area\" id=\"post1_chart_area\"><div class=\"analytica1\" id=\"regions_div\"></div><div class=\"analytica2\" id=\"chartContainer\"></div></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='heart1 fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='heart2 fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
-        currentPost = $('.post').first();
-        currentPost.addClass('post' + (postsCounter));
-        currentPost.addClass('example hoverable');
-        currentPost.attr('id', 'post' + (postsCounter));
-        currentPost.find('.pic1').attr('id', 'post' + postsCounter + '_pic1');
-        currentPost.find('.pic1').addClass('view overlay');
-        currentPost.find('.pic2').attr('id', 'post' + postsCounter + '_pic2');
-        currentPost.find('.pic2').addClass('view overlay');
-        currentPost.find('.description_area').addClass('script' + (postsCounter));
-        currentPost.find('.description_area').attr('id', 'post' + (postsCounter) + '_script');
-        currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (postsCounter) + '_mask1');
-        currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (postsCounter) + '_mask2');
-        currentPost.find('.vote1').attr('id', 'post' + (postsCounter) + '_vote1');
-        currentPost.find('.vote2').attr('id', 'post' + (postsCounter) + '_vote2');
-        currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (postsCounter) + '_mask1');
-        currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (postsCounter) + '_mask2');
-        currentPost.find('.phonelikes1').attr('id', 'post' + (postsCounter) + '_phonelikes1');
-        currentPost.find('.phonelikes2').attr('id', 'post' + (postsCounter) + '_phonelikes2');
-        currentPost.find('.heart1').attr('id', 'post' + (postsCounter) + '_heart1');
-        currentPost.find('.heart2').attr('id', 'post' + (postsCounter) + '_heart2');
-        currentPost.find('.stats').attr('id', 'post' + (postsCounter) + '_stats');
-        currentPost.find('.statistics1').attr('id', 'post' + (postsCounter) + '_worldicon');
-        currentPost.find('.statistics2').attr('id', 'post' + (postsCounter) + '_charticon');
-        currentPost.find('.chart-area').attr('id', 'post' + (postsCounter) + '_chart_area');
-        currentPost.find('.analytica1').attr('id', 'post' + (postsCounter) + '_regions_div');
-        currentPost.find('.analytica2').attr('id', 'post' + (postsCounter) + '_chartContainer');
-
-    }
-    if (localStorage.getItem('pn') === '2') {
-        $("#wall").prepend("<div class='post'><div class='stats'><div class=\"statistics1\" id=\"post1_worldicon\" onclick=\"showchart(this.id);\" style=\"right: 10px\"><i class=\"far fas fa-globe-americas\"></i></div><div class=\"statistics2\" id=\"post1_charticon\" onclick=\"showchart(this.id);\" style=\"right: 45px\"><i class=\"far fa-chart-bar\"></i></div></div><div class=\"chart-area\" id=\"post1_chart_area\"><div class=\"analytica1\" id=\"regions_div\"></div><div class=\"analytica2\" id=\"chartContainer\"></div></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='heart1 fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='heart2 fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
-        currentPost = $('.post').first();
-        currentPost.addClass('post' + (postsCounter));
-        currentPost.addClass('example hoverable');
-        currentPost.attr('id', 'post' + (postsCounter));
-        currentPost.find('.pic1').attr('id', 'post' + postsCounter + '_pic1');
-        currentPost.find('.pic1').addClass('view overlay');
-        currentPost.find('.pic2').attr('id', 'post' + postsCounter + '_pic2');
-        currentPost.find('.pic2').addClass('view overlay');
-        currentPost.find('.description_area').addClass('script' + (postsCounter));
-        currentPost.find('.description_area').attr('id', 'post' + (postsCounter) + '_script');
-        currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (postsCounter) + '_mask1');
-        currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (postsCounter) + '_mask2');
-        currentPost.find('.phonelikes1').attr('id', 'post' + (postsCounter) + '_phonelikes1');
-        currentPost.find('.phonelikes2').attr('id', 'post' + (postsCounter) + '_phonelikes2');
-        currentPost.find('.vote1').attr('id', 'post' + (postsCounter) + '_vote1');
-        currentPost.find('.vote2').attr('id', 'post' + (postsCounter) + '_vote2');
-        currentPost.find('.heart1').attr('id', 'post' + (postsCounter) + '_heart1');
-        currentPost.find('.heart2').attr('id', 'post' + (postsCounter) + '_heart2');
-        currentPost.find('.stats').attr('id', 'post' + (postsCounter) + '_stats');
-        currentPost.find('.statistics1').attr('id', 'post' + (postsCounter) + '_worldicon');
-        currentPost.find('.statistics2').attr('id', 'post' + (postsCounter) + '_charticon');
-        currentPost.find('.chart-area').attr('id', 'post' + (postsCounter) + '_chart_area');
-        currentPost.find('.analytica1').attr('id', 'post' + (postsCounter) + '_regions_div');
-        currentPost.find('.analytica2').attr('id', 'post' + (postsCounter) + '_chartContainer');
-    }
-    if (localStorage.getItem('pn') === '3') {
-        $("#wall").prepend("<div class='post'><div class='stats'><div class=\"statistics1\" id=\"post1_worldicon\" onclick=\"showchart(this.id);\" style=\"right: 10px\"><i class=\"far fas fa-globe-americas\"></i></div><div class=\"statistics2\" id=\"post1_charticon\" onclick=\"showchart(this.id);\" style=\"right: 45px\"><i class=\"far fa-chart-bar\"></i></div></div><div class=\"chart-area\" id=\"post1_chart_area\"><div class=\"analytica1\" id=\"regions_div\"></div><div class=\"analytica2\" id=\"chartContainer\"></div></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='heart1 fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='heart2 fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div>");
-        currentPost = $('.post').first();
-        currentPost.addClass('post' + (postsCounter));
-        currentPost.addClass('example hoverable');
-        currentPost.attr('id', 'post' + (postsCounter));
-        currentPost.find('.pic1').attr('id', 'post' + postsCounter + '_pic1');
-        currentPost.find('.pic1').addClass('view overlay');
-        currentPost.find('.pic2').attr('id', 'post' + postsCounter + '_pic2');
-        currentPost.find('.pic2').addClass('view overlay');
-        currentPost.find('.description_area').addClass('script' + (postsCounter));
-        currentPost.find('.description_area').attr('id', 'post' + (postsCounter) + '_script');
-        currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (postsCounter) + '_mask1');
-        currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (postsCounter) + '_mask2');
-        currentPost.find('.phonelikes1').attr('id', 'post' + (postsCounter) + '_phonelikes1');
-        currentPost.find('.phonelikes2').attr('id', 'post' + (postsCounter) + '_phonelikes2');
-        currentPost.find('.vote1').attr('id', 'post' + (postsCounter) + '_vote1');
-        currentPost.find('.vote2').attr('id', 'post' + (postsCounter) + '_vote2');
-        currentPost.find('.heart1').attr('id', 'post' + (postsCounter) + '_heart1');
-        currentPost.find('.heart2').attr('id', 'post' + (postsCounter) + '_heart2');
-        currentPost.find('.stats').attr('id', 'post' + (postsCounter) + '_stats');
-        currentPost.find('.statistics1').attr('id', 'post' + (postsCounter) + '_worldicon');
-        currentPost.find('.statistics2').attr('id', 'post' + (postsCounter) + '_charticon');
-        currentPost.find('.chart-area').attr('id', 'post' + (postsCounter) + '_chart_area');
-        currentPost.find('.analytica1').attr('id', 'post' + (postsCounter) + '_regions_div');
-        currentPost.find('.analytica2').attr('id', 'post' + (postsCounter) + '_chartContainer');
-    }
-*/
     if (post_amount >= 1) {
-        var j = i = k = 1;
+        var j = 1;
+        var k = 2;
         var storage = firebase.storage();
-
-        while (!!(imagename = this.localStorage.getItem('image' + i++))) {
+        let loop=1;
+        for(let i=1;i!==post_amount*2+1;i++) {
+            // while (!!(imagename = this.localStorage.getItem('image' + i++))) {
+            let imagename = localStorage.getItem('image' + i);
             var imgRef = storage.ref('images/' + imagename);
             imgRef.getDownloadURL().then(function (url) {
                 console.log("images download");
                 console.log(url);
-                $('#post' + j + '_pic' + (j * 2 - k)).each(function () {
+                if(loop===post_amount*2){
+                    $('#post' + 1 + '_pic' + 1).each(function () {
+                        $(this).css('background-image', 'url(' + url + ')');
+                    });
+                }
+                $('#post' + j + '_pic' + k).each(function () {
                     $(this).css('background-image', 'url(' + url + ')');
                 });
+                loop++;
+                if(k===1){
+                    k++;
+                }
+                else{
+                    k--;
+                    j++;
+                }
                 // if (i % 2 === 1) {
                 //     k = 0;
                 // }
@@ -487,43 +345,21 @@ window.onload = function () {
                 this.alert(error);
             });
         }
-        // function loop() {
-        //     var imagename = localStorage.getItem('image' + i);
-        //     var imgRef = storage.ref('images/' + imagename);
-        //     imgRef.getDownloadURL().then(function (url) {
-        //         console.log("images download");
-        //         console.log(url);
 
-        //         $('#post' + j + '_pic' + (j * 2 - k)).each(function () {
-        //             $(this).css('background-image', 'url(' + url + ')');
-        //         });
-        //         if (i % 2 === 1) {
-        //             k = 0;
-        //         }
-        //         if (i % 2 === 0) {
-        //             j = i / 2;
-        //             k = 1;
-        //         }
-        //     })
-        //     if (i === post_amount) {
-
-        //     }
-        //     else {
-        //         loop();
-        //     }
-        // }
     }
 
 }
 
 function attach1(file) {
-    document.getElementById('camera').style.display = "none";
-    document.getElementById('deletepic1').style.display = "block";
+    document.getElementById('1stepcircle').innerHTML="&#10004";
+    document.getElementById('label1').style.display="none";
+    document.getElementById('labelimg1').style.display="block";
 }
 
 function attach2(file) {
-    document.getElementById('camera2').style.display = "none";
-    document.getElementById('deletepic2').style.display = "block";
+    document.getElementById('label2').style.display="none";
+    document.getElementById('labelimg2').style.display="block";
+    document.getElementById('2stepcircle').innerHTML="&#10004";
 }
 
 function deletepic(clicked_id) {
@@ -538,6 +374,10 @@ function deletepic(clicked_id) {
         counter--;
         localStorage.setItem('c', counter);
         document.getElementById(clicked_id).style.display = "none";
+        var s= localStorage.getItem('s');
+        s=+s;
+        s--;
+        localStorage.setItem('s',s);
     }
     if (clicked_id === 'deletepic2') {
         $(".imagearea2").empty();
@@ -550,6 +390,10 @@ function deletepic(clicked_id) {
         counter--;
         localStorage.setItem('c', counter);
         document.getElementById(clicked_id).style.display = "none";
+        s= localStorage.getItem('s');
+        s=+s;
+        s--;
+        localStorage.setItem('s',s);
     }
 }
 
@@ -605,31 +449,46 @@ function postprocess(box) {
 
         document.getElementById('form2').style.display = "inline-block";
         document.getElementById('form1').style.display = "none";
-        document.getElementById('process').style.width = "33%";
-        document.getElementById('movingul').style.transform = "translate(0,-37px)";
-        document.getElementById('movingnum').style.transform = "translate(0,-24px)";
-        document.getElementById('deletepic1').style.display = 'none';
+
+
+        var s= localStorage.getItem('s');
+        s=+s;
+        s++;
+        localStorage.setItem('s',s);
 
     }
 
     if (progress === 2) {
         document.getElementById('description').style.display = "inline-block";
         document.getElementById('form2').style.display = "none";
-        document.getElementById('process').style.width = "67%";
-        document.getElementById('movingul').style.transform = "translate(0,-74px)";
-        document.getElementById('movingnum').style.transform = "translate(0,-48px)";
-        document.getElementById('deletepic2').style.display = 'none';
+        s= localStorage.getItem('s');
+        s=+s;
+        s++;
+        localStorage.setItem('s',s);
     }
 
     if (progress === 3) {
-        document.getElementById('process').style.width = "100%";
+        document.getElementById('3stepcircle').innerHTML="&#10004";
         document.getElementById('description').style.display = "none";
-        document.getElementById('postBtn').style.display = "block";
-        document.getElementById('arrow').style.display = "none";
-        document.getElementById('movingul').style.transform = "translate(0,-111px)";
-        document.getElementById('movingnum').style.transform = "translate(0,-72px)";
-
-        progress = 0;
+        document.getElementById('postingspan').style.display = "block";
+        document.getElementById('stepperbtn').innerHTML="post";
+    }
+    if(progress===4){
+        document.getElementById('stepperbtn').innerHTML="next";
+        document.getElementById('postingspan').style.display = "none";
+        document.getElementById('form1').style.display = "block";
+        document.getElementById('labelimg1').style.display="none";
+        document.getElementById('labelimg2').style.display="none";
+        document.getElementById('label1').style.display="block";
+        document.getElementById('label2').style.display="block";
+        document.getElementById('1stepcircle').innerHTML="1";
+        document.getElementById('2stepcircle').innerHTML="2";
+        document.getElementById('3stepcircle').innerHTML="3";
+        document.getElementById('tan').style.display="none";
+        document.getElementById('postlabbottom').style.display="none";
+        document.getElementById('postlab').style.zIndex="2";
+        progress=0;
+        posting();
     }
     progress++;
 }
@@ -669,13 +528,13 @@ window.addEventListener('resize', f)
 
 function f(e) {
     getElementsInArea(e, {
-        elements: document.getElementsByClassName('post'),
+        elements: document.getElementsByClassName('postgroup'),
         markedClass: 'highlight--1',
         zone: [30, 30] // percentage distance from top & bottom
     });
-
 }
 
+//13px 8px 17px 0 rgba(0,0,0,.2), 0 6px 12px 0 rgba(0,0,0,.19)
 function phonepost(box) {
     display = document.getElementById('phonelab').style.display;
     if (display === 'block') {
@@ -707,7 +566,32 @@ function phonepost(box) {
         document.getElementById('form1').style.display = "inline-block";
     }
 }
+var open=false;
+function  openchart(clicked_id) {
+    var i=document.getElementById(clicked_id).parentElement.id;
+    var i2=document.getElementById(i).parentElement.id;
+    var i3=document.getElementById(i2).parentElement.id;
 
+    if(open===true){
+        document.getElementById(i3).style.width="650px";
+        setTimeout(function(){
+            document.getElementById('animated-'+(i2)).style.display="none";
+            }, 1000);
+        open=false;
+        document.getElementById(i3).style.transform="translate(0px,0px)";
+        document.getElementById(clicked_id).style.color="black";
+
+
+
+    }
+    else{
+        document.getElementById(i3).style.transform="translate(-300px,0px)";
+        document.getElementById('animated-'+(i2)).style.display="-webkit-box";
+        document.getElementById(clicked_id).style.color="#8ad5d8";
+        open=true;
+        document.getElementById(i3).style.width="1300px";
+    }
+}
 function phonelikes(clicked_id) {
     document.getElementById(clicked_id).style.color = "#8ad5d8";
     var e = document.getElementById(clicked_id).parentElement.id;
@@ -743,167 +627,71 @@ function hideintro(box) {
     });
 }
 
-var clicked1 = true;
-var clicked2 = true;
-
+function tanscreen() {
+    document.getElementById('postlab').style.zIndex="10";
+    document.getElementById('tan').style.display="block";
+    document.getElementById('postlabbottom').style.display="block";
+}
+function hidetan() {
+    document.getElementById('tan').style.display="none";
+    document.getElementById('postlab').style.zIndex="2";
+    document.getElementById('postlabbottom').style.display="none";
+}
+function deleteimg(clicked_id) {
+    let counter=+localStorage.getItem('c');
+    counter--;
+    localStorage.setItem('c',counter);
+    if(clicked_id==='removepic1'){
+        document.getElementById('label1').style.display="block";
+        document.getElementById('labelimg1').style.display="none";
+        document.getElementById('1stepcircle').innerHTML="1";
+    }
+    else{
+        document.getElementById('label2').style.display="block";
+        document.getElementById('labelimg2').style.display="none";
+        document.getElementById('2stepcircle').innerHTML="2";
+    }
+}
 function showchart(clicked_id) {
-    $(window).resize(function () {
-        drawRegionsMap();
-    });
+
     var e = document.getElementById(clicked_id).parentElement.id;
-    var p = document.getElementById(e).parentElement.id;
+    var l = document.getElementById(e).parentElement.id;
+    var p=document.getElementById(l).previousElementSibling.id;
 
-    if ((clicked1 === true && clicked2 === true) || (clicked1 === true && clicked2 === false && clicked_id === p + '_charticon') || (clicked1 === false && clicked2 === true && clicked_id === p + '_worldicon')) {
-        display = document.getElementById(p + '_pic1').style.display;
-        if (display === 'none') {
-            document.getElementById(p + '_pic1').style.display = "block";
-        }
-        else {
-            document.getElementById(p + '_pic1').style.display = "none";
-        }
-        display = document.getElementById(p + '_pic2').style.display;
-        if (display === 'none') {
-            document.getElementById(p + '_pic2').style.display = "block";
-        }
-        else {
-            document.getElementById(p + '_pic2').style.display = "none";
-        }
-        display = document.getElementById(p + '_script').style.display;
-        if (display === 'none') {
-            document.getElementById(p + '_script').style.display = "block";
-        }
-        else {
-            document.getElementById(p + '_script').style.display = "none";
-        }
-        display = document.getElementById(p + '_chart_area').style.display;
-        if (display === 'block') {
-            document.getElementById(p + '_chart_area').style.display = "none";
-        }
-        else {
-            document.getElementById(p + '_chart_area').style.display = "block";
-        }
+    if(clicked_id=== p + '_charticon'){
+        document.getElementById(clicked_id).style.color="#8ad5d8";
+        document.getElementById(p+'_worldicon').style.color="black";
+        document.getElementById(p+'_chartContainer').style.display="block";
+        document.getElementById(p+'_regions_div').style.display="none";
     }
-    if (clicked_id === p + '_worldicon') {
-        document.getElementById(p + '_regions_div').style.display = "block";
+    if(clicked_id===p + '_worldicon'){
+        document.getElementById(clicked_id).style.color="#8ad5d8";
+        document.getElementById(p+'_charticon').style.color="black";
+        document.getElementById(p+'_chartContainer').style.display="none";
+        document.getElementById(p+'_regions_div').style.display="block";
+    }
+}
 
-        //google geo charts
-        google.charts.load('current', {
-            'packages': ['geochart'],
-            // Note: you will need to get a mapsApiKey for your project.
-            // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
-            'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
-        });
-        google.charts.setOnLoadCallback(drawRegionsMap);
+window.onscroll = function() {scrollFunction()};
 
-        function drawRegionsMap() {
-            var data = google.visualization.arrayToDataTable([
-                ['Country', 'Likes'],
-                ['Germany', 200],
-                ['United States', 300],
-                ['Brazil', 400],
-                ['Canada', 500],
-                ['France', 600],
-                ['RU', 700]
-            ]);
-
-            var options = {
-                backgroundColor: 'whitesmoke',
-                defaultColor: '#f5f5f5',
-                colorAxis: {colors: ['#8ad5d8']},
-            };
-
-            var chart = new google.visualization.GeoChart(document.getElementById(p + '_regions_div'));
-
-            chart.draw(data, options);
-
-        }
-
-        //finish geochart
-
-        if (clicked1) {
-            document.getElementById(p + '_worldicon').style.color = '#8ad5d8';
-            if (clicked2 === false) {
-                document.getElementById(p + '_charticon').style.color = 'black';
-                clicked2 = true;
-                document.getElementById(p + '_chartContainer').style.display = "none";
-                document.getElementById(p + '_chart_area').style.display = "block";
-            }
-            clicked1 = false;
-        } else {
-            document.getElementById(p + '_worldicon').style.color = 'black';
-            clicked1 = true;
-            document.getElementById(p + '_regions_div').style.display = "none";
-        }
+function scrollFunction() {
+    if(document.body.scrollTop > 500 || document.documentElement.scrollTop > 500){
+        document.getElementById('tan').style.display="none";
+        document.getElementById('postlab').style.zIndex="2";
+        document.getElementById('postlabbottom').style.display="none";
 
     }
-    if (clicked_id === p + '_charticon') {
-        document.getElementById(p + '_chartContainer').style.display = "block";
-
-        //bars cahrts
-
-        var chart = new CanvasJS.Chart(p + "_chartContainer", {
-            animationEnabled: true,
-            backgroundColor: "whitesmoke",
-            toolTip: {
-                shared: true
-            },
-            legend: {
-                cursor: "pointer",
-                itemclick: toggleDataSeries
-            },
-            data: [{
-                type: "column",
-                color: "#8ad5d8",
-                name: "Men likes",
-                legendText: "Men",
-                showInLegend: true,
-                dataPoints: [
-                    {label: "Image1", y: 266},
-                    {label: "Image2", y: 302},
-
-                ]
-            },
-                {
-                    type: "column",
-                    color: "lightpink",
-                    name: "Women likes",
-                    legendText: "Women",
-                    showInLegend: true,
-                    dataPoints: [
-                        {label: "Image1", y: 100},
-                        {label: "Image2", y: 200},
-
-                    ]
-                }]
-        });
-        chart.render();
-
-        function toggleDataSeries(e) {
-            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                e.dataSeries.visible = false;
-            }
-            else {
-                e.dataSeries.visible = true;
-            }
-            chart.render();
-        }
-
-        //finish bars chart
-        if (clicked2) {
-            document.getElementById(p + '_charticon').style.color = '#8ad5d8';
-            if (clicked1 === false) {
-                document.getElementById(p + '_worldicon').style.color = 'black';
-                clicked1 = true;
-                document.getElementById(p + '_regions_div').style.display = "none";
-            }
-            clicked2 = false;
-        } else {
-            document.getElementById(p + '_charticon').style.color = 'black';
-            clicked2 = true;
-            document.getElementById(p + '_chartContainer').style.display = "none";
-
-        }
-
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        document.getElementById("myBtn").style.display = "block";
+        document.getElementById('navbar').style.height="60px";
+    } else {
+        document.getElementById("myBtn").style.display = "none";
+        document.getElementById('navbar').style.height="80px";
     }
+}
 
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
 }
