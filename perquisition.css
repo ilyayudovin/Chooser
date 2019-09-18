@@ -101,11 +101,36 @@ header{
     height: 33px;
     width: 100%;
 }
+.postlabcross{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    color: lightgray;
+    cursor: pointer;
+    display: none;
+    font-size: 21px;
+}
+.postlabcross:hover{
+    color: #8ad5d8;
+}
 .postlabbottom{
     width: 100%;
     height: 242px;
     border-top:1px solid lightgray;
     display: none;
+}
+.shown{
+    display: inline-block;
+}
+.notshown{
+    display: none;
+}
+.md-form textarea.md-textarea:focus:not([readonly])+label{
+    color: #8ad5d8 ;
+}
+.md-form textarea.md-textarea:focus:not([readonly]){
+    box-shadow: 0 1px 0 0 #8ad5d8 ;
+    border-bottom:1px solid #8ad5d8 ;
 }
 .avatar{
     width: 175px;
@@ -180,7 +205,7 @@ input[type="file"] {
 }
 .form1 , .form2{
     position: relative;
-    display: inline-block;
+    /*display: inline-block;*/
     margin: 0 10px;
 }
 .removepic{
@@ -268,8 +293,42 @@ input[type="file"] {
     background-color: #fff;
     position: relative;
     width: 650px;
-    height: 510px;
+   /* height: 510px;*/
     z-index: 2;
+}
+.basicchart{
+    width: 98%;
+    height: 70px;
+    margin: 0 auto;
+    display: inline-block;
+    bottom: 0;
+}
+.basicchart_bottom{
+    width: 100%;
+    height: 62px;
+}
+.line{
+    width: 100%;
+    height: 15px;
+    background-color: lightblue;
+}
+.subline{
+    width: 50%;
+    height: 100%;
+    background-color: lightgray;
+    border-right: 1px solid;
+    transition-duration: 1s;
+}
+.votes_totalamount{
+    text-align: left;
+    padding-top: 10px;
+}
+.percentage{
+    position: absolute;
+    font-size: 25px;
+    color: white;
+    bottom: 10px;
+    left: 25px;
 }
 .postgroup{
     display: none;
@@ -331,9 +390,6 @@ input[type="file"] {
     font-size: 23px;
     cursor: pointer;
 }
-.fa-arrow-right:hover{
-    color: #00aced;
-}
 .step{
     width: 45px;
     position: absolute;
@@ -341,13 +397,11 @@ input[type="file"] {
     right: 10px;
 }
 .description{
-    display: none;
     margin-right: 280px;
     width: 280px;
 }
 .postingspan{
     font-size: 21px;
-    display: none;
 }
 .movingheaders ul li{
     font-size: 25px;
@@ -381,8 +435,7 @@ input[type="file"] {
 .statistics1,.statistics2,.statistics3{
     display: inline-block;
     cursor: pointer;
-    margin-right: 10px;
-    margin-top: 7px;
+    margin-right: 7px;
     font-size: 25px;
 }
 .statistics1{
@@ -405,12 +458,13 @@ input[type="file"] {
     height: 468px;
     z-index: 2;
     top: 40px;
+    border-top: 1px solid lightgray;
 }
 .analytica1{
-    background-color: #00bcd4;
+    background-color: white;
 }
 .analytica2{
-    background-color: #9575cd;
+    background-color: white;
     display: none;
 }
 .analytica1,.analytica2{
@@ -424,7 +478,7 @@ input[type="file"] {
 .stats{
     width: 100%;
     text-align: right;
-    height: 50px;
+    height: 32px;
 }
 .totop{
     position: fixed;

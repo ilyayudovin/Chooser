@@ -1,13 +1,14 @@
 @media only screen and (max-width: 1200px){
-    .postlab{
-        display: none;
-    }
     .bigcolumn{
         width: 650px;
     }
+
 }
 
 @media only screen and (max-width: 992px){
+    .avatar{
+        display: none;
+    }
     .intro h1{
         font-size: 55px;
     }

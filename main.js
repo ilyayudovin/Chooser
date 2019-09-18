@@ -1,115 +1,44 @@
+var firebaseConfig = {
+    apiKey: "AIzaSyAvexg6XWJotjy8BJqDLU6Yc_2jgupAcNU",
+    authDomain: "adaptive-1554480223106.firebaseapp.com",
+    databaseURL: "https://adaptive-1554480223106.firebaseio.com",
+    projectId: "adaptive-1554480223106",
+    storageBucket: "adaptive-1554480223106.appspot.com",
+    messagingSenderId: "1092575332403"
+};
+firebase.initializeApp(firebaseConfig);
+var db = firebase.firestore();
+// var storage = firebase.storage();
+var x=1;
 $(document).ready(function () {
-    var config = {
-        apiKey: "AIzaSyAvexg6XWJotjy8BJqDLU6Yc_2jgupAcNU",
-        authDomain: "adaptive-1554480223106.firebaseapp.com",
-        databaseURL: "https://adaptive-1554480223106.firebaseio.com",
-        projectId: "adaptive-1554480223106",
-        storageBucket: "adaptive-1554480223106.appspot.com",
-        messagingSenderId: "1092575332403"
-    };
-    firebase.initializeApp(config);
-    var storage = firebase.storage();
-    var fileButton = document.getElementById('logo');
-    var fileButton2 = document.getElementById('logo2');
-    var counter = 0;
-    var s= localStorage.getItem('s');
-    if(s===null){
-        s=1;
-        localStorage.setItem('s',s);
-    }
-    var img = new Image();
-    img.src = localStorage.theImage;
 
-    $("body").on("change", ".classhere", function (e) {
-        var fileAll = e.target.files[0];
-        var fileName = e.target.files[0].name;
-        var s= localStorage.getItem('s');
-        localStorage.setItem('image' + s, fileName);
-        alert(fileName);
-        var storageRef = firebase.storage().ref('images/' + fileName);
-        var task = storageRef.put(fileAll);
-        task.on('state_changed',
-            function progress(snapshot) {
-            },
-            function error(err) {
-
-            },
-            function complete() {
-
-            }
-        );
-
-
-
+    $("body").on("change", ".classhere", function () {
         var fileInput = $(this)[0];//returns a HTML DOM object by putting the [0] since it's really an associative array.
         var file = fileInput.files[0]; //there is only '1' file since they are not multiple type.
 
         var reader = new FileReader();
         reader.onload = function (e) {
             // Create a new image.
-            var data1;
-            var data2;
-
             var img = new Image();
 
             img.src = reader.result;
             var ida = img.src;
 
-            function check(value) {
-                try {
-                    localStorage.setItem('ска', value);
-                } catch (e) {
-                    if (e.code == 22) {
-                        alert('storage is probably full');
-                    }
-                }
-            }
-
-            try {
-                localStorage.theImage = reader.result; //stores the image to localStorage
-            } catch (e) {
-                if (e.code == 22) {
-                    alert('storage is probably full2');
-                }
-            }
-            // localStorage.theImage = reader.result; //stores the image to localStorage
-
             var dataImage = localStorage.getItem('theImage');
 
             counter = localStorage.getItem('c');
             var postNum = 'post' + postsCounter;
-
-            if (counter % 2 === 1) {
-                $(".imagearea1").html(img);
-                $('#labelimg1').each(function () {
-                    var imgURL = $('#imagearea1').find('img').attr('src');
-                    $(this).css('background-image', 'url(' + imgURL + ')');
-                });
-                var bannerImgg = $('#' + postNum).find('.imgnum').find('img')[0];
-                bannerImgg.src = dataImage;
-
-                localStorage.removeItem('theImage');
+            if(x===1){
+                attach1(img);
             }
-            if (counter % 2 === 0) {
-                $(".imagearea2").html(img);
-                $('#labelimg2').each(function () {
-                    var imgURL = $('#imagearea2').find('img').attr('src');
-                    $(this).css('background-image', 'url(' + imgURL + ')');
-                });
-                var bannerImgg2 = $('#' + postNum).find('.imgnum').find('img')[1];
-                bannerImgg2.src = dataImage;
-
-                localStorage.removeItem('theImage');
+            if(x===2){
+                attach2(img);
+                x-=2;
             }
-            counter++;
-            localStorage.setItem('c', counter);
+            x++;
         }
         reader.readAsDataURL(file);//attempts to read the file in question.
-
     });
-    counter++;
-    localStorage.setItem('c', counter);
-
 });
 
 
@@ -120,288 +49,154 @@ if (localStorage.getItem('pc') > 1) {
 localStorage.setItem('pc', postsCounter);
 
 var z = 0;
+
+var idcount=0;
+{
+    db.collection("polls").get().then(snap => {
+        snap.forEach((doc) => {
+            idcount++;
+            console.log(idcount);
+        });
+    });
+    idcount++;
+}
+
+
 function posting(box) {
+    // document.getElementById('stepperbtn').innerHTML = "post";
 
-        var currentPost,
+    var img1_src = $('#labelimg1').css('background-image').replace('url(','').replace(')','').replace(/\"/gi, "");
+    var img2_src = $('#labelimg2').css('background-image').replace('url(','').replace(')','').replace(/\"/gi, "");
 
-        pic1Id = 'post' + postsCounter + '_pic1',
-        pic2Id = 'post' + postsCounter + '_pic2';
+    db.collection("polls").doc("post" + idcount).set({
+        images:{
+            image1: img1_src,
+            image2: img2_src
+        }
+    })
+        .then(function () {
+            console.log("Document successfully written!");
+        })
+        .catch(function (error) {
+            console.error("Error writing document: ", error);
+        });
 
-    event.preventDefault();
-    event.preventDefault();
-    var storage = firebase.storage();
+    document.getElementById('postlabcross').style.display = "none";
 
-    z++;
-    var imagename = localStorage.getItem('image' + z);
-    var imgRef = storage.ref('images/' + imagename);
-    imgRef.getDownloadURL().then(function (url) {
-        var img = $('#' + pic1Id).next('.imgnum').find('img');
-        img.src = url;
-    });
-    $('#' + pic1Id).each(function () {
-        var imgURL = $('#' + pic1Id).next('.imgnum').find('img').attr('src');
-        $(this).css('background-image', 'url(' + imgURL + ')');
-    });
-
-    z++;
-    imagename = localStorage.getItem('image' + z);
-    imgRef = storage.ref('images/' + imagename);
-    imgRef.getDownloadURL().then(function (url) {
-        var img2 = $('#' + pic2Id).next('.imgnum').find('img');
-        img2.src = url;
-    });
-    $('#' + pic2Id).each(function () {
-        var imgURL = $('#' + pic2Id).next('.imgnum').find('img').attr('src');
-        $(this).css('background-image', 'url(' + imgURL + ')');
+    db.collection("polls").doc("post" + idcount).get().then(function (doc) {
+        poll.imgarray.push(doc.data());
+        poll.id=doc.id;
+        polls.push(poll);
+        createPoll(poll);
     });
 
-    document.getElementsByClassName("imagearea1")[0].style.display = "none";//change color to label
-    $("div#imagearea1").empty();
-    $('#logo').empty();
+}
 
-    document.getElementsByClassName("imagearea2")[0].style.display = "none";//change color to label
-    $("div#imagearea2").empty();
-    $('#logo2').empty();
 
-    var desc = document.getElementById("description").value;
-    if (postsCounter === 1 || postsCounter === "1") {
-        localStorage.setItem('text1', desc);
+const polls = [];
+poll = {
+    id: idcount,
+    imgarray: []
+};
+db.collection("polls").get().then(function(querySnapshot) {
+    querySnapshot.forEach(function(doc) {
+        poll.imgarray.push(doc.data());
+        poll.id=doc.id;
+        polls.push(poll);
+        poll = {
+            id: 0,
+            imgarray: []
+        };
+    });
+    createPoll(polls);
+});
+
+function createPoll(polls){
+    if(Array.isArray(polls)){
+        for(let counter=0;counter<polls.length;counter++){
+            createPoll2(polls[counter]);
+        }
+    }else{
+        createPoll2(polls);
     }
-    if (postsCounter === 2 || postsCounter === "2") {
-        localStorage.setItem('text2', desc);
-    }
-    if (postsCounter === 3 || postsCounter === "3") {
-        localStorage.setItem('text3', desc);
-    }
+}
 
-    var descarea = document.getElementById('post' + (postsCounter) + '_script');
-    //  descarea.innerHTML = desc;
-    //$('#description').val('');
-    //if (desc === '') {
-    //   document.getElementById('post' +(postsCounter)+'_script').style.height = "0px";
-    //  }
-
-
-    document.getElementById('postgroup' + (postsCounter)).style.display = "-webkit-box";
-
-    $("#wall").prepend("<div class='postgroup'><div class='post'><div class='stats'><div class='statistics3' onclick='openchart(this.id);'><i class=\"fas fa-bars\"></i></div></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='heart1 fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='heart2 fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div><div class=\" animated fadeInLeft\" alt=\"Transparent MDB Logo\"><div class=\"stats\" id=\"post1_stats\">\n" + "<div class=\"statistics1\" id=\"post1_worldicon\" onclick=\"showchart(this.id);\"><i class=\"far fas fa-globe-americas\"></i></div>\n" + "<div class=\"statistics2\" id=\"post1_charticon\" onclick=\"showchart(this.id);\"><i class=\"far fa-chart-bar\"></i></div>\n" + "</div>\n" + "<div class=\"chart-area\">\n" + "<div class=\"analytica1\"></div>\n" + "<div class=\"analytica2\"></div>\n" + "</div></div></div>");
-
-    postsCounter++;
-    currentPost = $('.post').first();
+function createPoll2(polls){
+    var c=polls.id.length-4;
+    let i = polls.id[3+c];
+    $("#wall").prepend("<div class='postgroup'><div class='post'><div class='stats'><div class='statistics3' onclick='openchart(this.id);'><i class=\"fas fa-bars\"></i></div></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='heart1 fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='heart2 fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div><div class=\" animated fadeInLeft\" alt=\"Transparent MDB Logo\"><div class=\"stats\" id=\"post1_stats\">\n" + "<div class=\"statistics1\" id=\"post1_worldicon\" onclick=\"showchart(this.id);\"><i class=\"far fas fa-globe-americas\"></i></div>\n" + "<div class=\"statistics2\" id=\"post1_charticon\" onclick=\"showchart(this.id);\"><i class=\"far fa-chart-bar\"></i></div>\n" + "</div>\n" + "<div class=\"chart-area\">\n" + "<div class=\"analytica1\"><div class=\"chartgeo\" id=\"regions_div\" style=\"width: 600px; height: 468px; margin: 0 auto\"></div>\n</div>\n" + "<div class=\"analytica2\"></div>\n" + "</div></div></div>");
+    var currentPost = $('.post').first();
     var postgroup = $('.postgroup').first();
     var animated = $('.animated').first();
-
-    currentPost.addClass('post' + (postsCounter));
+    currentPost.addClass('post' + (i));
     currentPost.addClass('example hoverable');
-    currentPost.attr('id', 'post' + (postsCounter));
-    currentPost.find('.pic1').attr('id', 'post' + postsCounter + '_pic1');
+    currentPost.attr('id', 'post' + (i));
+    currentPost.find('.pic1').attr('id', 'post' + i + '_pic1');
     currentPost.find('.pic1').addClass('view overlay');
-    currentPost.find('.pic2').attr('id', 'post' + postsCounter + '_pic2');
+    currentPost.find('.pic2').attr('id', 'post' + i + '_pic2');
     currentPost.find('.pic2').addClass('view overlay');
-    currentPost.find('.description_area').addClass('script' + (postsCounter));
-    currentPost.find('.description_area').attr('id', 'post' + (postsCounter) + '_script');
-    currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (postsCounter) + '_mask1');
-    currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (postsCounter) + '_mask2');
-    currentPost.find('.vote1').attr('id', 'post' + (postsCounter) + '_vote1');
-    currentPost.find('.vote2').attr('id', 'post' + (postsCounter) + '_vote2');
-    currentPost.find('.heart1').attr('id', 'post' + (postsCounter) + '_heart1');
-    currentPost.find('.heart2').attr('id', 'post' + (postsCounter) + '_heart2');
-    currentPost.find('.phonelikes1').attr('id', 'post' + (postsCounter) + '_phonelikes1');
-    currentPost.find('.phonelikes2').attr('id', 'post' + (postsCounter) + '_phonelikes2');
-    currentPost.find('.stats').attr('id', 'post' + (postsCounter) + '_showstats');
-    animated.find('.stats').attr('id', 'post' + (postsCounter) + '_stats');
-    animated.find('.statistics1').attr('id', 'post' + (postsCounter) + '_worldicon');
-    animated.find('.statistics2').attr('id', 'post' + (postsCounter) + '_charticon');
-    currentPost.find('.statistics3').attr('id', 'post' + (postsCounter) + '_open');
-    animated.find('.chart-area').attr('id', 'post' + (postsCounter) + '_chart_area');
-    animated.find('.analytica1').attr('id', 'post' + (postsCounter) + '_regions_div');
-    animated.find('.analytica2').attr('id', 'post' + (postsCounter) + '_chartContainer');
-    postgroup.find('.animated').attr('id', 'animated-post'+ (postsCounter));
+    currentPost.find('.description_area').addClass('script' + (i));
+    currentPost.find('.description_area').attr('id', 'post' + (i) + '_script');
+    currentPost.find('.vote1').attr('id', 'post' + (i) + '_vote1');
+    currentPost.find('.vote2').attr('id', 'post' + (i) + '_vote2');
+    currentPost.find('.heart1').attr('id', 'post' + (i) + '_heart1');
+    currentPost.find('.heart2').attr('id', 'post' + (i) + '_heart2');
+    currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (i) + '_mask1');
+    currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (i) + '_mask2');
+    currentPost.find('.phonelikes1').attr('id', 'post' + (i) + '_phonelikes1');
+    currentPost.find('.phonelikes2').attr('id', 'post' + (i) + '_phonelikes2');
+    currentPost.find('.stats').attr('id', 'post' + (i) + '_showstats');
+    animated.find('.stats').attr('id','post' + (i) + '_stats');
+    animated.find('.statistics1').attr('id', 'post' + (i) + '_worldicon');
+    animated.find('.statistics2').attr('id', 'post' + (i) + '_charticon');
+    currentPost.find('.statistics3').attr('id', 'post' + (i) + '_open');
+    animated.find('.chart-area').attr('id', 'post' + (i) + '_chart_area');
+    animated.find('.analytica1').attr('id', 'post' + (i) + '_regions_div');
+    animated.find('.analytica2').attr('id', 'post' + (i) + '_chartContainer');
+    animated.find('.chartgeo').attr('id', 'regions_div_postgroup' + (i));
+    // animated.find('.chartbars').attr('id', 'chartContainer_postgroup' + (i));
+    postgroup.find('.animated').attr('id', 'animated-post'+ (i));
+    postgroup.addClass('postgroup' + i);
+    postgroup.attr('id', 'postgroup' + i);
+    document.getElementById('postgroup' + i).style.display="-webkit-box";
 
-    postgroup.addClass('postgroup' + postsCounter);
-    postgroup.attr('id', 'postgroup' + postsCounter);
-
-
-
-    document.getElementById('form1').style.display = "inline-block";
-    document.getElementById('form2').style.display = "none";
-    document.getElementById('postingspan').style.display = "none";
-
-    document.getElementById('labelimg').style.backgroundImage = "url()";
-    document.getElementById('labelimg2').style.backgroundImage = "url()";
-
-    localStorage.setItem('pc', postsCounter);
-
-    localStorage.setItem('pn', postsCounter - 1);
-
-
-    if (postsCounter - 1 === 1) {
-        localStorage.setItem('show1', true);
-    }
-    if (postsCounter - 1 === 2) {
-        localStorage.setItem('show2', true);
-    }
-    if (postsCounter - 1 === 3) {
-        localStorage.setItem('show3', true);
-    }
-    //localStorage.setItem('show',true);
-    if (document.body.clientWidth < 510) {
-        document.getElementById('phonelab').style.display = "none";
-        document.getElementById('wall').style.display = "block";
-        document.getElementById('postlab').style.display = "none";
-        document.getElementById('form1').style.display = "none";
-    }
-
-    document.getElementById('1stepcircle').innerHTML="1";
-    document.getElementById('2stepcircle').innerHTML="2";
-    document.getElementById('3stepcircle').innerHTML="3";
-
-    //}
+    let  pic1Id = 'post' + i + '_pic1';
+    let  pic2Id = 'post' + i + '_pic2';
+    $('#' + pic1Id).css('background-image','url(' + polls.imgarray[0].images.image1 + ')');
+    $('#' + pic2Id).css('background-image','url(' + polls.imgarray[0].images.image2 + ')');
 }
 
-window.onload = function () {
-  //  document.getElementById('postgroup' + 1).style.display="-webkit-box";
-    var post_amount = +localStorage.getItem('pn');
-    var x=post_amount*2+1;
-    localStorage.setItem('s',x);
-    if(post_amount>1 || post_amount===1){
-        document.getElementById('postgroup' + 1).style.display="-webkit-box";
-        for(var i = 2;i<post_amount+2;i++){
-            $("#wall").prepend("<div class='postgroup'><div class='post'><div class='stats'><div class='statistics3' onclick='openchart(this.id);'><i class=\"fas fa-bars\"></i></div></div><div class='pic1' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask1'><i class='heart1 fas fa-heart' id='heart1' onclick='showvotes(this.id)'></i><div class='votes vote1' id='vote'>0</div></div><i class='fas fa-heart phonelikes1' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner1'></div><div class='pic2' ondblclick='maskshow(this.id)'><div class='mask flex-center rgba-stylish-strong' id='mask2'><i class='heart2 fas fa-heart' id='heart2' onclick='showvotes(this.id)'></i><div class='votes vote2' id='vote'>0</div></div><i class='fas fa-heart phonelikes2' onclick=\"phonelikes(this.id);\"></i></div><div class='imgnum'><img src='' class='tableBanner2'></div><div id='description_area' class='description_area'></div></div><div class=\" animated fadeInLeft\" alt=\"Transparent MDB Logo\"><div class=\"stats\" id=\"post1_stats\">\n" + "<div class=\"statistics1\" id=\"post1_worldicon\" onclick=\"showchart(this.id);\"><i class=\"far fas fa-globe-americas\"></i></div>\n" + "<div class=\"statistics2\" id=\"post1_charticon\" onclick=\"showchart(this.id);\"><i class=\"far fa-chart-bar\"></i></div>\n" + "</div>\n" + "<div class=\"chart-area\">\n" + "<div class=\"analytica1\"></div>\n" + "<div class=\"analytica2\"></div>\n" + "</div></div></div>");
-            var currentPost = $('.post').first();
-            var postgroup = $('.postgroup').first();
-            var animated = $('.animated').first();
-            currentPost.addClass('post' + (i));
-            currentPost.addClass('example hoverable');
-            currentPost.attr('id', 'post' + (i));
-            currentPost.find('.pic1').attr('id', 'post' + i + '_pic1');
-            currentPost.find('.pic1').addClass('view overlay');
-            currentPost.find('.pic2').attr('id', 'post' + i + '_pic2');
-            currentPost.find('.pic2').addClass('view overlay');
-            currentPost.find('.description_area').addClass('script' + (i));
-            currentPost.find('.description_area').attr('id', 'post' + (i) + '_script');
-            currentPost.find('.vote1').attr('id', 'post' + (i) + '_vote1');
-            currentPost.find('.vote2').attr('id', 'post' + (i) + '_vote2');
-            currentPost.find('.heart1').attr('id', 'post' + (i) + '_heart1');
-            currentPost.find('.heart2').attr('id', 'post' + (i) + '_heart2');
-            currentPost.find('.rgba-stylish-strong').attr('id', 'post' + (i) + '_mask1');
-            currentPost.find('.rgba-stylish-strong').eq(1).attr('id', 'post' + (i) + '_mask2');
-            currentPost.find('.phonelikes1').attr('id', 'post' + (i) + '_phonelikes1');
-            currentPost.find('.phonelikes2').attr('id', 'post' + (i) + '_phonelikes2');
-            currentPost.find('.stats').attr('id', 'post' + (i) + '_showstats');
-            animated.find('.stats').attr('id','post' + (i) + '_stats');
-            animated.find('.statistics1').attr('id', 'post' + (i) + '_worldicon');
-            animated.find('.statistics2').attr('id', 'post' + (i) + '_charticon');
-            currentPost.find('.statistics3').attr('id', 'post' + (i) + '_open');
-            animated.find('.chart-area').attr('id', 'post' + (i) + '_chart_area');
-            animated.find('.analytica1').attr('id', 'post' + (i) + '_regions_div');
-            animated.find('.analytica2').attr('id', 'post' + (i) + '_chartContainer');
-            postgroup.find('.animated').attr('id', 'animated-post'+ (i));
-            postgroup.addClass('postgroup' + i);
-            postgroup.attr('id', 'postgroup' + i);
-            document.getElementById('postgroup' + i).style.display="-webkit-box";
-        }
-       // post_amount++;
-        document.getElementById('postgroup' + (post_amount+1)).style.display="none";
-    }
+// window.onload = function () {
+//
+//
+//     var post_amount = +localStorage.getItem('pn');
+//     var x = post_amount * 2 + 1;
+//     localStorage.setItem('s', x);
+//
+// }
 
-
-    if (post_amount >= 1) {
-        var j = 1;
-        var k = 2;
-        var storage = firebase.storage();
-        let loop=1;
-        for(let i=1;i!==post_amount*2+1;i++) {
-            // while (!!(imagename = this.localStorage.getItem('image' + i++))) {
-            let imagename = localStorage.getItem('image' + i);
-            var imgRef = storage.ref('images/' + imagename);
-            imgRef.getDownloadURL().then(function (url) {
-                console.log("images download");
-                console.log(url);
-                if(loop===post_amount*2){
-                    $('#post' + 1 + '_pic' + 1).each(function () {
-                        $(this).css('background-image', 'url(' + url + ')');
-                    });
-                }
-                $('#post' + j + '_pic' + k).each(function () {
-                    $(this).css('background-image', 'url(' + url + ')');
-                });
-                loop++;
-                if(k===1){
-                    k++;
-                }
-                else{
-                    k--;
-                    j++;
-                }
-                // if (i % 2 === 1) {
-                //     k = 0;
-                // }
-                // if (i % 2 === 0) {
-                //     j = i / 2;
-                //     k = 1;
-                // }
-            }).catch(function (error) {
-                this.alert(error);
-            });
-        }
-
-    }
-
-}
-
-function attach1(file) {
-    document.getElementById('1stepcircle').innerHTML="&#10004";
-    document.getElementById('label1').style.display="none";
-    document.getElementById('labelimg1').style.display="block";
-}
-
-function attach2(file) {
-    document.getElementById('label2').style.display="none";
-    document.getElementById('labelimg2').style.display="block";
-    document.getElementById('2stepcircle').innerHTML="&#10004";
-}
-
-function deletepic(clicked_id) {
-    if (clicked_id === 'deletepic1') {
-        $(".imagearea1").empty();
-        document.getElementById('camera').style.display = "block";
-        $('#labelimg').each(function () {
+function attach1(file_url) {
+        $(".imagearea1").html(file_url);
+        $('#labelimg1').each(function () {
             var imgURL = $('#imagearea1').find('img').attr('src');
             $(this).css('background-image', 'url(' + imgURL + ')');
         });
-        var counter = localStorage.getItem('c');
-        counter--;
-        localStorage.setItem('c', counter);
-        document.getElementById(clicked_id).style.display = "none";
-        var s= localStorage.getItem('s');
-        s=+s;
-        s--;
-        localStorage.setItem('s',s);
-    }
-    if (clicked_id === 'deletepic2') {
-        $(".imagearea2").empty();
-        document.getElementById('camera2').style.display = "block";
-        $('#labelimg2').each(function () {
-            var imgURL = $('#imagearea2').find('img').attr('src');
-            $(this).css('background-image', 'url(' + imgURL + ')');
-        });
-        counter = localStorage.getItem('c');
-        counter--;
-        localStorage.setItem('c', counter);
-        document.getElementById(clicked_id).style.display = "none";
-        s= localStorage.getItem('s');
-        s=+s;
-        s--;
-        localStorage.setItem('s',s);
-    }
+    document.getElementById('1stepcircle').innerHTML = "&#10004";
+    document.getElementById('label1').style.display = "none";
+    document.getElementById('labelimg1').style.display = "block";
 }
 
-function deletepost(clicked_id) {
-    var p = document.getElementById(clicked_id).parentElement.id;
-    var e = document.getElementById(p).parentElement.id;
-    $('#' + e).remove();
+function attach2(file_url) {
+    $(".imagearea2").html(file_url);
+    $('#labelimg2').each(function () {
+        var imgURL = $('#imagearea2').find('img').attr('src');
+        $(this).css('background-image', 'url(' + imgURL + ')');
+    });
+    document.getElementById('label2').style.display = "none";
+    document.getElementById('labelimg2').style.display = "block";
+    document.getElementById('2stepcircle').innerHTML = "&#10004";
 }
+
 
 function showvotes(clicked_id) {
 
@@ -409,88 +204,144 @@ function showvotes(clicked_id) {
     var d = document.getElementById(e).parentElement.id;
     var f = document.getElementById(d).parentElement.id;
 
-    var likes1 = document.getElementById(f + '_vote1');
-    var likes2 = document.getElementById(f + '_vote2');
-    var counter1 = 1;
-    var counter2 = 1;
-    if (clicked_id === f + '_heart1') {
-        likes1.innerText = counter1;
-        counter1++;
+    document.getElementById(d).style.boxShadow = "0 0 1px 5px lightblue";
+
+    if (d === f + '_pic1') {
+        document.getElementById(f + '_subline').style.width = "80%";
     }
-    if (clicked_id === f + '_heart2') {
-        likes2.innerText = counter2;
-        counter2++;
+    if (d === f + '_pic2') {
+        document.getElementById(f + '_subline').style.width = "20%";
     }
-    display = document.getElementById(f + '_vote1').style.display;
-    if (display === 'block') {
-        document.getElementById(f + '_vote1').style.display = "none";
-        document.getElementById(f + '_heart1').style.display = "block";
-    }
-    else {
-        document.getElementById(f + '_vote1').style.display = "block";
-        document.getElementById(f + '_heart1').style.display = "none";
-    }
-    display = document.getElementById(f + '_vote2').style.display;
-    if (display === 'block') {
-        document.getElementById(f + '_vote2').style.display = "none";
-        document.getElementById(f + '_heart2').style.display = "block";
-    }
-    else {
-        document.getElementById(f + '_vote2').style.display = "block";
-        document.getElementById(f + '_heart2').style.display = "none";
-    }
+    var totalamount = +document.getElementById(f + '_tvamount').innerText;
+    totalamount++;
+    document.getElementById(f + '_tvamount').innerHTML = totalamount;
+    /* var likes1 = document.getElementById(f + '_vote1');
+     var likes2 = document.getElementById(f + '_vote2');
+     var counter1 = 1;
+     var counter2 = 1;
+     if (clicked_id === f + '_heart1') {
+         likes1.innerText = counter1;
+         counter1++;
+     }
+     if (clicked_id === f + '_heart2') {
+         likes2.innerText = counter2;
+         counter2++;
+     }
+     display = document.getElementById(f + '_vote1').style.display;
+     if (display === 'block') {
+         document.getElementById(f + '_vote1').style.display = "none";
+         document.getElementById(f + '_heart1').style.display = "block";
+     }
+     else {
+         document.getElementById(f + '_vote1').style.display = "block";
+         document.getElementById(f + '_heart1').style.display = "none";
+     }
+     display = document.getElementById(f + '_vote2').style.display;
+     if (display === 'block') {
+         document.getElementById(f + '_vote2').style.display = "none";
+         document.getElementById(f + '_heart2').style.display = "block";
+     }
+     else {
+         document.getElementById(f + '_vote2').style.display = "block";
+         document.getElementById(f + '_heart2').style.display = "none";
+     }*/
 }
 
-var progress = 1;
 
-function postprocess(box) {
-
-    if (progress === 1) {
-
-        document.getElementById('form2').style.display = "inline-block";
-        document.getElementById('form1').style.display = "none";
-
-
-        var s= localStorage.getItem('s');
-        s=+s;
-        s++;
-        localStorage.setItem('s',s);
-
+function radio(id) {
+    var current='';
+    var last='';
+    var last1 ='';
+    var last2 ='';
+    var cur=document.querySelector('.shown').id;
+    if(id==='stepperbtn'){
+        if (cur==='form1'){
+            id='2_step';
+        }
+        if(cur==='form2'){
+            id='3_step';
+        }
+        if(cur==='description'){
+            id='done';
+        }
+        if(cur==='postingspan'){
+            id='postPoll';
+        }
     }
-
-    if (progress === 2) {
-        document.getElementById('description').style.display = "inline-block";
-        document.getElementById('form2').style.display = "none";
-        s= localStorage.getItem('s');
-        s=+s;
-        s++;
-        localStorage.setItem('s',s);
+    if(id==='1_step'){
+        current= $('#form1');
+        last=$('#postingspan');
+        last.addClass('notshown');
+        last.removeClass('shown');
+        last1= $('#form2');
+        last2=$('#description');
+        current.addClass('shown');
+        current.removeClass('notshown');
+        last1.removeClass('shown');
+        last1.addClass('notshown');
+        last2.removeClass('shown');
+        last2.addClass('notshown');
+        document.getElementById('stepperbtn').innerHTML = "next";
     }
-
-    if (progress === 3) {
-        document.getElementById('3stepcircle').innerHTML="&#10004";
-        document.getElementById('description').style.display = "none";
-        document.getElementById('postingspan').style.display = "block";
-        document.getElementById('stepperbtn').innerHTML="post";
+    if(id==='2_step'){
+        current= $('#form2');
+        last=$('#postingspan');
+        last.addClass('notshown');
+        last.removeClass('shown');
+        last1= $('#form1');
+        last2=$('#description');
+        current.addClass('shown');
+        current.removeClass('notshown');
+        last1.removeClass('shown');
+        last1.addClass('notshown');
+        last2.removeClass('shown');
+        last2.addClass('notshown');
+        document.getElementById('stepperbtn').innerHTML = "next";
     }
-    if(progress===4){
-        document.getElementById('stepperbtn').innerHTML="next";
-        document.getElementById('postingspan').style.display = "none";
-        document.getElementById('form1').style.display = "block";
-        document.getElementById('labelimg1').style.display="none";
-        document.getElementById('labelimg2').style.display="none";
-        document.getElementById('label1').style.display="block";
-        document.getElementById('label2').style.display="block";
-        document.getElementById('1stepcircle').innerHTML="1";
-        document.getElementById('2stepcircle').innerHTML="2";
-        document.getElementById('3stepcircle').innerHTML="3";
-        document.getElementById('tan').style.display="none";
-        document.getElementById('postlabbottom').style.display="none";
+    if(id==='3_step'){
+        current= $('#description');
+        last=$('#postingspan');
+        last.addClass('notshown');
+        last.removeClass('shown');
+        last1= $('#form1');
+        last2=$('#form2');
+        current.addClass('shown');
+        current.removeClass('notshown');
+        last1.removeClass('shown');
+        last1.addClass('notshown');
+        last2.removeClass('shown');
+        last2.addClass('notshown');
+        document.getElementById('stepperbtn').innerHTML = "next";
+    }
+    if(id==='postPoll' && cur==='postingspan'){
+        cur=$('#postingspan');
+        var next=$('#form1');
+        cur.addClass('notshown');
+        cur.removeClass('shown');
+        next.addClass('shown');
+        next.removeClass('notshown');
+        document.getElementById('postlabcross').style.display = "none";
+        document.getElementById('stepperbtn').innerHTML = "next";
+        document.getElementById('tan').style.display = "none";
+        document.getElementById('postlabbottom').style.display = "none";
+        document.getElementById('label1').style.display = "block";
+        document.getElementById('labelimg1').style.display = "none";
+        document.getElementById('label2').style.display = "block";
+        document.getElementById('labelimg2').style.display = "none";
+        document.getElementById('1stepcircle').innerHTML = "1";
+        document.getElementById('2stepcircle').innerHTML = "2";
         document.getElementById('postlab').style.zIndex="2";
-        progress=0;
         posting();
     }
-    progress++;
+    if(id==='done' && cur!=='postingspan'){
+        var done=$('#postingspan');
+        done.addClass('shown');
+        done.removeClass('notshown');
+        last=$('#description');
+        last.removeClass('shown');
+        last.addClass('notshown');
+        document.getElementById('stepperbtn').innerHTML = "post";
+    }
 }
 
 var getElementsInArea = (function (docElm) {
@@ -534,64 +385,91 @@ function f(e) {
     });
 }
 
-//13px 8px 17px 0 rgba(0,0,0,.2), 0 6px 12px 0 rgba(0,0,0,.19)
-function phonepost(box) {
-    display = document.getElementById('phonelab').style.display;
-    if (display === 'block') {
-        document.getElementById('phonelab').style.display = "none";
-    }
-    else {
-        document.getElementById('phonelab').style.display = "block";
-    }
-    display = document.getElementById('wall').style.display;
-    if (display === 'none') {
-        document.getElementById('wall').style.display = "block";
-    }
-    else {
-        document.getElementById('wall').style.display = "none";
-    }
-    display = document.getElementById('postlab').style.display;
-    if (display === 'block') {
-        document.getElementById('postlab').style.display = "none";
-    }
-    else {
-        document.getElementById('postlab').style.display = "block";
-    }
+function openchart(clicked_id) {
 
-    display = document.getElementById('form1').style.display;
-    if (display === 'block') {
-        document.getElementById('form1').style.display = "none";
+
+    var i = document.getElementById(clicked_id).parentElement.id;
+    var i2 = document.getElementById(i).parentElement.id;
+    var i3 = document.getElementById(i2).parentElement.id;
+
+    if (document.getElementById('animated-' + (i2)).style.display === "-webkit-box") {
+        document.getElementById(i3).style.width = "650px";
+        setTimeout(function () {
+            document.getElementById('animated-' + (i2)).style.display = "none";
+        }, 1000);
+        open = false;
+        document.getElementById(i3).style.transform = "translate(0px,0px)";
+        document.getElementById(clicked_id).style.color = "black";
     }
     else {
-        document.getElementById('form1').style.display = "inline-block";
+
+        document.getElementById(i3).style.transform = "translate(-300px,0px)";
+        document.getElementById('animated-' + (i2)).style.display = "-webkit-box";
+        document.getElementById(clicked_id).style.color = "#8ad5d8";
+        open = true;
+        document.getElementById(i3).style.width = "1300px";
+
+        //geochart
+        google.charts.load('current', {
+            'packages': ['geochart'],
+            // Note: you will need to get a mapsApiKey for your project.
+            // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+            'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+        });
+        google.charts.setOnLoadCallback(drawRegionsMap);
+
+        function drawRegionsMap() {
+            var data = google.visualization.arrayToDataTable([
+                ['Country', 'Popularity'],
+                ['Germany', 200],
+                ['United States', 300],
+                ['Brazil', 400],
+                ['Canada', 500],
+                ['France', 600],
+                ['RU', 700]
+            ]);
+
+            var options = {
+                backgroundColor: {},
+                colorAxis: {minValue: 0, colors: ['whitesmoke', '#8ad5d8']}
+            };
+
+            var chart = new google.visualization.GeoChart(document.getElementById('regions_div_' + i3));
+
+            chart.draw(data, options);
+        }
+
+        //geochart
+
+        //chart bars
+        /*  var chart = new CanvasJS.Chart(("chartContainer_" + i3), {
+              animationEnabled: true,
+              axisX:{
+                  interval: 1
+              },
+              axisY2:{
+                  interlacedColor: "white",
+                  gridColor: "white",
+                  title: "Amount of votes"
+              },
+              data: [{
+                  type: "bar",
+                  name: "companies",
+                  axisYType: "secondary",
+                  color: "#8ad5d8",
+                  dataPoints: [
+                      { y: 100, label: "1 Image" },
+                      { y: 7, label: "2 Image" },
+
+                  ]
+              }]
+          });
+         chart.render();*/
+//chart bars
+
     }
 }
-var open=false;
-function  openchart(clicked_id) {
-    var i=document.getElementById(clicked_id).parentElement.id;
-    var i2=document.getElementById(i).parentElement.id;
-    var i3=document.getElementById(i2).parentElement.id;
 
-    if(open===true){
-        document.getElementById(i3).style.width="650px";
-        setTimeout(function(){
-            document.getElementById('animated-'+(i2)).style.display="none";
-            }, 1000);
-        open=false;
-        document.getElementById(i3).style.transform="translate(0px,0px)";
-        document.getElementById(clicked_id).style.color="black";
-
-
-
-    }
-    else{
-        document.getElementById(i3).style.transform="translate(-300px,0px)";
-        document.getElementById('animated-'+(i2)).style.display="-webkit-box";
-        document.getElementById(clicked_id).style.color="#8ad5d8";
-        open=true;
-        document.getElementById(i3).style.width="1300px";
-    }
-}
 function phonelikes(clicked_id) {
     document.getElementById(clicked_id).style.color = "#8ad5d8";
     var e = document.getElementById(clicked_id).parentElement.id;
@@ -627,66 +505,74 @@ function hideintro(box) {
     });
 }
 
-function tanscreen() {
-    document.getElementById('postlab').style.zIndex="10";
-    document.getElementById('tan').style.display="block";
-    document.getElementById('postlabbottom').style.display="block";
+function tanscreen(clicked_id) {
+    document.getElementById('postlab').style.zIndex = "10";
+    document.getElementById('tan').style.display = "block";
+    document.getElementById('postlabbottom').style.display = "block";
+    document.getElementById('postlabcross').style.display = "block";
 }
-function hidetan() {
-    document.getElementById('tan').style.display="none";
-    document.getElementById('postlab').style.zIndex="2";
-    document.getElementById('postlabbottom').style.display="none";
+
+function hidetan(clicked_id) {
+    document.getElementById('tan').style.display = "none";
+    document.getElementById('postlab').style.zIndex = "2";
+    document.getElementById('postlabbottom').style.display = "none";
+    document.getElementById('postlabcross').style.display = "none";
 }
+
 function deleteimg(clicked_id) {
-    let counter=+localStorage.getItem('c');
-    counter--;
-    localStorage.setItem('c',counter);
-    if(clicked_id==='removepic1'){
-        document.getElementById('label1').style.display="block";
-        document.getElementById('labelimg1').style.display="none";
-        document.getElementById('1stepcircle').innerHTML="1";
+
+    if (clicked_id === 'removepic1') {
+        document.getElementById('label1').style.display = "block";
+        document.getElementById('labelimg1').style.display = "none";
+        document.getElementById('1stepcircle').innerHTML = "1";
+        x--;
     }
-    else{
-        document.getElementById('label2').style.display="block";
-        document.getElementById('labelimg2').style.display="none";
-        document.getElementById('2stepcircle').innerHTML="2";
+    if (clicked_id === 'removepic2'){
+        document.getElementById('label2').style.display = "block";
+        document.getElementById('labelimg2').style.display = "none";
+        document.getElementById('2stepcircle').innerHTML = "2";
+        x++;
     }
 }
+
 function showchart(clicked_id) {
 
     var e = document.getElementById(clicked_id).parentElement.id;
     var l = document.getElementById(e).parentElement.id;
-    var p=document.getElementById(l).previousElementSibling.id;
+    var p = document.getElementById(l).previousElementSibling.id;
 
-    if(clicked_id=== p + '_charticon'){
-        document.getElementById(clicked_id).style.color="#8ad5d8";
-        document.getElementById(p+'_worldicon').style.color="black";
-        document.getElementById(p+'_chartContainer').style.display="block";
-        document.getElementById(p+'_regions_div').style.display="none";
+    if (clicked_id === p + '_charticon') {
+        document.getElementById(clicked_id).style.color = "#8ad5d8";
+        document.getElementById(p + '_worldicon').style.color = "black";
+        document.getElementById(p + '_chartContainer').style.display = "block";
+        document.getElementById(p + '_regions_div').style.display = "none";
     }
-    if(clicked_id===p + '_worldicon'){
-        document.getElementById(clicked_id).style.color="#8ad5d8";
-        document.getElementById(p+'_charticon').style.color="black";
-        document.getElementById(p+'_chartContainer').style.display="none";
-        document.getElementById(p+'_regions_div').style.display="block";
+    if (clicked_id === p + '_worldicon') {
+        document.getElementById(clicked_id).style.color = "#8ad5d8";
+        document.getElementById(p + '_charticon').style.color = "black";
+        document.getElementById(p + '_chartContainer').style.display = "none";
+        document.getElementById(p + '_regions_div').style.display = "block";
     }
 }
 
-window.onscroll = function() {scrollFunction()};
+window.onscroll = function () {
+    scrollFunction()
+};
 
 function scrollFunction() {
-    if(document.body.scrollTop > 500 || document.documentElement.scrollTop > 500){
-        document.getElementById('tan').style.display="none";
-        document.getElementById('postlab').style.zIndex="2";
-        document.getElementById('postlabbottom').style.display="none";
+    if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+        document.getElementById('tan').style.display = "none";
+        document.getElementById('postlab').style.zIndex = "2";
+        document.getElementById('postlabbottom').style.display = "none";
+        document.getElementById('postlabcross').style.display = "none";
 
     }
     if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
         document.getElementById("myBtn").style.display = "block";
-        document.getElementById('navbar').style.height="60px";
+        document.getElementById('navbar').style.height = "60px";
     } else {
         document.getElementById("myBtn").style.display = "none";
-        document.getElementById('navbar').style.height="80px";
+        document.getElementById('navbar').style.height = "80px";
     }
 }
 
@@ -695,3 +581,7 @@ function topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
+
+
+
+

@@ -41,7 +41,7 @@
             </button>
 
             <!-- Collapsible content -->
-            <div class="collapse navbar-collapse" id="basicExampleNav">
+            <div class="collapse navbar-collapse" id="basicExampleNav" style="background-color: #8ad5d8">
 
                 <!-- Links -->
                 <ul class="navbar-nav mr-auto">
@@ -51,7 +51,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
+                        <a class="nav-link" href="#">Your polls</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Pricing</a>
@@ -100,7 +100,8 @@
     <div class="bigcolumn" id="bigcolumn">
 
         <div class="postlab" id="postlab" >
-            <div class="postlabtop" id="postlabtop" onclick="tanscreen();">Create a Poll</div>
+            <div class="postlabtop" id="postlabtop" onclick="tanscreen(this.id);">Create a Poll</div>
+            <i class="postlabcross fas fa-times" id="postlabcross" onclick="hidetan(this.id);"></i>
             <div class="postlabbottom" id="postlabbottom">
                 <div class="row">
                     <div class="col-md-12">
@@ -109,7 +110,7 @@
                         <ul class="stepper stepper-horizontal">
 
                             <!-- First Step -->
-                            <li class="completed">
+                            <li class="completed" id="1_step" onclick="radio(this.id)">
                                 <a href="#!">
                                     <span class="circle" id="1stepcircle" style="background-color:#8ad5d8!important;">1</span>
                                     <span class="label">First image</span>
@@ -117,7 +118,7 @@
                             </li>
 
                             <!-- Second Step -->
-                            <li class="active">
+                            <li class="active" id="2_step" onclick="radio(this.id)">
                                 <a href="#!">
                                     <span class="circle" id="2stepcircle" style="background-color:#8ad5d8!important;">2</span>
                                     <span class="label">Second image</span>
@@ -125,10 +126,10 @@
                             </li>
 
                             <!-- Third Step -->
-                            <li class="warning">
+                            <li class="warning" id="3_step" onclick="radio(this.id)">
                                 <a href="#!">
                                     <span class="circle" id="3stepcircle" style="background-color:#8ad5d8!important;">3</span>
-                                    <span class="label">text</span>
+                                    <span class="label" style="color: rgba(0,0,0,.87);font-weight: 600">text</span>
                                 </a>
                             </li>
 
@@ -138,9 +139,9 @@
                     </div>
                 </div>
                 <div class="understepper">
-                    <div class="form1" id="form1">
+                    <div class="form1 shown" id="form1">
                         <div class="imagearea1" id="imagearea1"></div>
-                        <input onchange="attach1(this); " class="classhere" type="file" name="logo" id="logo"/>
+                        <input class="classhere" type="file" name="logo" id="logo"/>
                         <label for="logo" class="custom-file-upload" id="label1" >
                             <i class="fas fa-cloud-upload-alt"
                                style="font-size: 27px;color: lightblue"><span>choose 1 file</span></i>
@@ -150,9 +151,9 @@
                             <button class="removepic" id="removepic1" onclick="deleteimg(this.id);">remove</button>
                         </div>
                     </div>
-                    <div class="form2" id="form2" style="display: none">
+                    <div class="form2 notshown" id="form2" >
                         <div class="imagearea2" id="imagearea2"></div>
-                        <input onchange="attach2(this); " class="classhere" type="file" name="logo2" id="logo2"/>
+                        <input class="classhere" type="file" name="logo2" id="logo2"/>
                         <label for="logo2" class="custom-file-upload" id="label2">
                             <i class="fas fa-cloud-upload-alt"
                                style="font-size: 27px;color: lightblue"><span>choose 2 file</span></i>
@@ -162,12 +163,12 @@
                             <button class="removepic" id="removepic2" onclick="deleteimg(this.id);">remove</button>
                         </div>
                     </div>
-                    <div class="md-form description" id="description">
+                    <div class="md-form description notshown" id="description">
                         <textarea id="form7" class="md-textarea form-control" rows="3"></textarea>
                         <label for="form7">Material textarea</label>
                     </div>
-                    <span class="postingspan" id="postingspan">Your Poll was successfully created!<br>Tap 'post' to post it</span>
-                    <button type="button" class=" stepperbtn btn btn-info" id="stepperbtn"  onclick="postprocess();">Next</button>
+                    <span class="postingspan notshown" id="postingspan">Your Poll was successfully created!<br>Tap 'post' to post it</span>
+                    <button type="button" class=" stepperbtn btn btn-info" id="stepperbtn"  onclick="radio(this.id);">Next</button>
                 </div>
             </div>
             <!--<div class="test example hoverable" id="forma">
@@ -224,48 +225,64 @@
         </div>
 
         <div class="wall" id="wall">
-            <div class="postgroup postgroup1" id="postgroup1">
-                <div class="post post1 example hoverable shadowroll" id="post1" style="position: relative">
-                    <div class="stats" id="post1_showstats">
-                        <div class="statistics3" id="post1_open" onclick="openchart(this.id);">
-                            <i class="fas fa-bars"></i></div>
-                    </div>
+            <!--<div class="postgroup postgroup1" id="postgroup1">-->
+                <!--<div class="post post1 example hoverable shadowroll" id="post1" style="position: relative">-->
+                    <!--<div class="stats" id="post1_showstats">-->
+                        <!--<div class="statistics3" id="post1_open" onclick="openchart(this.id);">-->
+                            <!--<i class="fas fa-bars"></i></div>-->
+                    <!--</div>-->
 
-                    <div class="pic1 view overlay" id="post1_pic1">
-                        <div class="mask flex-center rgba-stylish-strong" id="post1_mask1">
-                            <i class="heart1 fas fa-heart" id="post1_heart1" onclick="showvotes(this.id)"></i>
-                            <div class="votes vote1" id="post1_vote1">0</div>
-                        </div>
-                        <i class="fas fa-heart phonelikes1" id="post1_phonelikes1" onclick="phonelikes(this.id);"></i>
-                    </div>
-                    <div class="imgnum">
-                        <img src="" id="tableBanner1" class="tableBanner1">
-                    </div>
-                    <div class="pic2 view overlay" id="post1_pic2">
-                        <div class="mask flex-center rgba-stylish-strong" id="post1_mask2">
-                            <i class="heart2 fas fa-heart" id="post1_heart2" onclick="showvotes(this.id)"></i>
-                            <div class="votes vote2" id="post1_vote2">0</div>
-                        </div>
-                        <i class="fas fa-heart phonelikes2" id="post1_phonelikes2" onclick="phonelikes(this.id);"></i>
-                    </div>
-                    <div class="imgnum">
-                        <img src="" id="tableBanner2" class="tableBanner2">
-                    </div>
-                    <div id="post1_script" class="description_area script1"></div>
-                </div>
-                <div class=" animated fadeInLeft" alt="Transparent MDB Logo" id="animated-post1">
-                    <div class="stats" id="post1_stats">
-                        <div class="statistics1" id="post1_worldicon" onclick="showchart(this.id);"><i
-                                class="far fas fa-globe-americas"></i></div>
-                        <div class="statistics2" id="post1_charticon" onclick="showchart(this.id);"><i
-                                class="far fa-chart-bar"></i></div>
-                    </div>
-                    <div class="chart-area" id="post1_chart_area">
-                        <div class="analytica1" id="post1_regions_div"></div>
-                        <div class="analytica2" id="post1_chartContainer"></div>
-                    </div>
-                </div>
-            </div>
+                    <!--<div class="pic1 view overlay" id="post1_pic1">-->
+                        <!--<div class="mask flex-center rgba-stylish-strong" id="post1_mask1">-->
+                            <!--<i class="heart1 fas fa-heart" id="post1_heart1" onclick="showvotes(this.id)"></i>-->
+                            <!--<div class="votes vote1" id="post1_vote1">0</div>-->
+                        <!--</div>-->
+                        <!--<div class="percentage"><span id="post1_pic1_percentage">0</span>%</div>-->
+                        <!--<i class="fas fa-heart phonelikes1" id="post1_phonelikes1" onclick="phonelikes(this.id);"></i>-->
+                    <!--</div>-->
+                    <!--<div class="imgnum">-->
+                        <!--<img src="" id="tableBanner1" class="tableBanner1">-->
+                    <!--</div>-->
+                    <!--<div class="pic2 view overlay" id="post1_pic2">-->
+                        <!--<div class="mask flex-center rgba-stylish-strong" id="post1_mask2">-->
+                            <!--<i class="heart2 fas fa-heart" id="post1_heart2" onclick="showvotes(this.id)"></i>-->
+                            <!--<div class="votes vote2" id="post1_vote2">0</div>-->
+                        <!--</div>-->
+                        <!--<div class="percentage" style="right: -200px"><span id="post1_pic2_percentage">0</span>%</div>-->
+                        <!--<i class="fas fa-heart phonelikes2" id="post1_phonelikes2" onclick="phonelikes(this.id);"></i>-->
+                    <!--</div>-->
+                    <!--<div class="imgnum">-->
+                        <!--<img src="" id="tableBanner2" class="tableBanner2">-->
+                    <!--</div>-->
+                    <!--<div class="basicchart" id="basicchart_post1">-->
+                        <!--<div class="basicchart" id="basicchart_image1">-->
+                            <!--<div class="line" id="post1_line">-->
+                                <!--<div class="subline" id="post1_subline"></div>-->
+                            <!--</div>-->
+                            <!--<div class="basicchart_bottom">-->
+                                <!--<div class="votes_totalamount">votes:<span id="post1_tvamount">0</span></div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;<div id="post1_script" class="description_area script1"></div>&ndash;&gt;-->
+                <!--</div>-->
+                <!--<div class=" animated fadeInLeft" alt="Transparent MDB Logo" id="animated-post1">-->
+                    <!--<div class="stats" id="post1_stats">-->
+                        <!--<div class="statistics1" id="post1_worldicon" onclick="showchart(this.id);"><i-->
+                                <!--class="far fas fa-globe-americas"></i></div>-->
+                        <!--<div class="statistics2" id="post1_charticon" onclick="showchart(this.id);"><i-->
+                                <!--class="far fa-chart-bar"></i></div>-->
+                    <!--</div>-->
+                    <!--<div class="chart-area" id="post1_chart_area" style="position: relative;">-->
+                        <!--<div class="analytica1" id="post1_regions_div">-->
+                            <!--<div class="chartgeo" id="regions_div_postgroup1" style="width: 600px; height: 468px; margin: 0 auto"></div>-->
+                        <!--</div>-->
+                        <!--<div class="analytica2" id="post1_chartContainer">-->
+                            <!--<div class="chartbars" id="chartContainer_postgroup1" style="height: 370px; width: 100%;"></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
         <!-- <div  style="width: 650px;height: 510px;background-color: lightblue;display: none" class="animated fadeInLeft"
                alt="Transparent MDB Logo" id="animated-img1"> </div>-->
@@ -273,9 +290,9 @@
     <div class="totop" onclick="topFunction()" id="myBtn"><i class="fas fa-arrow-circle-up"></i></div>
 </div>
 
-
-<script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
-
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<!--<script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>-->
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <!-- Bootstrap tooltips -->
 <script type="text/javascript" src="js/popper.min.js"></script>
@@ -291,6 +308,8 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="js/addons-pro/stepper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-firestore.js"></script>
 <script type="text/javascript" src="main.js"></script>
 </body>
 </html>
