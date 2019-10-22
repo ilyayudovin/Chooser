@@ -64,18 +64,14 @@
     .btn-info:hover{
         color: black;
     }
-    .custom-file-upload{
-        background-color: whitesmoke;
-    }
+
     .fa-arrow-right{
         color: whitesmoke;
     }
     .fa-arrow-right:hover{
         color: white;
     }
-    .form1 ,.form2{
-        display: none;
-    }
+
     .postlab h1{
         display: none;
     }
@@ -99,7 +95,7 @@
         width: 80px;
         margin:10px 60px;
     }
-    .bigcolumn{
+    .bigcolumn,.postgroup,.post{
         width: 100%;
     }
    .description_area{
@@ -110,13 +106,29 @@
    .avatar{
        margin-left: 20px;
    }
+   .statistics3,.stats{
+       display: none;
+   }
+   .pic1,.pic2{
+       border-radius: 2px;
+       transition-duration: 1s;
+       animation-duration: 1s;
+   }
 }
 
 @media only screen and (max-width: 415px){
+    .homelink{
+        display: block;
+    }
+    .totop{
+        display: none;
+    }
+    .mask{
+        display: none;
+    }
     .pic1,.pic2{
-        margin: 5px 0;
-        width:180px;
-        height: 260px;
+        width:193px;
+        height: 270px;
     }
     .phonelikes1, .phonelikes2{
         display: block;
@@ -124,13 +136,62 @@
     .chart-area{
         height: 345px;
     }
+    #navbar{
+        height: 60px;
+    }
+    .col-md-12{
+        padding: 0;
+    }
+    ul.stepper li a{
+        padding-left: 5px;
+    }
+    .stepper-horizontal li:not(:last-child):after{
+        left:18px;
+    }
+    .understepper{
+        bottom: 0;
+        right: 0;
+        width: 100%;
+    }
+    .bigcolumn{
+        padding-top: 75px;
+    }
+    .postlabtop{
+        border: 1px solid lightgray;
+    }
+    .postlabbottom{
+        height: 100%;
+        position: relative;
+
+    }
+    .postlab{
+        position: fixed;
+        display: none;
+        top: 0px;
+        height: 100%;
+    }
+    .removepic_phone{
+        display: block;
+    }
+    .fa-times-circle{
+        display: block;
+    }
+    .description{
+        width: 100%;
+        padding: 0 20px;
+    }
+    .md-form label{
+        left: 20px;
+    }
+    .postingspan{
+        padding-top: 20px;
+    }
 }
 
 @media only screen and (max-width: 376px){
     .pic1,.pic2{
-        margin: 5px 0;
-        width:160px;
-        height: 210px;
+        width:173px;
+        /*height: 220px;*/
     }
     .navbar-brand{
         margin-right: -4rem;
@@ -141,9 +202,9 @@
         cursor: pointer;
         font-size: 19px;
     }
-    .far{
-        font-size: 20px;
-    }
+    /*.far{*/
+        /*font-size: 20px;*/
+    /*}*/
     .intro{
         transform: translate(-50%, -50%);
         position: absolute;
@@ -164,7 +225,8 @@
         line-height: 30px;
     }
     .description{
-        width: 230px;
+        width: 100%;
+        padding: 0 20px;
     }
     footer{
         padding-top: 0;
@@ -184,9 +246,6 @@
         width: 80%;
     }
 
-    .fa-times-circle{
-        color: darkgray;
-    }
     .fa-times{
         color: black;
     }
@@ -195,6 +254,7 @@
 @media only screen and (max-width: 321px) {
     .pic1,.pic2{
         width:147px;
-        height: 200px;
+        /*height: 200px;*/
     }
 }
+
